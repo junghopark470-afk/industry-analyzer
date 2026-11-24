@@ -1,0 +1,44 @@
+/* 사이트 공용: 상단 산업 탭 + 산업 내 서브메뉴 + 홈 화면. 각 페이지의 색 토큰을 그대로 씁니다. */
+body.home{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#13202B; --muted:#5A6874; --line:#D9DFE4;
+  --hull:#B23A2E; --sea:#1D6A74; --sea-soft:#E1EEF0;
+  --f-display:"Space Grotesk","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding:0 max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+@media (prefers-color-scheme: dark){body.home{
+  --bg:#0F171E; --surface:#16212A; --ink:#E4EAEE; --muted:#93A2AE; --line:#2A3843;
+  --hull:#E0675A; --sea:#5DB3BE; --sea-soft:#17323A; color-scheme:dark}}
+body{margin:0}
+.home *{box-sizing:border-box}
+.home .wrap{max-width:1080px;margin:0 auto}
+.home h1,.home h2{font-family:var(--f-display);line-height:1.25;margin:0;text-wrap:balance}
+
+.site-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding-block:20px 12px;border-bottom:1px solid var(--line)}
+.site-top .brand{font-family:var(--f-display);font-weight:700;color:var(--ink);text-decoration:none}
+.site-top .brand small{display:block;font-family:var(--f-body);font-weight:400;color:var(--muted);font-size:.78rem}
+.site-top .tabs{display:flex;gap:6px;flex-wrap:wrap}
+.site-top .tab{font-size:.88rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 14px;border-radius:999px;text-decoration:none;line-height:1.4}
+.site-top a.tab:hover{border-color:var(--ink)}
+.site-top .tab[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.site-top .tab.is-soon{color:var(--muted);cursor:not-allowed}
+.site-top .tab.is-soon::after{content:" · 준비 중";font-size:.75rem}
+.subnav{display:flex;gap:4px 20px;flex-wrap:wrap;border-bottom:1px solid var(--line);font-size:.92rem}
+.subnav a{color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subnav a:hover{color:var(--ink)}
+.subnav a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--hull)}
+:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+
+.home .hero{padding-block:40px 24px;display:grid;gap:12px}
+.home .hero h1{font-size:clamp(1.7rem,4vw,2.4rem)}
+.home .lede{color:var(--muted);max-width:62ch;margin:0}
+.home .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.home .card{display:grid;gap:8px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;color:var(--ink);text-decoration:none}
+.home a.card:hover{border-color:var(--sea)}
+.home .card p{margin:0;color:var(--muted);font-size:.92rem}
+.home .card.is-soon{opacity:.6}
+.home .eyebrow{font-size:.72rem;letter-spacing:.12em;color:var(--hull);font-weight:600}
+.home .card.is-soon .eyebrow{color:var(--muted)}
+.home .links{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.home .links span{font-size:.8rem;background:var(--sea-soft);color:var(--sea);padding:3px 10px;border-radius:999px}
+.home .foot{margin-top:40px;color:var(--muted);font-size:.8rem}

@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>조선업 산업 리포트 · 산업동향 분석기</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 항해일지형 단일 칼럼. 상단 논지·사이클 → 중단 구조·매력도(PE) → 하단 가격·재무·딜(IB). 섹션 번호는 읽는 순서. */
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#13202B; --muted:#5A6874; --line:#D9DFE4;
+  --hull:#B23A2E; --sea:#1D6A74; --sea-soft:#E1EEF0; --hull-soft:#F6E5E2;
+  --good:#2F7D4A; --warn:#A86A12; --bad:#B23A2E;
+  --grid:#E6EAED; --axis:#B9C3CB; --track:#E3E8EC; --on-fill:#FFFFFF; --c-hd:#008F86; --c-hw:#C0661A; --c-sh:#4258B0;
+  --f-display:"Space Grotesk","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F171E; --surface:#16212A; --ink:#E4EAEE; --muted:#93A2AE; --line:#2A3843;
+  --hull:#E0675A; --sea:#5DB3BE; --sea-soft:#17323A; --hull-soft:#3A201D;
+  --good:#6CC48A; --warn:#E0A54A; --bad:#E0675A; --grid:#22303A; --axis:#3A4B57; --track:#22303A; --on-fill:#0F171E; --c-hd:#14A99D; --c-hw:#D07A2C; --c-sh:#6E7FD6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F171E; --surface:#16212A; --ink:#E4EAEE; --muted:#93A2AE; --line:#2A3843;
+  --hull:#E0675A; --sea:#5DB3BE; --sea-soft:#17323A; --hull-soft:#3A201D;
+  --good:#6CC48A; --warn:#E0A54A; --bad:#E0675A; --grid:#22303A; --axis:#3A4B57; --track:#22303A; --on-fill:#0F171E; --c-hd:#14A99D; --c-hw:#D07A2C; --c-sh:#6E7FD6; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.25;margin:0}
+h2{font-size:1.45rem}
+h3{font-size:1.02rem;font-weight:600}
+p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--f-mono)}
+a{color:var(--sea)}
+:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+
+/* top bar */
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding-block:20px 12px;border-bottom:1px solid var(--line)}
+.brand{font-family:var(--f-display);font-weight:700;letter-spacing:.02em}
+.brand small{display:block;font-family:var(--f-body);font-weight:400;color:var(--muted);font-size:.78rem;letter-spacing:0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{font:inherit;font-size:.88rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 14px;border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tab:disabled{color:var(--muted);cursor:not-allowed}
+.tab:disabled::after{content:" · 준비 중";font-size:.75rem}
+
+/* hero */
+.hero{padding-block:36px 20px;display:grid;gap:20px}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--hull);font-weight:600}
+.hero h1{font-size:clamp(1.8rem,4.6vw,2.8rem)}
+.hero .lede{max-width:68ch;color:var(--muted);font-size:1.02rem}
+.asof{font-size:.8rem;color:var(--muted)}
+
+/* nav */
+.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.84rem;padding-block:10px;border-block:1px solid var(--line);margin-bottom:8px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--ink)}
+.band{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-block:32px 4px;display:flex;align-items:center;gap:10px}
+.band::after{content:"";flex:1;height:1px;background:var(--line)}
+
+section{padding-block:28px;display:grid;gap:18px;scroll-margin-top:16px}
+.sec-head{display:flex;gap:14px;align-items:baseline}
+.sec-no{font-family:var(--f-mono);color:var(--hull);font-size:.9rem}
+.sec-sub{color:var(--muted);font-size:.9rem;max-width:70ch}
+
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g2x{grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0;display:grid;gap:8px;align-content:start}
+.card p,.card li{font-size:.9rem}
+.card ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.lbl{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.src{font-size:.74rem;color:var(--muted)}
+
+/* thesis */
+.thesis{background:var(--ink);color:var(--bg);border-radius:12px;padding:22px 24px;display:grid;gap:16px}
+.thesis .lbl{color:color-mix(in srgb,var(--bg) 65%,transparent)}
+.thesis h3{font-size:1.25rem}
+.thesis-cols{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.thesis ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:.9rem}
+
+/* cycle gauge */
+.cycle{display:grid;gap:10px}
+.cyc-track{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.cyc-seg{padding:8px 6px;text-align:center;font-size:.8rem;border-radius:6px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.cyc-row{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:center}
+.cyc-row .lbl{text-transform:none;letter-spacing:0;font-size:.8rem}
+.cyc-seg.on{background:var(--hull-soft);border-color:var(--hull);color:var(--ink);font-weight:600}
+.cyc-seg.on2{background:var(--sea-soft);border-color:var(--sea);color:var(--ink);font-weight:600}
+
+/* KPI */
+.kpi .v{font-family:var(--f-display);font-size:1.6rem;font-weight:600;line-height:1.1}
+.kpi .v small{font-size:.85rem;color:var(--muted);font-weight:500}
+.pill{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:999px;font-weight:600;width:max-content}
+.p-good{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)}
+.p-warn{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.p-bad{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}
+
+/* value chain */
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.chain .card{border-top:3px solid var(--sea)}
+.chain .card.core{border-top-color:var(--hull)}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:720px}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:600;color:var(--muted);font-size:.76rem;background:color-mix(in srgb,var(--line) 35%,transparent)}
+tr:last-child td{border-bottom:0}
+td.neg{color:var(--bad)} td.pos{color:var(--good)}
+
+/* bars */
+.bars{display:grid;gap:10px}
+.bar-row{display:grid;grid-template-columns:110px 1fr 92px;gap:10px;align-items:center;font-size:.85rem}
+.bar-track{height:14px;background:color-mix(in srgb,var(--line) 60%,transparent);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:var(--sea);border-radius:3px}
+.bar-fill.hull{background:var(--hull)}
+.bar-row .r{text-align:right;font-variant-numeric:tabular-nums}
+
+/* five forces */
+.force{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center}
+.dots{display:flex;gap:3px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots i.f{background:var(--hull)}
+
+/* calculator */
+.calc{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.inputs{display:grid;gap:10px}
+.inputs label{display:grid;grid-template-columns:1fr 90px;gap:10px;align-items:center;font-size:.88rem}
+.inputs input{font:inherit;font-variant-numeric:tabular-nums;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:100%}
+.big{font-family:var(--f-display);font-size:2.2rem;font-weight:700;color:var(--hull)}
+.sens td.hit{background:var(--hull-soft);font-weight:700}
+
+/* scenarios */
+.scn .card{border-top:3px solid var(--line)}
+.scn .bull{border-top-color:var(--good)} .scn .base{border-top-color:var(--sea)} .scn .bear{border-top-color:var(--bad)}
+
+/* timeline */
+.tl{display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0 10px 18px;position:relative}
+.tl-item::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--sea)}
+.tl-item.past::before{background:var(--sea)}
+.tl-when{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.tl-item p{font-size:.9rem}
+
+/* checklist */
+.chk{display:grid;gap:8px}
+.chk label{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:.9rem;cursor:pointer}
+.chk input{margin-top:4px;accent-color:var(--hull)}
+.chk .why{display:block;color:var(--muted);font-size:.82rem}
+.progress{font-size:.85rem;color:var(--muted)}
+
+.gap{border-style:dashed;background:transparent}
+.gap .lbl{color:var(--warn)}
+footer{padding-block:32px;border-top:1px solid var(--line);margin-top:24px;font-size:.82rem;color:var(--muted);display:grid;gap:10px}
+footer ol{margin:0;padding-left:20px;display:grid;gap:3px}
+footer li{word-break:break-all}
+
+@media (max-width:520px){
+  .bar-row{grid-template-columns:84px 1fr 70px}
+  .tl-item{grid-template-columns:1fr;gap:2px}
+  .cyc-seg{font-size:.7rem;padding:6px 2px}
+  .cyc-row{grid-template-columns:52px 1fr}
+}
+@media (prefers-reduced-motion:no-preference){.bar-fill{transition:width .5s ease}}
+/* ---- charts (shared with charts.js) ---- */
+.c-svg{display:block;max-width:100%;overflow:visible}
+.c-ax{font:11px var(--f-body);fill:var(--muted)}
+.c-ax-b{font:600 11.5px var(--f-body);fill:var(--ink)}
+.c-val{font:600 12px var(--f-display);fill:var(--ink)}
+.c-ref{font:600 11px var(--f-body);fill:var(--hull)}
+.c-zone{font:600 11px var(--f-body);fill:var(--muted)}
+.c-num{font:700 11px var(--f-display);fill:var(--on-fill)}
+.c-tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.8rem;padding:6px 10px;border-radius:6px;max-width:260px;line-height:1.45;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.c-hb{display:grid;gap:10px}
+.c-hb-row{display:grid;grid-template-columns:minmax(78px,118px) 1fr 84px;gap:10px;align-items:center;font-size:.85rem}
+.c-hb-t{position:relative;height:14px;background:var(--track);border-radius:0 4px 4px 0}
+.c-hb-f{height:100%;border-radius:0 4px 4px 0}
+.c-hb-ref{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed var(--hull);z-index:1}
+.c-hb-v{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.c-note{font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:6px;margin-top:8px}
+.c-key-ref{display:inline-block;width:16px;border-top:2px dashed var(--hull)}
+.c-st{display:flex;gap:2px;height:34px;border-radius:6px;overflow:hidden}
+.c-st-s{display:flex;align-items:center;padding:0 8px;min-width:0}
+.c-st-s span{font-size:.78rem;font-weight:600;color:var(--on-fill);white-space:nowrap;overflow:hidden}
+.c-leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.78rem;color:var(--muted);margin-top:8px}
+.c-leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.c-rg{display:grid;gap:8px}
+.c-rg-t{position:relative;height:14px;background:var(--track);border-radius:7px}
+.c-rg-band{position:absolute;top:0;bottom:0;background:color-mix(in srgb,var(--sea) 38%,transparent);border-radius:7px}
+.c-rg-mid{position:absolute;top:-3px;bottom:-3px;width:3px;margin-left:-1.5px;background:var(--sea);border-radius:2px}
+.c-rg-now{position:absolute;top:-1px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--hull);box-shadow:0 0 0 2px var(--surface)}
+.c-rg-k{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.76rem;color:var(--muted)}
+.c-rg-k i{display:inline-block;margin-right:5px;vertical-align:0}
+.k-band{width:14px;height:8px;background:color-mix(in srgb,var(--sea) 38%,transparent);border-radius:4px}
+.k-mid{width:3px;height:10px;background:var(--sea)}
+.k-now{width:9px;height:9px;border-radius:50%;background:var(--hull)}
+.chart-card h3{font-size:.95rem}
+.chart-card .take{font-size:.86rem;color:var(--muted)}
+.chart{min-width:0}
+</style>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top site-top">
+    <a class="brand" href="../">산업동향 분석기<small>투자자를 위한 산업 체크 보드</small></a>
+    <nav class="tabs" aria-label="산업 선택"><a class="tab" aria-current="page" href="../shipbuilding/">조선</a><span class="tab is-soon" aria-disabled="true">자동차</span><span class="tab is-soon" aria-disabled="true">반도체</span></nav>
+  </header>
+  <nav class="subnav" aria-label="페이지"><a href="./" aria-current="page">산업 리포트</a><a href="stocks.html">조선 3사 주가 비교</a></nav>
+  <main id="app"></main>
+</div>
+
+<script src="../assets/charts.js"></script>
+<script>
+/* ============================================================
+   산업 데이터. 새 산업은 같은 구조의 객체를 INDUSTRIES에 추가하면 됩니다.
+   모든 수치는 출처 번호(src)를 달고, 확인 못 한 항목은 gap으로 표시합니다.
+   ============================================================ */
+const INDUSTRIES = {
+ship: {
+  name:"조선",
+  title:"조선업: 실적은 정점으로, 주가는 반토막",
+  lede:"한국 조선 3사는 2026년 1~3분기에 이미 2025년 연간 영업이익을 넘겼습니다. 같은 기간 주가는 5월 고점 대비 54~67% 빠졌습니다. 이익의 질과 2028년 이후 수주 지속성, 이 두 가지가 지금 판단의 핵심입니다.",
+  asof:"데이터 기준: 2026-11-24 작성. 주가·멀티플은 2026-11-05 종가(메리츠) 기준이라 현재가와 다를 수 있습니다.",
+
+  thesis:{
+    headline:"이익 사이클은 2028년까지 보이고, 주가는 2029년 이후 수주를 걱정하고 있다",
+    why:[
+      "3사 백로그 약 1,454억 달러(약 200조원), 2028년 인도 슬롯 소진 [7][9]",
+      "고선가 수주분 매출 인식 본격화로 영업이익률 10~17%대 진입 [1][3]",
+      "미국 LNG 프로젝트, MASGA(함정·MRO) 같은 신규 수요축 [4][6]",
+      "고점 대비 주가 -54~-67%로 멀티플 압축 [6][9]"
+    ],
+    wrong:[
+      "LNG선 선가가 꺾이고 중국이 LNG선 점유율을 빼앗는 경우 [2][7]",
+      "2029년 이후 슬롯이 채워지지 않아 신규 수주가 백로그를 못 메우는 경우",
+      "원화 강세로 환산이익이 줄어드는 경우(분기 -700억원 사례) [3]",
+      "미국 LNG 인허가 지연이 장기화하는 경우 [7]"
+    ],
+    exit:[
+      "분기 신규수주가 매출 인식액을 2개 분기 연속 밑돌 때",
+      "클락슨 신조선가지수가 3개월 연속 하락할 때",
+      "LNG선 신조가가 2.4억 달러 아래로 내려갈 때"
+    ]
+  },
+
+  cycle:{
+    phases:["침체","회복","호황","둔화"],
+    rows:[
+      {label:"수주",on:3,cls:"on",note:"글로벌 발주는 2026년 1~8월 +60%로 견조하지만 한국 점유율은 하락. 한국 관점에서 호황 후반에서 둔화 초입."},
+      {label:"실적",on:2,cls:"on2",note:"2023~24년 고선가 수주분이 매출로 잡히는 구간. 2027~28년까지 이익 증가 전망."},
+      {label:"주가",on:3,cls:"on",note:"5월 고점 이후 급락. 시장은 이익보다 2029년 이후 수주를 먼저 가격에 반영 중."}
+    ]
+  },
+
+  indicators:[
+    {k:"클락슨 신조선가지수",v:"186.34",u:"pt",d:"2026년 8월, 연중 최고. 2021년 8월 145.97",tone:"good",tag:"상승",src:[2]},
+    {k:"글로벌 발주 (1~8월)",v:"5,972",u:"만 CGT",d:"전년 동기 +60%. 2025년 연간 6,691만 CGT",tone:"good",tag:"견조",src:[2]},
+    {k:"한국 수주 점유율 (1~8월)",v:"16.8",u:"%",d:"중국 81.1%. 8월 단월 한국 7%로 연중 최저",tone:"bad",tag:"하락",src:[8]},
+    {k:"대형 LNG선 한국 점유율",v:"57.9",u:"%",d:"2026년 1~10월 76척 중 44척. 중국 저가 공세 확대",tone:"warn",tag:"방어 중",src:[5]},
+    {k:"3사 수주잔고",v:"1,454",u:"억 달러",d:"약 200조원. 3.5년치 일감. 가동률 100% 수준",tone:"good",tag:"충분",src:[7,9]},
+    {k:"후판 가격 (2026E)",v:"620",u:"$/톤",d:"2025년 594 → 2026년 +4.3%, 2027년 +6.8% 전망",tone:"warn",tag:"완만 상승",src:[6]},
+    {k:"원/달러 환율",v:"1,334",u:"원",d:"10/30 기준. 3분기 평균 79원 하락으로 HD 영업익 약 700억원 감소",tone:"warn",tag:"부담",src:[3]},
+    {k:"LNG 프로젝트 파이프라인",v:"478",u:"Mt/년",d:"2032년 목표. 미국 255Mt(53%). 미국 인허가가 변수",tone:"warn",tag:"정책 변수",src:[7]}
+  ],
+
+  chain:[
+    {t:"원자재·기자재",d:"후판(포스코·현대제철), 엔진(HD현대마린엔진·한화엔진), 보냉재(한국카본·동성화인텍), 피팅(태광·성광벤드)",core:false},
+    {t:"설계·건조 (핵심)",d:"HD한국조선해양(HD현대중공업·삼호·미포 합병), 한화오션, 삼성중공업. 상선·해양플랜트·특수선",core:true},
+    {t:"선주·발주처",d:"그리스·유럽 선주, 카타르·미국 LNG 프로젝트, 컨테이너 정기선사, 미 해군",core:false},
+    {t:"애프터마켓",d:"MRO, 친환경 개조, 선박 서비스(HD현대마린솔루션). 미 해군 MRO가 새 영역",core:false}
+  ],
+  chainNote:"수익의 무게중심은 건조 단계지만, 2026년 마진이 가장 높은 곳은 엔진(HD현대마린엔진 3분기 영업이익률 28.5%)입니다 [3]. 엔진 슬롯이 부족해 가격 결정력이 엔진사로 옮겨가고 있습니다.",
+
+  forces:[
+    {k:"진입장벽",s:4,d:"도크·숙련공·설계 레퍼런스가 필요. 다만 중국은 2021년 이후 2,080만 CGT 증설로 장벽을 넘는 중 [8]"},
+    {k:"공급자 교섭력",s:3,d:"후판은 조선사 우위(중국산 수입 대체). 엔진·보냉재는 공급자 우위"},
+    {k:"고객 교섭력",s:2,d:"슬롯 부족으로 현재는 조선사 우위. 슬롯이 비면 빠르게 선주 우위로 전환"},
+    {k:"대체재 위협",s:1,d:"해상운송 대체재 거의 없음. 연료(LNG·암모니아·메탄올) 전환은 오히려 수요 요인"},
+    {k:"경쟁 강도",s:4,d:"중국이 물량(점유율 80%+)을, 한국이 고부가(LNG·VLGC·VLAC)를 차지하는 이원 구도"}
+  ],
+  forcesNote:"점수는 1(약함)~5(강함). 진입장벽은 높을수록, 나머지는 낮을수록 산업에 유리합니다.",
+
+  attract:[
+    {t:"단위경제성",items:["고정비 비중이 큰 장치산업이라 매출이 늘면 이익이 크게 늘어남(영업레버리지)","HD한국조선해양 3분기 영업이익률 약 17.5%, 한화오션 14.2%, 삼성중공업 10.7% [1][3]","3사 2026~28E 영업이익 9.8조 → 11.8조 → 13.7조원 전망, 과거 슈퍼사이클 고점 6.6조원 [8]"]},
+    {t:"ROIC vs WACC",items:["메리츠 2028E ROE: HD현대중공업 37%, HD한국조선해양 26%, 삼성중공업 24%, 한화오션 16% [6]","자기자본비용 7.8% 가정 대비 스프레드가 크게 양(+)인 구간","스프레드가 유지되는 기간이 밸류에이션을 결정"]},
+    {t:"현금흐름 품질",items:["과거 헤비테일(인도 시 60%+) 구조에서 호황기엔 선수금 비중이 높아짐","HD한국조선해양 순현금 약 11조원 [3]","선수금은 부채로 잡히므로 순현금은 수주 둔화 시 빠르게 줄 수 있음"]},
+    {t:"자본집약도",items:["2010년대 구조조정 이후 도크 증설은 제한적, 주로 생산성·자동화 투자","인력은 호황기 대비 절반 수준(약 9만 명) [7]","미국 거점(필리조선소, HD키윗) 투자는 수주 연동형 성장 Capex [4]"]},
+    {t:"해자(Moat)",items:["LNG선 건조 슬롯 연 75척 vs 중국 25척 [6]","VLGC·VLAC 글로벌 발주의 50% 이상 점유(HD) [3]","미국 함정·MRO는 동맹국 조선소만 가능한 규제성 해자"]}
+  ],
+
+  comps:{
+    note:"2026-11-05 종가 기준, 메리츠증권 추정치. 한화오션 2026E 이익은 일회성 요인으로 보이며 출처에 설명이 없어 PER·EV/EBITDA가 왜곡됐을 수 있습니다.",
+    cols:["종목","주가(원)","시총(억원)","목표가(원)","PER 26E","PER 27E","PBR 26E","PBR 27E","EV/EBITDA 27E","배당수익률","6개월 수익률"],
+    rows:[
+      ["HD현대중공업","271,000","284,445","800,000","11.0","7.4","2.70","2.20","4.8","4.6%","-60.1%"],
+      ["HD한국조선해양","246,000","174,102","500,000","4.8","4.7","1.10","1.00","2.0","7.3%","-47.6%"],
+      ["삼성중공업","16,960","149,248","35,000","13.4","8.5","2.75","2.08","4.7","-","-47.4%"],
+      ["한화오션","49,250","150,909","120,000","2.9*","18.4","1.37","1.27","8.9","-","-63.0%"]
+    ],
+    src:[6]
+  },
+
+  valuation:{
+    keyMultiple:"조선업은 수주에서 매출까지 2~3년 시차가 있어 PER이 사이클 내내 왜곡됩니다. 그래서 IB와 증권사는 ROE 대비 P/B(잔여이익 모델)를 주로 씁니다. 보조로 수주잔고 대비 시가총액, EV/EBITDA를 함께 봅니다.",
+    method:"적정 PBR = (ROE − g) ÷ (COE − g). 메리츠는 HD현대중공업에 2028E ROE 37%, COE 7.8%를 넣어 목표 PBR 4.7배를 산출했습니다 [6].",
+    defaults:{roe:37,coe:7.8,g:0,bps:100000},
+    band:"과거 PBR 밴드는 이번 조사에서 수집하지 못했습니다. 2008년 고점(PBR 3~4배대), 2016년 저점(0.5배 내외) 등은 증권사 리포트로 확인이 필요합니다.",
+    backlogCap:"3사 시총 합(HD한국조선해양 제외, 11/5) 약 58조원 vs 3사 수주잔고 약 200조원 → 시총/백로그 약 0.29배."
+  },
+
+  credit:[
+    {t:"순차입금 / EBITDA",d:"HD한국조선해양은 순현금 약 11조원으로 지표상 음(-) [3]. 한화오션·삼성중공업 수치는 미수집.",gap:false},
+    {t:"이자보상배율",d:"3분기 영업이익 급증으로 개선 추세로 판단. 회사별 수치는 사업보고서 확인 필요.",gap:true},
+    {t:"신용등급·회사채 스프레드",d:"한국기업평가·NICE·한신평 등급 추이와 조선사 회사채 스프레드는 이번 버전에 미수집.",gap:true},
+    {t:"환헤지 구조",d:"한화오션 환헤지 약 45억 달러, 2028년까지 백로그를 다 커버하지 못함 [6]. 환율 10% 변동 시 영업이익 약 10% 미만 영향 [1].",gap:false}
+  ],
+
+  deals:[
+    {when:"2024-12",t:"한화, 미국 필리조선소 인수",d:"한국 조선사의 첫 미국 조선소. 현재 9척 건조 중 [1]"},
+    {when:"2026-10",t:"HD현대·키윗 합작 'HD키윗조선'",d:"미국 신규 조선소 2027년 착공, 2029년 본격 가동 목표. 투자 규모는 수주 연동 [4]"},
+    {when:"2026-10",t:"한화 필리조선소, 미 해군 LSM 첫 수주",d:"약 2.69억 달러(3,575억원), 옵션 3척. 2027년 4분기 착공. 미 해군은 LSM 35척 계획 [4]"},
+    {when:"진행 중",t:"한화오션, 오스탈 USA 인수 추진",d:"미 해군 함정 건조 역량 확보 목적 [1]"},
+    {when:"진행 중",t:"삼성중공업 × GD NASSCO",d:"차세대 군수지원함(NGLS) 협력, 2026년 내 MSRA 자격 확보 목표 [4]"}
+  ],
+  governance:[
+    "한화오션: 한화에어로스페이스 등 그룹 지배. 미국 함정 사업을 그룹 방산과 묶는 구조라 계열사 간 거래를 볼 것",
+    "HD한국조선해양: 지주사 아래 중간지주 구조. 자회사 상장(HD현대중공업·마린엔진)으로 지주 할인 이슈",
+    "배당: HD한국조선해양 2026E 주당 18,000원(7.3%), HD현대중공업 12,500원(4.6%). 삼성중공업·한화오션 무배당 [6]",
+    "노사: 2026년 3사 임단협 모두 타결. HD현대중공업은 부분파업 11회 후 10/27 가결, 한화오션 찬성 50.02% [1]"
+  ],
+
+  scenarios:[
+    {cls:"bull",t:"Bull",p:"25%",items:["미국 LNG 인허가 재개, 2027년 LNG선 대량 발주","LNG선 신조가 2.7억 달러 돌파 [6]","MASGA로 함정·MRO 수주가 연 단위로 반복","→ 목표 PBR까지 재평가 (증권사 목표가 수준)"]},
+    {cls:"base",t:"Base",p:"55%",items:["3사 영업이익 2027E 11.8조, 2028E 13.7조 달성 [8]","2029년 슬롯은 컨테이너·탱커로 일부 채움","LNG선 선가 횡보","→ 이익 증가분만큼 주가 회복, 멀티플은 현 수준"]},
+    {cls:"bear",t:"Bear",p:"20%",items:["중국이 LNG선 점유율 50% 이상 확보","선가 인하로 백로그 확보(KIS 경고) [7]","원화 강세(메리츠 2027E 1,289원) 겹침 [6]","→ 2028년 이후 이익 감소 선반영, 추가 하락"]}
+  ],
+  scenarioNote:"확률은 이 페이지의 판단이며 증권사 추정이 아닙니다. 목표주가는 출처의 증권사 수치를 그대로 쓰고 새로 만들지 않았습니다.",
+
+  catalysts:[
+    {when:"2026-10-28",past:true,t:"3분기 실적 발표",d:"HD한국조선해양 영업이익 1조 4,472억원(+37%), 한화오션 4,857억원(+68%), 삼성중공업 3,384억원(+42%)"},
+    {when:"2026-11-03",past:true,t:"미국 중간선거",d:"민주당 승리 이후 LNG 인허가 우려로 조선주 하락 [7]"},
+    {when:"2026-12",t:"연간 수주 목표 달성 여부",d:"HD 93.9%, 삼성 91%. 연말 몰아치기 수주 확인 [5]"},
+    {when:"2027-01",t:"클락슨 연간 통계·국가별 점유율",d:"2026년 한국 점유율 확정치"},
+    {when:"2027-01~02",t:"4분기 실적·2027 수주 가이던스",d:"4분기 3사 영업이익 컨센서스 2.48조원(+57%) [9]"},
+    {when:"2027 상반기",t:"후판 가격 협상",d:"메리츠 2027E +6.8% 전망 [6]"},
+    {when:"2027",t:"미국 LNG 프로젝트 FID",d:"삼성중공업·한화오션은 2027년부터 미국 LNG선 발주 기대 [6]"},
+    {when:"2027 4분기",t:"필리조선소 LSM 착공",d:"옵션 3척 행사 여부가 후속 촉매 [4]"}
+  ],
+
+  risks:[
+    {lvl:"bad",p:4,i:5,t:"중국의 LNG선 진입",d:"후허(Hengli) 등 LNG선 진출, 일부 입찰에서 저가로 점유율 확대 [3][8]"},
+    {lvl:"bad",p:3,i:5,t:"2029년 이후 수주 공백",d:"2028년 슬롯은 찼지만 2029년은 경쟁 중. 주가 급락의 주된 이유"},
+    {lvl:"warn",p:3,i:4,t:"미국 LNG 정책",d:"인허가 지연 시 LNG선 발주 지연. 카타르 불가항력 이슈도 선가 약세 요인 [6][7]"},
+    {lvl:"warn",p:3,i:3,t:"환율",d:"원화 1% 강세 ≈ 영업이익 약 1% 감소(한화오션 기준) [1]"},
+    {lvl:"warn",p:4,i:2,t:"인력·노사",d:"인력 호황기 절반 수준. 2026년 협상은 타결됐지만 매년 반복되는 변수"},
+    {lvl:"warn",p:3,i:2,t:"원가",d:"후판 가격 2026~27년 상승 전망. 엔진 가격 +10%(공급자 우위) [6]"}
+  ],
+
+  checklist:[
+    {t:"분기 신규수주 ≥ 매출 인식액인가 (Book-to-Bill > 1)",w:"1 미만이 이어지면 백로그가 줄기 시작"},
+    {t:"클락슨 신조선가지수 방향",w:"매월 초 발표. 3개월 이동 방향을 볼 것"},
+    {t:"LNG선 신조가와 한국 점유율",w:"한국 조선 이익의 가장 큰 축"},
+    {t:"2029~30년 인도 슬롯 확보율",w:"삼성중공업 2029년 LNG 슬롯 75% 확보 같은 공시·IR 멘트 [6]"},
+    {t:"수주 선종 믹스",w:"LNG·VLGC·VLAC 비중이 내려가면 마진 하락 신호"},
+    {t:"영업이익률 추이와 일회성 요인",w:"충당금 환입·환율 효과를 걷어낸 본업 마진"},
+    {t:"후판 가격과 원/달러",w:"원가와 환산이익의 두 변수"},
+    {t:"MASGA 실제 수주 건수와 금액",w:"MOU가 아니라 계약을 셀 것"},
+    {t:"PBR 대비 ROE 스프레드",w:"아래 계산기로 적정 PBR 점검"},
+    {t:"노사 일정·파업 여부",w:"매년 7~10월 임단협 시즌"}
+  ],
+
+  charts:{
+    op:[{label:"2025A",value:5.93,dim:true,tip:"2025년 실적 5.93조원"},{label:"2026E",value:9.8},{label:"2027E",value:11.8},{label:"2028E",value:13.7}],
+    opRef:{value:6.6,label:"과거 슈퍼사이클 고점 6.6조"},
+    dd:[{label:"HD현대중공업",value:33.5,text:"33% (−67%)",color:"var(--c-hd)",tip:"745,000 → 249,500원"},{label:"한화오션",value:28.7,text:"29% (−71%)",color:"var(--c-hw)",tip:"149,900 → 43,000원"},{label:"삼성중공업",value:43.5,text:"44% (−56%)",color:"var(--c-sh)",tip:"34,400 → 14,970원"}],
+    share:[{label:"중국",value:81.1,color:"var(--muted)"},{label:"한국",value:16.8,color:"var(--hull)"},{label:"일본",value:2.1,color:"var(--axis)"}],
+    nbpi:[{label:"2021.08",value:145.97,dim:true},{label:"2026.01",value:184.29},{label:"2026.03",value:182.14},{label:"2026.08",value:186.34}],
+    kr:{labels:["5월","6월","7월","8월"],values:[31,9,14,7],ref:{value:16.8,label:"1~8월 누적 16.8%"}},
+    orders:[{label:"HD한국조선해양",value:94.9,text:"94.9%",color:"var(--c-hd)",tip:"221.3억 / 233.1억 달러 (11/23)"},{label:"삼성중공업 전체",value:91,text:"91%",color:"var(--c-sh)",tip:"127억 / 139억 달러"},{label:"삼성중공업 상선",value:146,text:"146%",color:"var(--c-sh)",tip:"83억 / 57억 달러"}],
+    plate:{labels:["1Q26","2Q26","3Q26","4Q26","2027E"],values:[597.3,615.2,630.0,636.3,661.6],yMin:560},
+    lng:[{label:"한국",value:44,color:"var(--hull)"},{label:"중국 등",value:32,color:"var(--muted)"}],
+    roe:[{label:"HD현대중공업",value:37.0,color:"var(--c-hd)"},{label:"HD한국조선해양",value:26.3,color:"var(--c-hd)"},{label:"삼성중공업",value:24.2,color:"var(--c-sh)"},{label:"한화오션",value:16.1,color:"var(--c-hw)"}],
+    slots:[{label:"한국",value:75,color:"var(--hull)"},{label:"중국",value:25,color:"var(--muted)"}]
+  },
+
+  sources:[
+    "마이데일리, 3분기 나란히 웃은 조선 3사 (2026-11-01) https://www.mydaily.co.kr/page/view/2026103009384428123",
+    "허프포스트코리아, 8월 글로벌 선박 시장 점유율 (2026-09-04, 클락슨 인용) https://www.huffingtonpost.kr/article/260159 · SK증권 리포트 재게시 (2026-09-17) https://finance.thesmileinfo.com/2026/09/Shipbuilding.html",
+    "Investing.com, HD한국조선해양 3분기 실적 (2026-10-28) https://kr.investing.com/news/transcripts/article-93CH-2144856",
+    "중앙이코노미뉴스, 한화 美 해군 함정 첫 수주 (2026-11-02) https://www.joongangenews.com/news/articleView.html?idxno=560430",
+    "디지털데일리, 조선 3사 연간 수주 목표 (2026-11-16) https://www.ddaily.co.kr/page/view/2026111615532526772 · 머니투데이 (2026-11-15) https://www.mt.co.kr/industry/2026/11/15/2026111313442274003",
+    "메리츠증권, 2027 Outlook 조선 (2026-11-06, 11/5 종가) https://home.imeritz.com/include/resource/research/WorkFlow/20261104152618505K_02.pdf",
+    "매일신문 (2026-11-07) https://www.imaeil.com/page/view/2026110717482202215",
+    "SK증권 리포트 재게시 (2026-09-17) https://finance.thesmileinfo.com/2026/09/Shipbuilding.html",
+    "서울신문 (2026-11-02, FnGuide 컨센서스 인용) https://m.seoul.co.kr/news/newsView.php?id=20261102500106 · 조선비즈 (2026-01-03) https://v.daum.net/v/20260103060218106"
+  ]
+}
+};
+
+/* ============================ 렌더러 ============================ */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cite=a=>a&&a.length?` <span class="src">[${a.join("][")}]</span>`:"";
+function sec(id,no,title,sub,body){return `<section id="${id}"><div><div class="sec-head"><span class="sec-no">${no}</span><h2>${title}</h2></div>${sub?`<p class="sec-sub">${sub}</p>`:""}</div>${body}</section>`}
+const band=t=>`<div class="band">${t}</div>`;
+
+function render(D){
+  const toc=[["s1","요약·사이클"],["s2","선행지표"],["s3","밸류체인"],["s4","산업 매력도"],["s5","종목 비교"],["s6","밸류에이션"],["s7","재무·크레딧"],["s8","딜·거버넌스"],["s9","시나리오"],["s10","촉매·일정"],["s11","리스크"],["s12","체크리스트"]];
+  let h=`<div class="hero"><span class="eyebrow">산업 리포트 · ${esc(D.name)}</span><h1>${esc(D.title)}</h1><p class="lede">${esc(D.lede)}</p><p class="asof">${esc(D.asof)}</p></div>`;
+  h+=`<nav class="toc" aria-label="목차">${toc.map(([i,t],n)=>`<a href="#${i}">${n+1}. ${t}</a>`).join("")}</nav>`;
+
+  const cc=(id,title,take,src)=>`<div class="card chart-card"><h3>${title}</h3><div class="chart" id="${id}"></div>${take?`<p class="take">${take}</p>`:""}${src?`<p class="src">${src}</p>`:""}</div>`;
+  const dash1=`<div class="grid g3">${cc("ch-op","3사 영업이익, 과거 고점의 2배","2026년 추정치가 2000년대 슈퍼사이클 고점(6.6조원)을 이미 넘었습니다.","단위 조원. 2025A 머니투데이 [5], 2026~28E SK증권 [8]")}${cc("ch-dd","주가는 5월 고점의 3분의 1","이익은 늘었는데 주가는 빠졌습니다. 시장은 2029년 이후 수주를 걱정합니다.","11/24 종가 ÷ 2026년 5월 고점 [9]")}${cc("ch-share","1~8월 글로벌 수주 점유율","물량은 중국, 한국은 LNG선 같은 고부가 선종에 집중합니다.","CGT 기준 [8]")}</div>`;
+  const dash2=`<div class="grid g2x">${cc("ch-nbpi","클락슨 신조선가지수","2021년 대비 +28%, 2026년 들어 182~186pt에서 고점 유지.","[2]")}${cc("ch-kr","한국 월별 수주 점유율 (2026)","5월 31%에서 8월 7%까지 하락. 점선은 1~8월 누적 평균.","[2]")}${cc("ch-orders","연간 수주 목표 달성률","연말 2개월을 남기고 90% 이상. 한화오션은 목표 미공시(10월 말 81.1억 달러).","11월 중순 기준 [5]")}${cc("ch-plate","후판 가격 추이·전망","원가 부담은 완만히 커지는 중. 2027년 +6.8% 전망.","단위 $/톤, 메리츠 추정 [6]")}</div><div class="card chart-card"><h3>대형 LNG선 수주 (2026년 1~10월, 76척)</h3><div class="chart" id="ch-lng"></div><p class="take">한국 이익의 핵심 선종. 아직 절반 이상을 지키고 있지만 중국 비중이 커지는 중입니다.</p><p class="src">[5]</p></div>`;
+  h+=band("산업 이해 · 지금 어디쯤인가");
+  const T=D.thesis;
+  const cyc=`<div class="card cycle"><span class="lbl">사이클 위치</span>${D.cycle.rows.map(r=>`<div class="cyc-row"><span class="lbl">${r.label}</span><div class="cyc-track">${D.cycle.phases.map((p,i)=>`<div class="cyc-seg ${i===r.on?r.cls:""}">${p}</div>`).join("")}</div></div><p style="font-size:.84rem;color:var(--muted)">${esc(r.note)}</p>`).join("")}</div>`;
+  h+=sec("s1","01","투자 논지와 사이클 위치","왜 지금 보는가, 무엇이 틀리면 파는가를 한 장으로.",
+    `<div class="thesis"><div><span class="lbl">투자 논지 카드</span><h3>${esc(T.headline)}</h3></div><div class="thesis-cols">
+     <div><span class="lbl">왜 지금</span><ul>${T.why.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+     <div><span class="lbl">무엇이 틀리면</span><ul>${T.wrong.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+     <div><span class="lbl">매도 트리거</span><ul>${T.exit.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div></div>${cyc}${dash1}`);
+
+  h+=sec("s2","02","핵심 선행지표","주가보다 먼저 움직이는 숫자들. 색은 투자자 관점의 신호입니다.",
+    `<div class="grid g4">${D.indicators.map(k=>`<div class="card kpi"><span class="lbl">${esc(k.k)}</span><div class="v num">${k.v}<small> ${k.u}</small></div><span class="pill p-${k.tone}">${k.tag}</span><p style="color:var(--muted);font-size:.82rem">${esc(k.d)}${cite(k.src)}</p></div>`).join("")}</div>${dash2}`);
+
+  h+=sec("s3","03","산업구조·밸류체인","",
+    `<div class="chain">${D.chain.map(c=>`<div class="card ${c.core?"core":""}"><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div>`).join("")}</div><p class="sec-sub">${esc(D.chainNote)}</p>`);
+
+  h+=band("산업 매력도 · PE 관점");
+  h+=sec("s4","04","산업 매력도","포터의 5 Forces와 단위경제성, 현금흐름, 자본집약도, 해자.",
+    `<div class="grid g2"><div class="card"><span class="lbl">5 Forces</span><div class="chart" id="ch-radar"></div>${D.forces.map(f=>`<div class="force"><h3>${f.k}</h3><div class="dots" aria-label="${f.s}점">${[1,2,3,4,5].map(i=>`<i class="${i<=f.s?"f":""}"></i>`).join("")}</div><p style="grid-column:1/-1;color:var(--muted);font-size:.84rem">${esc(f.d)}</p></div>`).join("")}<p class="src">${esc(D.forcesNote)}</p></div>
+     <div class="grid">${D.attract.slice(0,2).map(a=>`<div class="card"><h3>${a.t}</h3><ul>${a.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div></div>
+     <div class="grid g3">${D.attract.slice(2).map(a=>`<div class="card"><h3>${a.t}</h3><ul>${a.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>
+     <div class="grid g2x">${cc("ch-roe","2028E ROE vs 자기자본비용","네 회사 모두 ROE가 자본비용(7.8%)을 크게 웃돕니다. 이 스프레드가 PBR 프리미엄의 근거입니다.","메리츠 추정 [6]")}${cc("ch-slots","LNG선 연간 건조 슬롯","한국이 중국의 3배. LNG선 해자의 실체입니다.","척/년, 메리츠 [6]")}</div>`);
+
+  h+=band("가격 판단 · IB 관점");
+  const C=D.comps;
+  const dd=C.rows.map(r=>({n:r[0],v:parseFloat(r[10])}));
+  const maxdd=Math.max(...dd.map(x=>Math.abs(x.v)));
+  h+=sec("s5","05","관련 종목·피어 비교",esc(C.note),
+    `<div class="tbl"><table><thead><tr>${C.cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${C.rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${i===10&&c.startsWith("-")?"neg":""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+     <div class="grid g2"><div class="card"><span class="lbl">6개월 주가 수익률 (11/5 기준)</span><div class="bars">${dd.map(x=>`<div class="bar-row"><span>${x.n}</span><div class="bar-track"><div class="bar-fill hull" style="width:${Math.abs(x.v)/maxdd*100}%"></div></div><span class="r">${x.v}%</span></div>`).join("")}</div><p class="src">출처 [6]</p></div>
+     <div class="card"><span class="lbl">3분기 영업이익률 (계산값)</span><div class="bars">${[["HD한국조선해양",17.5],["한화오션",14.2],["삼성중공업",10.7],["HD현대마린엔진",28.5]].map(([n,v])=>`<div class="bar-row"><span>${n}</span><div class="bar-track"><div class="bar-fill" style="width:${v/30*100}%"></div></div><span class="r">${v}%</span></div>`).join("")}</div><p class="src">눈금 0~30%. 출처 [1][3]</p></div></div>`);
+
+  const V=D.valuation;
+  h+=sec("s6","06","밸류에이션","핵심 멀티플, 적정 PBR 계산기, 백로그 대비 시가총액.",
+    `<div class="grid g2"><div class="card"><span class="lbl">조선업의 핵심 멀티플</span><p>${esc(V.keyMultiple)}</p><p>${esc(V.method)}</p></div>
+     <div class="card"><span class="lbl">수주잔고 대비 시가총액</span><p>${esc(V.backlogCap)}</p><span class="lbl" style="margin-top:6px">역사적 PBR 밴드</span><p>${esc(V.band)}</p></div></div>
+     <div class="card"><span class="lbl">적정 PBR 계산기 (잔여이익 모델)</span><div class="calc">
+       <div class="inputs">
+         <label for="in-roe">지속 가능 ROE (%)<input id="in-roe" type="number" step="0.5" value="${V.defaults.roe}"></label>
+         <label for="in-coe">자기자본비용 COE (%)<input id="in-coe" type="number" step="0.1" value="${V.defaults.coe}"></label>
+         <label for="in-g">영구성장률 g (%)<input id="in-g" type="number" step="0.5" value="${V.defaults.g}"></label>
+         <label for="in-bps">BPS (원, 선택)<input id="in-bps" type="number" step="1000" value="${V.defaults.bps}"></label>
+         <p class="src">기본값은 메리츠의 HD현대중공업 가정(ROE 37%, COE 7.8%) [6]. BPS 100,000원은 계산 예시입니다.</p>
+       </div>
+       <div style="display:grid;gap:8px;align-content:start"><span class="lbl">적정 PBR</span><div class="big num" id="out-pbr">-</div><p id="out-px" class="num" style="color:var(--muted)"></p>
+         <div class="tbl"><table class="sens" style="min-width:0"><thead id="sens-h"></thead><tbody id="sens-b"></tbody></table></div><p class="src">민감도: 행 = ROE, 열 = COE. 강조 칸이 입력값에 가장 가까운 조합.</p></div>
+     </div></div>`);
+
+  h+=sec("s7","07","재무 건전성·크레딧","점선 카드는 이번 버전에서 데이터를 확보하지 못한 항목입니다.",
+    `<div class="grid g2">${D.credit.map(c=>`<div class="card ${c.gap?"gap":""}"><span class="lbl">${c.gap?"데이터 보강 필요":"확인됨"}</span><h3>${c.t}</h3><p>${esc(c.d)}</p></div>`).join("")}</div>`);
+
+  h+=sec("s8","08","딜·자본시장·거버넌스","미국 조선 거점 확보가 2024~26년 딜의 중심입니다.",
+    `<div class="grid g2"><div class="card"><span class="lbl">주요 딜</span><div class="tl">${D.deals.map(x=>`<div class="tl-item past"><span class="tl-when">${x.when}</span><div><h3>${esc(x.t)}</h3><p style="color:var(--muted)">${esc(x.d)}</p></div></div>`).join("")}</div></div>
+     <div class="card"><span class="lbl">지배구조·주주환원·오버행</span><ul>${D.governance.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`);
+
+  h+=band("판단과 실행");
+  h+=sec("s9","09","시나리오 분석",esc(D.scenarioNote),
+    `<div class="card chart-card"><h3>시나리오 확률</h3><div id="ch-scn"></div></div><div class="grid g3 scn">${D.scenarios.map(s=>`<div class="card ${s.cls}"><div style="display:flex;justify-content:space-between;align-items:baseline"><h3>${s.t}</h3><span class="mono num">${s.p}</span></div><ul>${s.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>`);
+
+  h+=sec("s10","10","촉매 트래커·이벤트 캘린더","채워진 점은 지나간 이벤트입니다.",
+    `<div class="card"><div class="tl">${D.catalysts.map(x=>`<div class="tl-item ${x.past?"past":""}"><span class="tl-when">${x.when}</span><div><h3>${esc(x.t)}</h3><p style="color:var(--muted)">${esc(x.d)}</p></div></div>`).join("")}</div></div>`);
+
+  h+=sec("s11","11","리스크","원 안의 번호는 아래 카드 번호입니다. 오른쪽 위로 갈수록 먼저 챙겨야 할 리스크입니다.",
+    `<div class="card chart-card"><h3>리스크 맵: 발생 가능성 × 영향</h3><div class="chart" id="ch-risk"></div><p class="src">점수는 이 페이지의 판단(1~5)입니다.</p></div><div class="grid g3">${D.risks.map((r,i)=>`<div class="card"><span class="pill p-${r.lvl}">${r.lvl==="bad"?"높음":"중간"}</span><h3>${i+1}. ${esc(r.t)}</h3><p style="color:var(--muted)">${esc(r.d)}</p></div>`).join("")}</div>`);
+
+  h+=sec("s12","12","투자 체크리스트","체크 상태는 이 브라우저에만 저장됩니다.",
+    `<p class="progress" id="chk-p"></p><div class="c-hb-t" style="height:10px;border-radius:5px"><div id="chk-bar" class="c-hb-f" style="width:0;background:var(--hull);border-radius:5px"></div></div><div class="chk">${D.checklist.map((c,i)=>`<label for="chk-${i}"><input type="checkbox" id="chk-${i}"><span>${esc(c.t)}<span class="why">${esc(c.w)}</span></span></label>`).join("")}</div>`);
+
+  h+=`<footer><strong>출처</strong><ol>${D.sources.map(s=>`<li>${esc(s)}</li>`).join("")}</ol><p>이 페이지는 공개 기사와 증권사 리포트를 정리한 참고 자료이며 투자 권유가 아닙니다. 주가·멀티플은 작성일 기준이 아니라 각 출처의 기준일 수치입니다.</p></footer>`;
+  document.getElementById("app").innerHTML=h;
+  bindCalc(); bindChecklist(D); drawCharts(D);
+}
+
+function bindCalc(){
+  const $=id=>document.getElementById(id);
+  const f=(roe,coe,g)=>coe-g<=0?NaN:(roe-g)/(coe-g);
+  function upd(){
+    const roe=+$("in-roe").value, coe=+$("in-coe").value, g=+$("in-g").value, bps=+$("in-bps").value;
+    const p=f(roe,coe,g);
+    $("out-pbr").textContent=isFinite(p)?p.toFixed(2)+"배":"COE가 g보다 커야 합니다";
+    $("out-px").textContent=isFinite(p)&&bps>0?`BPS ${bps.toLocaleString()}원 × ${p.toFixed(2)}배 = 적정주가 ${Math.round(bps*p).toLocaleString()}원`:"";
+    const rs=[-10,-5,0,5,10].map(d=>Math.round((roe+d)*10)/10).filter(x=>x>0);
+    const cs=[-1,-0.5,0,0.5,1].map(d=>Math.round((coe+d)*10)/10);
+    $("sens-h").innerHTML=`<tr><th>ROE \\ COE</th>${cs.map(c=>`<th>${c}%</th>`).join("")}</tr>`;
+    $("sens-b").innerHTML=rs.map(r=>`<tr><td>${r}%</td>${cs.map(c=>{const v=f(r,c,g);return `<td class="${r===Math.round(roe*10)/10&&c===Math.round(coe*10)/10?"hit":""}">${isFinite(v)?v.toFixed(1):"-"}</td>`}).join("")}</tr>`).join("");
+    const tds=[...$("sens-b").querySelectorAll("td:not(:first-child)")];const vs=tds.map(t=>parseFloat(t.textContent)).filter(isFinite);const mx=Math.max(...vs),mn=Math.min(...vs);
+    tds.forEach(t=>{const v=parseFloat(t.textContent);if(isFinite(v)&&!t.classList.contains("hit"))t.style.background=`color-mix(in srgb,var(--sea) ${Math.round(6+(v-mn)/((mx-mn)||1)*40)}%,transparent)`});
+  }
+  ["in-roe","in-coe","in-g","in-bps"].forEach(id=>$(id).addEventListener("input",upd));
+  upd();
+}
+function bindChecklist(D){
+  const key="chk-"+D.name; let st={};
+  try{st=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){}
+  const boxes=[...document.querySelectorAll('.chk input')];
+  const p=document.getElementById("chk-p");
+  const upd=()=>{const n=boxes.filter(b=>b.checked).length;p.textContent=`${n} / ${boxes.length} 확인`;const b=document.getElementById("chk-bar");if(b)b.style.width=(n/boxes.length*100)+"%"};
+  boxes.forEach((b,i)=>{b.checked=!!st[i];b.addEventListener("change",()=>{st[i]=b.checked;try{localStorage.setItem(key,JSON.stringify(st))}catch(e){}upd()})});
+  upd();
+}
+function drawCharts(D){
+  const K=Charts, G=D.charts;
+  K.mount(document.getElementById("ch-op"),K.columns({data:G.op,dec:1,unit:"조원",ref:G.opRef,title:"3사 영업이익"}));
+  K.hbars(document.getElementById("ch-dd"),{data:G.dd,max:100});
+  K.stack(document.getElementById("ch-share"),{data:G.share,dec:1,unit:"%"});
+  K.mount(document.getElementById("ch-nbpi"),K.columns({data:G.nbpi,dec:1,unit:"pt",title:"신조선가지수"}));
+  K.mount(document.getElementById("ch-kr"),K.line({labels:G.kr.labels,series:[{color:"var(--hull)",points:G.kr.values.map(y=>({y}))}],unit:"%",unitShort:"%",labelAll:true,ref:G.kr.ref,area:true}));
+  K.hbars(document.getElementById("ch-orders"),{data:G.orders,max:150,ref:{value:100,label:"연간 목표 100%"}});
+  K.mount(document.getElementById("ch-plate"),K.line({labels:G.plate.labels,series:[{color:"var(--sea)",points:G.plate.values.map(y=>({y}))}],unit:"$/톤",yMin:G.plate.yMin,labelAll:true,dec:0}));
+  K.stack(document.getElementById("ch-lng"),{data:G.lng,unit:"척"});
+  K.mount(document.getElementById("ch-radar"),K.radar({axes:D.forces.map(f=>({label:f.k,value:f.s})),max:5,title:"5 Forces"}));
+  K.hbars(document.getElementById("ch-roe"),{data:G.roe,unit:"%",dec:1,ref:{value:7.8,label:"자기자본비용 7.8%"}});
+  K.hbars(document.getElementById("ch-slots"),{data:G.slots,unit:"척"});
+  K.stack(document.getElementById("ch-scn"),{data:D.scenarios.map(s=>({label:s.t,value:parseFloat(s.p),color:s.cls==="bull"?"var(--good)":s.cls==="bear"?"var(--bad)":"var(--sea)"})),unit:"%"});
+  K.mount(document.getElementById("ch-risk"),K.scatter({x:[0.5,5.5],y:[0.5,5.5],xs:1,ys:1,xf:()=>"",yf:()=>"",xLabel:"발생 가능성 (낮음 → 높음)",yLabel:"영향 (작음 → 큼)",height:300,
+    zones:[{x:[3.5,5.5],y:[3.5,5.5],color:"var(--hull)",op:.1}],zoneLabels:[{x:5.4,y:5.25,t:"우선 관리",anchor:"end"}],
+    points:D.risks.map((r,i)=>({x:r.p,y:r.i,num:i+1,r:11,color:r.lvl==="bad"?"var(--hull)":"var(--warn)",showLabel:false,tip:`${i+1}. ${r.t} · 가능성 ${r.p} · 영향 ${r.i}`}))}));
+}
+render(INDUSTRIES.ship);
+</script>
+
+</body>
+</html>
