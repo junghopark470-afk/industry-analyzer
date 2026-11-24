@@ -102,6 +102,15 @@ tr:last-child td{border-bottom:0}
 footer{padding-block:28px;border-top:1px solid var(--line);margin-top:20px;font-size:.8rem;color:var(--muted);display:grid;gap:10px}
 footer ol{margin:0;padding-left:20px;display:grid;gap:3px}
 footer li{word-break:break-all}
+.how{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.steps{margin:0;padding-left:20px;display:grid;gap:4px;font-size:.88rem;font-variant-numeric:tabular-nums}
+.steps b{font-weight:600}
+.gl{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:0;font-size:.86rem}
+.gl dt{font-weight:600} .gl dd{margin:0;color:var(--muted)}
+.qbar{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.qbar div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.qbar b{display:block;font-family:var(--f-display);font-size:1.25rem;font-variant-numeric:tabular-nums}
+.qbar span{font-size:.78rem;color:var(--muted)}
 @media (max-width:520px){.ff-row,.ff-axis{grid-template-columns:96px 1fr}.ff-inner{min-width:480px}}
 /* ---- charts (shared with charts.js) ---- */
 .c-svg{display:block;max-width:100%;overflow:visible}
@@ -152,10 +161,28 @@ footer li{word-break:break-all}
 
   <div class="hero">
     <span class="eyebrow">주가 vs 적정가치</span>
-    <h1>세 회사 모두 증권사 목표가의 절반 아래, 자체 계산으로는 약세~기본 시나리오 사이</h1>
-    <p class="lede">증권사 목표가는 현재가보다 2~3배 높지만, 지난 6주 동안 리포트의 40%가 목표가를 내렸습니다. 그래서 이 페이지는 목표가와 별도로 ROE·PBR 기반 적정가를 세 가지 시나리오로 다시 계산해 현재가와 비교합니다. 아래 가정은 직접 바꿀 수 있습니다.</p>
+    <h1 id="hero-h1">세 회사 모두 증권사 목표가의 절반 아래, 자체 계산으로는 약세~기본 시나리오 사이</h1>
+    <div class="qbar" id="qbar"></div>
+    <p class="lede">증권사 목표가 평균은 현재가의 2.2~2.8배지만, 지난 6주 동안 리포트의 40%가 목표가를 내렸습니다 [10]. 그래서 이 페이지는 목표가와 별도로 ROE·PBR 기반 적정가를 세 가지 시나리오로 다시 계산해 현재가와 비교합니다. 아래 가정은 직접 바꿀 수 있습니다.</p>
     <p class="asof">현재가: 2026-11-24 장 마감 이후 스냅샷(알파스퀘어·이투데이). BPS·EPS 추정은 메리츠증권 2026-11-06 리포트에서 역산. 투자 권유가 아닙니다.</p>
   </div>
+
+  <section>
+    <div><h2>처음 보는 분을 위한 읽는 법</h2><p class="sec-sub">적정가는 "회사가 자본으로 얼마나 버는가(ROE)"와 "주주가 요구하는 수익률(COE)"의 비율로 계산합니다. 아래는 HD현대중공업을 예로 든 실제 계산이며, 가정을 바꾸면 숫자도 함께 바뀝니다.</p></div>
+    <div class="how">
+      <div class="card"><span class="lbl">계산 예시 · HD현대중공업</span><ol class="steps" id="how-steps"></ol></div>
+      <div class="card"><span class="lbl">용어</span><dl class="gl">
+        <dt>현재가</dt><dd>2026-11-24 장 마감 가격</dd>
+        <dt>BPS</dt><dd>주당순자산. 회사 순자산 ÷ 주식 수 (2027년 추정)</dd>
+        <dt>ROE</dt><dd>자기자본이익률. 20%면 주주 돈 100원으로 1년에 20원 이익</dd>
+        <dt>COE</dt><dd>자기자본비용. 주주가 요구하는 최소 수익률 (기본 8.5%)</dd>
+        <dt>PBR</dt><dd>주가 ÷ BPS. 순자산의 몇 배에 거래되는지</dd>
+        <dt>PER</dt><dd>주가 ÷ 주당순이익. 이익의 몇 배에 거래되는지</dd>
+        <dt>상승여력</dt><dd>(적정가 ÷ 현재가 − 1). +20%면 적정가가 현재가보다 20% 높음</dd>
+        <dt>약세·기본·강세</dt><dd>ROE를 낮게·중간·높게 가정한 세 가지 적정가</dd>
+      </dl></div>
+    </div>
+  </section>
 
   <section>
     <div><h2>한눈에 보기</h2><p class="sec-sub">판정은 현재가가 기본(Base) 시나리오 적정가 대비 어디에 있는지로 매깁니다. 가정을 바꾸면 함께 바뀝니다.</p></div>
@@ -165,8 +192,8 @@ footer li{word-break:break-all}
   <section>
     <div><h2>세 종목 나란히 보기</h2><p class="sec-sub">막대와 점에 마우스를 올리거나 탭하면 숫자가 나옵니다.</p></div>
     <div class="grid g3">
-      <div class="card chart-card"><h3>현재가 대비 상승여력</h3><div class="c-leg" style="margin:0"><span><i style="background:var(--r1)"></i>기본 시나리오 적정가</span><span><i style="background:var(--r4)"></i>증권사 목표가 평균</span></div><div class="chart" id="ch-up"></div><p class="take">증권사 목표가는 모두 +100% 이상이지만, 자체 기본 시나리오로는 한화오션만 큰 폭의 할인입니다.</p></div>
-      <div class="card chart-card"><h3>52주 고점 대비 현재 주가</h3><div class="chart" id="ch-dd2"></div><p class="take">세 종목 모두 고점의 30~40%대. 한화오션의 낙폭이 가장 큽니다.</p></div>
+      <div class="card chart-card"><h3>현재가 대비 상승여력</h3><div class="c-leg" style="margin:0"><span><i style="background:var(--r1)"></i>기본 시나리오 적정가</span><span><i style="background:var(--r4)"></i>증권사 목표가 평균</span></div><div class="chart" id="ch-up"></div><p class="take" id="take-up"></p></div>
+      <div class="card chart-card"><h3>52주 고점 대비 현재 주가</h3><div class="chart" id="ch-dd2"></div><p class="take">HD현대중공업 33%(−67%), 한화오션 28%(−72%), 삼성중공업 42%(−58%). 52주 장중 고점 기준이며, 한화오션의 낙폭이 가장 큽니다.</p></div>
       <div class="card chart-card"><h3>ROE 대비 PBR: 싸고 비싼 위치</h3><div class="chart" id="ch-sc"></div><p class="take">점선이 가정한 자본비용에서의 적정 PBR입니다. 점선 아래면 ROE에 비해 싸게 거래되는 것입니다.</p></div>
     </div>
   </section>
@@ -258,11 +285,11 @@ const bps26=c=>c.p1105/c.pbr26, bps27=c=>c.p1105/c.pbr27, eps27=c=>c.p1105/c.per
 const fairPBR=roe=>S.coe-S.g<=0?NaN:(roe-S.g)/(S.coe-S.g);
 const fair=(c,k)=>bps27(c)*fairPBR(S.roe[c.id][k]);
 
-function verdict(c){const b=fair(c,"base"),r=fair(c,"bear");
-  if(c.px<r) return ["p-good","약세 시나리오보다 낮음"];
-  if(c.px<b*0.9) return ["p-good","기본 시나리오 대비 할인"];
-  if(c.px<=b*1.1) return ["p-warn","기본 시나리오 근처"];
-  return ["p-bad","기본 시나리오 대비 할증"];}
+function verdict(c){const b=fair(c,"base"),r=fair(c,"bear"),d=(c.px/b-1)*100,ds=(d>=0?"+":"−")+Math.abs(d).toFixed(1)+"%";
+  if(c.px<r) return ["p-good",`약세 적정가보다도 ${Math.abs((c.px/r-1)*100).toFixed(1)}% 낮음`];
+  if(c.px<b*0.9) return ["p-good",`기본 적정가 대비 ${ds} 할인`];
+  if(c.px<=b*1.1) return ["p-warn",`기본 적정가 근처 (${ds})`];
+  return ["p-bad",`기본 적정가 대비 ${ds} 할증`];}
 
 function renderCards(){
   document.getElementById("cards").innerHTML=D.map(c=>{
@@ -272,11 +299,15 @@ function renderCards(){
     <div class="px num">${won(c.px)}<small> 원 <span class="${c.chg>=0?"up":"dn"}">${c.chg>=0?"+":""}${c.chg}%</span></small></div>
     <span class="pill ${cls}">${txt}</span>
     ${Charts.range({min:fair(c,"bear"),mid:b,max:fair(c,"bull"),now:c.px,minL:won(fair(c,"bear")),midL:won(b),maxL:won(fair(c,"bull")),nowL:won(c.px),tip:`현재가 ${won(c.px)}원 · 기본 시나리오 ${won(b)}원`})}
-    <dl class="kv"><dt>기본 시나리오 적정가</dt><dd>${won(b)}원 (${pct((b/c.px-1)*100)})</dd>
+    <dl class="kv"><dt>전일 종가 → 오늘 종가</dt><dd>${won(c.px/(1+c.chg/100))} → ${won(c.px)}원</dd>
+    <dt>시가총액</dt><dd>${(c.px*c.shares/1e12).toFixed(1)}조원</dd>
+    <dt>기본 시나리오 적정가</dt><dd>${won(b)}원 (${pct((b/c.px-1)*100)})</dd>
     <dt>약세 ~ 강세</dt><dd>${won(fair(c,"bear"))} ~ ${won(fair(c,"bull"))}</dd>
     <dt>증권사 목표가 평균 (${c.tps.length}곳)</dt><dd>${won(tpAvg)}원 (${pct((tpAvg/c.px-1)*100)})</dd>
-    <dt>52주 고점 대비</dt><dd class="dn">${pct((c.px/c.hi52-1)*100)}</dd>
-    <dt>2027E PBR / PER</dt><dd>${(c.px/bps27(c)).toFixed(2)}배 / ${(c.px/eps27(c)).toFixed(1)}배</dd></dl>
+    <dt>52주 고점 ${won(c.hi52)}원 대비</dt><dd class="dn">${pct((c.px/c.hi52-1)*100)}</dd>
+    <dt>52주 최저 ${won(c.lo52)}원 대비</dt><dd>${pct((c.px/c.lo52-1)*100)}</dd>
+    <dt>현재 PBR → 적정 PBR (기본)</dt><dd>${(c.px/bps27(c)).toFixed(2)}배 → ${fairPBR(S.roe[c.id].base).toFixed(2)}배</dd>
+    <dt>2027E PER</dt><dd>${(c.px/eps27(c)).toFixed(1)}배</dd></dl>
     <div class="verdict"><ul>${c.notes.map(n=>`<li>${n}</li>`).join("")}</ul></div><p class="src">현재가 ${c.asof}</p></div>`}).join("");
 }
 
@@ -295,7 +326,7 @@ function renderFF(){
     const x=v=>(v/max*100);
     const ticks=[];for(let t=0;t<=max+1e-9;t+=step)ticks.push(t);
     const baseV=fair(c,"base");
-    return `<div class="ff"><div class="ff-head"><h3>${c.name}</h3><span class="src">현재가 ${won(c.px)}원 · 기본 시나리오 ${won(baseV)}원</span></div>
+    return `<div class="ff"><div class="ff-head"><h3>${c.name}</h3><span class="src">현재가 ${won(c.px)}원 · 기본 시나리오 ${won(baseV)}원 (${pct((baseV/c.px-1)*100)}) · 증권사 목표가 ${won(Math.min(...tp))}~${won(Math.max(...tp))}원</span></div>
     <div class="ff-body"><div class="ff-inner">
       <div class="ff-axis"><span></span><div class="ff-plot" style="height:20px"><div class="ff-now" style="left:${x(c.px)}%;height:${rows.length*38+24}px;top:0"><span style="top:0">현재 ${won(c.px)}</span></div></div></div>
       ${rows.map(r=>{const a=Math.min(r[1],r[2]),b=Math.max(r[1],r[2]);const narrow=x(b)-x(a)<14;return `<div class="ff-row"><span>${r[0]}</span><div class="ff-track"><div class="ff-bar" style="left:${x(a)}%;width:${Math.max(x(b)-x(a),0.6)}%;background:${r[3]}"></div>${narrow?`<span class="ff-lab" style="left:${x(a)}%">${won(a)} ~ ${won(b)}</span>`:`<span class="ff-lab" style="left:${x(a)}%">${won(a)}</span><span class="ff-lab" style="left:${x(b)}%;transform:translateX(-100%)">${won(b)}</span>`}</div></div>`}).join("")}
@@ -321,6 +352,8 @@ function renderTable(){
     ["현재 PER 2027E",c=>(c.px/eps27(c)).toFixed(1)+"배"],
     ["현재가에 내재된 지속 ROE",c=>((c.px/bps27(c))*(S.coe-S.g)+S.g).toFixed(1)+"%"],
     ["11/5 대비 주가",c=>pct((c.px/c.p1105-1)*100)],
+    ["적정가 약세 / 기본 / 강세 (원)",c=>won(fair(c,"bear"))+" / "+won(fair(c,"base"))+" / "+won(fair(c,"bull"))],
+    ["기본 적정가까지 / 목표가 평균까지",c=>pct((fair(c,"base")/c.px-1)*100)+" / "+pct((c.tps.reduce((a,t)=>a+t[1],0)/c.tps.length/c.px-1)*100)],
     ["52주 저가 / 고가",c=>won(c.lo52)+" / "+won(c.hi52)],
     ["증권사 목표가",c=>c.tps.map(t=>`${t[0]} ${(t[1]/10000).toLocaleString()}만`).join(", ")]
   ];
@@ -338,7 +371,22 @@ function renderCharts(){
   K.mount(document.getElementById("ch-sc"),K.scatter({x:[0,40],y:[0,ymax],xs:10,ys:1,xf:v=>v+"%",yf:v=>v+"배",xLabel:"기본 시나리오 ROE",yLabel:"현재 PBR (2027E)",height:280,fn:x=>fairPBR(x),fnLabel:"적정 PBR",points:pts,
     zoneLabels:[{x:39,y:ymax*0.08,t:"저평가 영역",anchor:"end"},{x:1,y:ymax*0.92,t:"고평가 영역"}]}));
 }
-function all(){renderCards();renderCharts();renderFF();renderTable()}
+function renderSummary(){
+  const ups=D.map(c=>(fair(c,"base")/c.px-1)*100), tpu=D.map(c=>(c.tps.reduce((a,t)=>a+t[1],0)/c.tps.length/c.px-1)*100);
+  const rng=a=>{const lo=Math.min(...a),hi=Math.max(...a);const f=v=>(v>=0?"+":"−")+Math.abs(v).toFixed(0)+"%";return f(lo)+"~"+f(hi)};
+  document.getElementById("hero-h1").textContent=`증권사 목표가까지 ${rng(tpu)}, 자체 기본 적정가까지는 ${rng(ups)}`;
+  document.getElementById("qbar").innerHTML=D.map(c=>`<div><span>${c.name} · 11/24 종가</span><b>${won(c.px)}원</b><span class="${c.chg>=0?"up":"dn"}">${c.chg>=0?"+":""}${c.chg}%</span><span> · 기본 적정가 ${won(fair(c,"base"))}원</span></div>`).join("");
+  const c=D[0],r=S.roe[c.id].base,pb=fairPBR(r),b=bps27(c),f=b*pb;
+  document.getElementById("how-steps").innerHTML=[
+    `2027년 추정 주당순자산(BPS): <b>${won(b)}원</b> (메리츠 추정에서 역산)`,
+    `기본 시나리오 ROE <b>${r}%</b>, 자기자본비용 COE <b>${S.coe}%</b>, 성장률 g <b>${S.g}%</b>`,
+    `적정 PBR = (${r} − ${S.g}) ÷ (${S.coe} − ${S.g}) = <b>${pb.toFixed(2)}배</b>`,
+    `적정가 = ${won(b)}원 × ${pb.toFixed(2)}배 = <b>${won(f)}원</b>`,
+    `현재가 ${won(c.px)}원 → 적정가까지 <b>${pct((f/c.px-1)*100)}</b>. 약세(ROE ${S.roe[c.id].bear}%)면 ${won(fair(c,"bear"))}원, 강세(ROE ${S.roe[c.id].bull}%)면 ${won(fair(c,"bull"))}원`
+  ].map(x=>`<li>${x}</li>`).join("");
+  document.getElementById("take-up").textContent="현재가 대비 기본 적정가: "+D.map((c,i)=>`${c.name} ${pct(ups[i])}`).join(", ")+". 증권사 목표가 평균: "+D.map((c,i)=>`${c.name} ${pct(tpu[i])}`).join(", ")+".";
+}
+function all(){renderSummary();renderCards();renderCharts();renderFF();renderTable()}
 renderInputs();all();
 document.querySelector(".assume").addEventListener("input",e=>{
   const t=e.target; if(t.tagName!=="INPUT")return; const v=parseFloat(t.value); if(!isFinite(v))return;
