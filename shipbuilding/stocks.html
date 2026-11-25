@@ -165,7 +165,7 @@ footer li{word-break:break-all}
     <h1 id="hero-h1">세 회사 모두 증권사 목표가의 절반 아래, 자체 계산으로는 약세~기본 시나리오 사이</h1>
     <div class="qbar" id="qbar"></div>
     <p class="lede">증권사 목표가 평균은 현재가의 2.2~2.8배지만, 지난 6주 동안 리포트의 40%가 목표가를 내렸습니다 [10]. 그래서 이 페이지는 목표가와 별도로 ROE·PBR 기반 적정가를 세 가지 시나리오로 다시 계산해 현재가와 비교합니다. 아래 가정은 직접 바꿀 수 있습니다.</p>
-    <p class="asof">현재가: 2026-11-24 장 마감 이후 스냅샷(알파스퀘어·이투데이). BPS·EPS 추정은 메리츠증권 2026-11-06 리포트에서 역산. 투자 권유가 아닙니다.</p>
+    <p class="asof">현재가: 2026-11-24 공식 종가(Yahoo Finance). BPS·EPS 추정은 메리츠증권 2026-11-06 리포트에서 역산. 투자 권유가 아닙니다.</p>
   </div>
 
   <section>
@@ -245,7 +245,7 @@ footer li{word-break:break-all}
       <li>메리츠증권, 2027 Outlook 조선 (2026-11-06, 11/5 종가 기준 추정치·목표가) https://home.imeritz.com/include/resource/research/WorkFlow/20261104152618505K_02.pdf</li>
       <li>알파스퀘어 삼성중공업 (2026-11-24) https://alphasquare.co.kr/home/stock-information?code=010140 · 이투데이 종목정보 (2026-11-24 장종료) https://www.etoday.co.kr/market/mkt_stkinfo?varIssCd=010140</li>
       <li>CBC뉴스, 조선주 일제히 약세 (2026-11-20) https://www.cbci.co.kr/news/articleView.html?idxno=629077</li>
-      <li>알파스퀘어 HD현대중공업 (2026-11-24 16:33) https://alphasquare.co.kr/home/stock-summary?code=329180 · 한화오션 (2026-11-24 16:19) https://alphasquare.co.kr/home/stock-summary?code=042660</li>
+      <li>Yahoo Finance 일별 시세 (2026-11-24 공식 종가): HD현대중공업 https://finance.yahoo.com/quote/329180.KS/history/ · 한화오션 https://finance.yahoo.com/quote/042660.KS/history/ · 삼성중공업 https://finance.yahoo.com/quote/010140.KS/history/</li>
       <li>잡포스트, HD현대중공업 5.45% 상승 (2026-11-24) https://www.job-post.co.kr/news/articleView.html?idxno=240604</li>
       <li>알파스퀘어 HD한국조선해양 (2026-11-23) https://alphasquare.co.kr/home/stock-summary?code=009540</li>
       <li>미래에셋증권 HD현대중공업 목표가 57만원 (머니투데이 2026-10-29) https://www.mt.co.kr/index.php/stock/2026/10/29/2026102908430280961</li>
@@ -260,12 +260,12 @@ footer li{word-break:break-all}
 <script src="../assets/charts.js"></script>
 <script>
 const D=[
- {id:"hhi",name:"HD현대중공업",code:"329180",px:249500,chg:4.61,asof:"11/24 16:33",shares:104.96e6,
+ {id:"hhi",name:"HD현대중공업",code:"329180",px:250500,chg:5.03,asof:"11/24 종가",shares:104.96e6,
   p1105:271000,pbr26:2.70,pbr27:2.20,per27:7.4,hi52:765000,lo52:235500,
   tps:[["메리츠",800000,"11/06"],["한국투자",750000,"10/12"],["NH",700000,"10월"],["유안타",643000,"11/12"],["미래에셋",570000,"10/29"]],
   roe28:37.0,beta:1.06,
   notes:["엔진 자회사 포함, 3사 중 이익의 질이 가장 높음 (HD현대마린엔진 영업이익률 28.5%)","배당 2026E 주당 12,500원 (메리츠)","목표가 하향이 가장 많음: 10월에만 20건"]},
- {id:"hwo",name:"한화오션",code:"042660",px:43000,chg:7.77,asof:"11/24 16:19",shares:306.4e6,
+ {id:"hwo",name:"한화오션",code:"042660",px:43200,chg:8.27,asof:"11/24 종가",shares:306.4e6,
   p1105:49250,pbr26:1.37,pbr27:1.27,per27:18.4,hi52:154800,lo52:39500,
   tps:[["메리츠",120000,"11/06"],["한국투자",110000,"10/12"],["현대차",100000,"10/13"]],
   roe28:16.1,beta:1.09,
