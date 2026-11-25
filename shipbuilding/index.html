@@ -242,6 +242,77 @@ footer li{word-break:break-all}
 .vt tr.res td{font-weight:700;background:color-mix(in srgb,var(--sea) 8%,transparent)}
 .steps2{margin:0;padding-left:20px;display:grid;gap:4px;font-size:.88rem;font-variant-numeric:tabular-nums}
 td.dn,span.dn{color:var(--bad)} td.up,span.up{color:var(--good)}
+
+/* ---- v4 story layout ---- */
+.chap{padding-block:44px 8px;display:grid;gap:20px;scroll-margin-top:12px;border-top:1px solid var(--line);margin-top:28px}
+.chap-h{display:grid;gap:8px}
+.chap-no{font-size:.8rem;font-weight:700;letter-spacing:.08em;color:var(--hull)}
+.chap-h h2{font-size:clamp(1.4rem,3.4vw,1.9rem)}
+.chap-q{font-size:1rem;color:var(--muted);max-width:70ch}
+.story{display:grid;gap:12px;max-width:74ch}
+.story p{font-size:1rem;line-height:1.8}
+.story b{color:var(--ink)}
+.sub-h{font-size:1.12rem;font-weight:700;margin-top:10px}
+.take2{border-left:4px solid var(--hull);background:var(--surface);border-radius:0 10px 10px 0;padding:14px 18px;display:grid;gap:6px}
+.take2 .lbl{color:var(--hull);font-weight:700}
+.take2 p{font-size:.98rem;line-height:1.7}
+.summary{background:#14212C;color:#E9EFF3;border-radius:14px;padding:22px 24px;display:grid;gap:14px}
+.summary .lbl{color:#9FB1BE;font-weight:600}
+.summary ol{margin:0;padding-left:22px;display:grid;gap:10px}
+.summary li{font-size:1rem;line-height:1.7;color:#DCE5EB}
+.summary li b{color:#FFFFFF}
+.summary a{color:#7FD0DA;white-space:nowrap}
+.qnums{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.qnums div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:2px}
+.qnums b{font-family:var(--f-display);font-size:1.45rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.qnums span{font-size:.8rem;color:var(--muted)}
+.chapnav{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.chapnav a{display:grid;gap:4px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.chapnav a:hover{border-color:var(--sea)}
+.chapnav small{color:var(--hull);font-weight:700;font-size:.75rem}
+.chapnav span{font-size:.84rem;color:var(--muted)}
+.flow{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.flow>div{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--sea);border-radius:10px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.flow>div:nth-child(2){border-top-color:var(--warn)} .flow>div:nth-child(3){border-top-color:var(--hull)}
+.flow h3{font-size:1rem}
+.flow p{font-size:.88rem;color:var(--muted)}
+.flow .see{font-size:.82rem;color:var(--ink);border-top:1px dashed var(--line);padding-top:6px}
+.lag{display:grid;grid-template-columns:64px repeat(6,minmax(0,1fr));gap:3px;font-size:.8rem}
+.lag>div{padding:8px 6px;border-radius:6px;text-align:center;line-height:1.35;min-width:0;overflow-wrap:anywhere}
+.lag .hd{font-weight:600;color:var(--muted);background:transparent;padding:4px}
+.lag .rl{font-weight:700;text-align:left;background:transparent;padding:8px 0;display:flex;align-items:center}
+.lag .hi{background:color-mix(in srgb,var(--good) 22%,var(--surface));color:var(--ink)}
+.lag .md{background:color-mix(in srgb,var(--warn) 20%,var(--surface))}
+.lag .lo{background:color-mix(in srgb,var(--bad) 18%,var(--surface))}
+.lag .un{background:var(--surface);border:1px dashed var(--axis);color:var(--muted)}
+.eras{display:grid;gap:0;border-left:3px solid var(--line);margin-left:8px}
+.era{position:relative;padding:4px 0 22px 22px;display:grid;gap:8px}
+.era::before{content:"";position:absolute;left:-10px;top:6px;width:17px;height:17px;border-radius:50%;background:var(--surface);border:3px solid var(--ec,var(--sea))}
+.era-h{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.era-h .yr{font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+.era-h h3{font-size:1.12rem}
+.era p{font-size:.95rem;line-height:1.75;max-width:74ch}
+.era ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:.88rem}
+.era .stk{font-size:.86rem;color:var(--muted)}
+.cmp2{width:100%;border-collapse:collapse;font-size:.88rem;min-width:620px}
+.cmp2 th,.cmp2 td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;white-space:normal}
+.cmp2 th{font-size:.78rem;color:var(--muted)}
+.phases{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.phases>div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:4px;align-content:start}
+.phases .when{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+.phases h3{font-size:.98rem}
+.phases p{font-size:.86rem;color:var(--muted)}
+.steps3{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.steps3>div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.steps3 .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:700;font-size:.85rem}
+.steps3 p{font-size:.88rem;color:var(--muted)}
+.appx summary{cursor:pointer;font-weight:700;font-size:1.05rem;padding:12px 0}
+.appx[open] summary{margin-bottom:8px}
+@media (max-width:520px){
+  .lag{grid-template-columns:44px repeat(6,minmax(0,1fr));font-size:.66rem;gap:2px}
+  .lag>div{padding:6px 2px}
+  .summary{padding:18px 16px}
+}
 </style>
 <link rel="stylesheet" href="../assets/site.css">
 </head>
@@ -266,9 +337,9 @@ const PX={"d":["2026-05-22","2026-05-26","2026-05-27","2026-05-28","2026-05-29",
 const INDUSTRIES = {
 ship: {
   name:"조선",
-  title:"조선업: 영업이익은 사상 최대 9.8조원, 주가는 연중 고점에서 58~72% 하락",
-  lede:"한국 조선 3사(HD한국조선해양·한화오션·삼성중공업)의 2026년 영업이익 추정치는 9.8조원으로 2025년 5.93조원보다 65% 많고, 과거 슈퍼사이클 최고치 6.6조원의 1.5배입니다. 그런데 주가는 2026년 연중 고점(장중) 대비 HD현대중공업 −67%(5/27 고점), 한화오션 −72%(3/3 고점), 삼성중공업 −58%(4/23 고점) 빠졌습니다(11/24 종가). 같은 기간 코스피도 하락했지만, 5/26 이후 조선 3사 낙폭(−52~−69%)은 코스피(−38%)보다 훨씬 컸습니다. 이미 쌓인 일감 1,454억 달러(약 200조원, 약 3.5년치)가 2028년까지 이익을 받쳐 주지만, 시장은 2029년 이후 수주를 걱정하고 있습니다.",
-  asof:"데이터 기준: 2026-11-24 작성. 주가 현황표는 2026-11-24 종가, 피어 멀티플 표는 2026-11-05 종가(메리츠증권) 기준입니다. 투자 권유가 아닙니다.",
+  title:"조선업, 20년 사이클로 읽기: 이익은 사상 최대인데 주가는 왜 고점의 3분의 1이 됐나",
+  lede:"조선업은 배를 주문받고 2~3년 뒤에 돈을 버는 산업입니다. 그래서 이익과 주가가 같은 방향으로 움직이지 않을 때가 많습니다. 이 리포트는 조선업을 처음 보는 분이 ① 돈 버는 구조, ② 지난 20년의 호황과 불황, ③ 지금 사이클 위치, ④ 2026년 주가 급락의 이유, ⑤ 적정 주가 계산까지 순서대로 따라오면 스스로 주식을 평가할 수 있도록 구성했습니다.",
+  asof:"데이터 기준: 2026-11-24 종가(주가), 2026년 10월 말(수주·선가), 2026-11-05(메리츠증권 추정치). 과거 수치는 각 시점 기사 기준. 투자 권유가 아닙니다.",
 
   facts:[
     {k:"3사 영업이익 (2026년 추정)",v:"9.8",u:"조원",cmp:"2025년 5.93조원 → +65%",tone:"up",mean:"회사가 본업으로 번 이익. 2000년대 슈퍼사이클 최고치 6.6조원의 약 1.5배로, 사상 최대 수준입니다.",src:[5,8]},
@@ -282,19 +353,22 @@ ship: {
   ],
 
   glossary:[
-    ["CGT (표준선 환산톤수)","배 무게에 건조 난이도를 곱한 단위. 같은 무게라도 LNG선이 벌크선보다 CGT가 큽니다. <b>예: 1~8월 글로벌 발주 5,972만 CGT</b>"],
+    ["CGT (표준선 환산톤수)","배 무게에 건조 난이도를 곱한 단위. 같은 무게라도 LNG선이 벌크선보다 CGT가 큽니다. <b>예: 2026년 1~10월 세계 발주 7,969만 CGT</b>"],
     ["수주잔고 (백로그)","계약은 했지만 아직 인도하지 않은 배의 총액. <b>예: 1,454억 달러 ÷ 연간 매출 ≈ 3.5년치 일감</b>"],
-    ["신조선가지수","클락슨이 발표하는 새 배 가격 지수(1988년 1월 = 100). <b>예: 186.34pt = 1988년보다 1.86배 비쌈</b>"],
+    ["신조선가지수","클락슨이 발표하는 새 배 가격 지수(1988년 1월 = 100). <b>예: 187.20pt(2026년 10월 말) = 1988년보다 1.87배 비쌈</b>"],
     ["인도 슬롯","조선소가 특정 연도에 배를 완성해 넘길 수 있는 도크 자리. <b>예: LNG선 슬롯 한국 연 75척, 중국 25척</b>"],
     ["Book-to-Bill (수주/매출 비율)","신규 수주 ÷ 매출 인식액. <b>1.0 이상이면 잔고가 늘고, 1.0 미만이 이어지면 일감이 줄어듭니다</b>"],
     ["영업이익률","영업이익 ÷ 매출. <b>예: 17.5% = 매출 100원당 17.5원 이익</b>"],
     ["ROE (자기자본이익률)","순이익 ÷ 자기자본. <b>예: 37% = 주주 돈 100원으로 1년에 37원을 벌어들임</b>"],
-    ["COE (자기자본비용)","주주가 요구하는 최소 수익률. ROE가 이보다 높아야 가치를 만듭니다. <b>이 페이지 기본값 7.8% (메리츠)</b>"],
+    ["COE (자기자본비용)","주주가 요구하는 최소 수익률. ROE가 이보다 높아야 가치를 만듭니다. <b>이 페이지 기본값 = 국고채 10년 3.823% + 베타 × 시장위험프리미엄 8.167% ≈ 12.5%. 증권사(메리츠)는 7.8% 사용</b>"],
     ["PBR (주가순자산비율)","주가 ÷ 주당순자산(BPS). <b>예: 2.2배 = 장부상 순자산의 2.2배 가격</b>"],
-    ["적정 PBR","(ROE − 성장률) ÷ (COE − 성장률). <b>예: ROE 37%, COE 7.8%, 성장률 0% → 37 ÷ 7.8 = 4.7배</b>"],
+    ["잔여이익모델 (RIM)","적정주가 = 지금 주당순자산 + 앞으로 자본비용을 넘어 벌 초과이익의 현재가치. <b>예: HD현대중공업 100,370 + 16,468 + 27,068 + 21,661 = 165,568원 (5장)</b>"],
+    ["초과이익 지속계수 ω","2029년 이후 초과이익이 매년 몇 %씩 남는지. <b>예: 0.5면 해마다 절반으로 줄어듦</b>"],
     ["PER (주가수익비율)","주가 ÷ 주당순이익(EPS). <b>예: 7.4배 = 지금 이익으로 7.4년이면 시가총액만큼 번다는 뜻</b>"],
     ["EV/EBITDA","(시가총액 + 순차입금) ÷ 감가상각 전 영업이익. 부채 구조가 다른 회사를 비교할 때 씁니다. <b>낮을수록 싸다는 뜻</b>"],
     ["헤비테일","배값 대부분(60% 이상)을 인도할 때 받는 계약 방식. 호황기에는 선수금 비중이 높아져 현금흐름이 좋아집니다."],
+    ["해양플랜트","바다에서 원유·가스를 뽑는 설비(FPSO 등). 2010년대 한국 조선사가 경험 없이 저가 수주했다가 2015년 대규모 손실을 낸 원인입니다."],
+    ["슈퍼사이클","2003~2008년처럼 발주·선가·이익이 몇 년 동안 함께 크게 오르는 구간."],
     ["MASGA","한미 조선 협력 패키지(Make American Shipbuilding Great Again). 미국 함정 건조·MRO를 한국 조선사가 맡는 사업 기회입니다."],
     ["MRO","유지·보수·정비(Maintenance, Repair, Overhaul). 미 해군 함정 정비가 한국 조선사의 새 매출원입니다."],
     ["VLGC · VLAC","초대형 LPG 운반선 · 초대형 암모니아 운반선. HD한국조선해양이 글로벌 발주의 50% 이상을 수주합니다."]
@@ -356,24 +430,24 @@ ship: {
     {k:"공급자 교섭력",s:3,d:"후판은 조선사 우위(2026E +4.3%로 완만). 엔진은 공급자 우위(가격 +10%) [6]"},
     {k:"고객 교섭력",s:2,d:"2028년 슬롯 소진(잔고 약 3.5년치)으로 현재는 조선사 우위. 슬롯이 비면 빠르게 선주 우위로 전환"},
     {k:"대체재 위협",s:1,d:"해상운송 대체재 거의 없음. 연료(LNG·암모니아·메탄올) 전환은 오히려 수요 요인"},
-    {k:"경쟁 강도",s:4,d:"중국이 물량(1~8월 점유율 81.1%)을, 한국이 고부가(대형 LNG선 57.9%, VLGC·VLAC 50%+)를 차지하는 이원 구도"}
+    {k:"경쟁 강도",s:4,d:"중국이 물량(2026년 1~10월 점유율 76.6%)을, 한국이 고부가(대형 LNG선 57.9%, VLGC·VLAC 50%+)를 차지하는 이원 구도"}
   ],
   forcesNote:"점수는 1(약함)~5(강함). 진입장벽은 높을수록, 나머지는 낮을수록 산업에 유리합니다.",
 
   attract:[
     {t:"단위경제성",items:["고정비 비중이 큰 장치산업이라 매출이 늘면 이익이 크게 늘어남(영업레버리지)","HD한국조선해양 3분기 영업이익률 약 17.5%, 한화오션 14.2%, 삼성중공업 10.7% [1][3]","3사 2026~28E 영업이익 9.8조 → 11.8조 → 13.7조원 전망, 과거 슈퍼사이클 고점 6.6조원 [8]"]},
-    {t:"ROIC vs WACC",items:["메리츠 2028E ROE: HD현대중공업 37%, HD한국조선해양 26%, 삼성중공업 24%, 한화오션 16% [6]","자기자본비용 7.8% 가정 대비 스프레드가 크게 양(+)인 구간","스프레드가 유지되는 기간이 밸류에이션을 결정"]},
+    {t:"ROIC vs WACC",items:["메리츠 2028E ROE: HD현대중공업 37%, HD한국조선해양 26%, 삼성중공업 24%, 한화오션 16% [6]","자기자본비용(CAPM 약 12.5%, 증권사 7.8%)보다 ROE가 높아 초과이익이 나는 구간","스프레드가 유지되는 기간이 밸류에이션을 결정"]},
     {t:"현금흐름 품질",items:["과거 헤비테일(인도 시 60%+) 구조에서 호황기엔 선수금 비중이 높아짐","HD한국조선해양 순현금 약 11조원 [3]","선수금은 부채로 잡히므로 순현금은 수주 둔화 시 빠르게 줄 수 있음"]},
-    {t:"자본집약도",items:["2010년대 구조조정 이후 도크 증설은 제한적, 주로 생산성·자동화 투자","인력은 호황기 대비 절반 수준(약 9만 명) [7]","미국 거점(필리조선소, HD키윗) 투자는 수주 연동형 성장 Capex [4]"]},
+    {t:"자본집약도",items:["2010년대 구조조정 이후 도크 증설은 제한적, 주로 생산성·자동화 투자","종사자 2014년 20만3,441명 → 2022년 7월 9만2,394명(−54.5%) [32]","미국 거점(필리조선소, HD키윗) 투자는 수주 연동형 성장 Capex [4]"]},
     {t:"해자(Moat)",items:["LNG선 건조 슬롯 연 75척 vs 중국 25척 [6]","VLGC·VLAC 글로벌 발주의 50% 이상 점유(HD) [3]","미국 함정·MRO는 동맹국 조선소만 가능한 규제성 해자"]}
   ],
 
   quotes:{
     asof:"2026-11-24 종가. 시가총액은 메리츠 시총으로 역산한 주식 수 × 종가. 목표가 평균은 최근 증권사 목표가(HD 5곳, 한화 3곳, 삼성 2곳) 단순 평균. PBR·PER은 메리츠 2027E 추정치를 11/24 종가로 다시 계산.",
     rows:[
-      {n:"HD현대중공업",code:"329180",px:249500,chg:4.61,hi:745000,lo52:235500,cap:26.2,tp:692600,pbr:2.03,per:6.8},
-      {n:"한화오션",code:"042660",px:43000,chg:7.77,hi:149900,lo52:39500,cap:13.2,tp:110000,pbr:1.11,per:16.1},
-      {n:"삼성중공업",code:"010140",px:14970,chg:4.32,hi:34400,lo52:14270,cap:13.2,tp:33000,pbr:1.84,per:7.5}
+      {n:"HD현대중공업",code:"329180",px:249500,chg:4.61,hi:765000,hiD:"5/27",lo52:235500,cap:26.2,tp:692600,pbr:2.03,per:6.8},
+      {n:"한화오션",code:"042660",px:43000,chg:7.77,hi:154800,hiD:"3/3",lo52:39500,cap:13.2,tp:110000,pbr:1.11,per:16.1},
+      {n:"삼성중공업",code:"010140",px:14970,chg:4.32,hi:35350,hiD:"4/23",lo52:14270,cap:13.2,tp:33000,pbr:1.84,per:7.5}
     ],
     note:"HD한국조선해양(009540)은 위 HD현대중공업의 모회사(중간지주)라 이익이 겹칩니다. 11/24 종가를 확보하지 못해 아래 피어 표(11/5 기준)에만 넣었습니다."
   },
@@ -394,7 +468,7 @@ ship: {
     keyMultiple:"조선업은 수주에서 매출까지 2~3년 시차가 있어 PER이 사이클 내내 왜곡됩니다. 그래서 IB와 증권사는 ROE 대비 P/B(잔여이익 모델)를 주로 씁니다. 보조로 수주잔고 대비 시가총액, EV/EBITDA를 함께 봅니다.",
     method:"적정 PBR = (ROE − g) ÷ (COE − g). 메리츠는 HD현대중공업에 2028E ROE 37%, COE 7.8%를 넣어 목표 PBR 4.7배를 산출했습니다 [6].",
     defaults:{roe:37,coe:7.8,g:0,bps:100000},
-    band:"과거 PBR 밴드는 이번 조사에서 수집하지 못했습니다. 2008년 고점(PBR 3~4배대), 2016년 저점(0.5배 내외) 등은 증권사 리포트로 확인이 필요합니다.",
+    band:"2007년 슈퍼사이클 고점 때 조선주 PBR은 3.72배였고, 2025년 6월에는 HD현대중공업·삼성중공업·한화오션 평균 12개월 선행 PBR이 4.01배로 그 고점을 넘었습니다 [26]. 지금은 2027E 기준 1.11~2.03배로 내려왔습니다(11/24 종가).",
     backlogCap:"3사 시가총액 합(HD현대중공업·한화오션·삼성중공업) 11/5 약 58조원 → 11/24 약 52.6조원(26.2 + 13.2 + 13.2조). 3사 수주잔고 약 200조원 대비 시총/백로그 0.29배 → 0.26배. 쌓인 일감 1원당 시가총액이 26원이라는 뜻입니다."
   },
 
@@ -420,16 +494,16 @@ ship: {
   ],
 
   scenarios:[
-    {cls:"bull",t:"Bull",p:"25%",items:["미국 LNG 인허가 재개, 2027년 LNG선 대량 발주","LNG선 신조가 2.7억 달러 돌파 [6]","MASGA로 함정·MRO 수주가 연 단위로 반복","→ HD현대중공업 기준 자체 강세 적정가 434,759원(+74%), 증권사 목표가 57만~80만원까지 재평가 여지"]},
-    {cls:"base",t:"Base",p:"55%",items:["3사 영업이익 2027E 11.8조, 2028E 13.7조 달성 [8]","2029년 슬롯은 컨테이너·탱커로 일부 채움","LNG선 선가 횡보","→ HD현대중공업 기준 자체 기본 적정가 289,840원(+16%). 이익 증가율(2027E +20%)만큼 회복"]},
-    {cls:"bear",t:"Bear",p:"20%",items:["중국이 LNG선 점유율 50% 이상 확보","선가 인하로 백로그 확보(KIS 경고) [7]","원화 강세(메리츠 2027E 1,289원, 현재 대비 −3.4%) 겹침 [6]","→ HD현대중공업 기준 자체 약세 적정가 173,904원(−30%)"]}
+    {cls:"bull",t:"강세",p:25,om:0.8,coe:"broker",items:["미국 LNG 인허가 재개, 2027년 LNG선 대량 발주","LNG선 신조가 2.7억 달러 돌파 [6]","MASGA로 함정·MRO 수주가 해마다 반복","시장이 증권사 수준의 낮은 자본비용(7.8%)을 계속 인정"]},
+    {cls:"base",t:"기본",p:55,om:0.5,coe:"capm",items:["3사 영업이익 2027E 11.8조, 2028E 13.7조 달성 [8]","2029년 이후 슬롯은 컨테이너·탱커로 일부 채움","LNG선 선가 횡보, 초과이익은 해마다 절반씩 줄어듦"]},
+    {cls:"bear",t:"약세",p:20,om:0.3,coe:"capm",items:["중국이 LNG선 점유율 50% 이상 확보","선가를 낮춰 일감을 채우는 구간 재현 [7]","원화 강세(메리츠 2027E 1,289원) 겹침 [6]"]}
   ],
-  scenarioNote:"확률은 이 페이지의 판단이며 증권사 추정이 아닙니다. 적정가는 조선 3사 주가 비교 페이지의 기본 가정(COE 8.5%, 2027E BPS 123,182원, ROE 약세 12% · 기본 20% · 강세 30%)으로 계산했고, % 는 11/24 종가 249,500원 대비입니다.",
+  scenarioNote:"확률은 이 페이지의 판단이며 증권사 추정이 아닙니다. 적정가는 5장의 잔여이익모델로 계산했습니다. 약세·기본은 CAPM 자본비용(약 12.5%), 강세는 증권사 자본비용 7.8%를 넣었고, % 는 11/24 종가 대비입니다.",
 
   catalysts:[
     {when:"2026-10-28",past:true,t:"3분기 실적 발표",d:"HD한국조선해양 영업이익 1조 4,472억원(+37%), 한화오션 4,857억원(+68%), 삼성중공업 3,384억원(+42%)"},
     {when:"2026-11-03",past:true,t:"미국 중간선거",d:"민주당 승리 이후 LNG 인허가 우려로 조선주 하락 [7]"},
-    {when:"2026-12",t:"연간 수주 목표 달성 여부",d:"HD 93.9%, 삼성 91%. 연말 몰아치기 수주 확인 [5]"},
+    {when:"2026-12",t:"연간 수주 목표 달성 여부",d:"11월 중순 HD한국조선해양 94.9%, 삼성중공업 91%. 연말 몰아치기 수주 확인 [5]"},
     {when:"2027-01",t:"클락슨 연간 통계·국가별 점유율",d:"2026년 한국 점유율 확정치"},
     {when:"2027-01~02",t:"4분기 실적·2027 수주 가이던스",d:"4분기 3사 영업이익 컨센서스 2.48조원(+57%) [9]"},
     {when:"2027 상반기",t:"후판 가격 협상",d:"메리츠 2027E +6.8% 전망 [6]"},
@@ -439,23 +513,23 @@ ship: {
 
   risks:[
     {lvl:"bad",p:4,i:5,t:"중국의 LNG선 진입",d:"후허(Hengli) 등 LNG선 진출, 일부 입찰에서 저가로 점유율 확대 [3][8]"},
-    {lvl:"bad",p:3,i:5,t:"2029년 이후 수주 공백",d:"2028년 슬롯은 찼지만 2029년은 경쟁 중. 주가가 고점 대비 −56~−71% 빠진 주된 이유"},
+    {lvl:"bad",p:3,i:5,t:"2029년 이후 수주 공백",d:"2028년 슬롯은 찼지만 2029년은 경쟁 중. 주가가 연중 고점 대비 −58~−72% 빠진 주된 이유"},
     {lvl:"warn",p:3,i:4,t:"미국 LNG 정책",d:"인허가 지연 시 LNG선 발주 지연. 카타르 불가항력 이슈도 선가 약세 요인 [6][7]"},
     {lvl:"warn",p:3,i:3,t:"환율",d:"원화 1% 강세 ≈ 영업이익 약 1% 감소(한화오션 기준) [1]"},
-    {lvl:"warn",p:4,i:2,t:"인력·노사",d:"인력 약 9만 명으로 호황기의 절반. 2026년 협상은 타결(HD 부분파업 11회, 한화 찬성 50.02%)됐지만 매년 반복 [1][7]"},
+    {lvl:"warn",p:4,i:2,t:"인력·노사",d:"종사자 2022년 7월 9만2,394명으로 2014년의 절반 이하 [32]. 2026년 협상은 타결(HD 부분파업 11회, 한화 찬성 50.02%)됐지만 매년 반복 [1][7]"},
     {lvl:"warn",p:3,i:2,t:"원가",d:"후판 가격 2026~27년 상승 전망. 엔진 가격 +10%(공급자 우위) [6]"}
   ],
 
   checklist:[
     {t:"분기 신규수주 ≥ 매출 인식액인가 (Book-to-Bill > 1)",w:"기준 1.0. 2개 분기 연속 1.0 미만이면 일감이 줄기 시작"},
-    {t:"클락슨 신조선가지수 방향",w:"현재 186.34pt(2026년 8월). 3개월 연속 하락하면 경고"},
+    {t:"클락슨 신조선가지수 방향",w:"현재 187.20pt(2026년 10월 말, 사상 최고권). 3개월 연속 하락하면 경고. 과거 고점은 2008년 191.51 [26]"},
     {t:"LNG선 신조가와 한국 점유율",w:"경고선: 신조가 2.4억 달러 하회, 한국 점유율 50% 하회 (현재 57.9%)"},
     {t:"2029~30년 인도 슬롯 확보율",w:"예: 삼성중공업 2029년 LNG 슬롯 75% 확보 [6]. 50% 아래면 공백 우려"},
     {t:"수주 선종 믹스",w:"LNG·VLGC·VLAC 비중이 내려가면 마진 하락 신호"},
     {t:"영업이익률 추이와 일회성 요인",w:"3분기 기준 HD 17.5% · 한화 14.2% · 삼성 10.7%. 충당금 환입·환율 효과는 빼고 볼 것"},
-    {t:"후판 가격과 원/달러",w:"후판 620$/톤(2026E), 환율 1,334원(10/30). 원화 1% 강세 ≈ 영업이익 약 1% 감소"},
+    {t:"후판 가격과 원/달러",w:"후판 620$/톤(2026E), 환율 1,342.6원(11/24). 원화 1% 강세 ≈ 영업이익 약 1% 감소"},
     {t:"MASGA 실제 수주 건수와 금액",w:"MOU가 아니라 계약을 셀 것"},
-    {t:"PBR 대비 ROE 스프레드",w:"ROE 37% · COE 7.8%면 적정 PBR 4.7배. 06번 계산기로 점검"},
+    {t:"ROE와 자본비용의 차이(초과이익)",w:"2028E ROE(HD현대중공업 37%)가 자본비용(약 12.5%)을 얼마나 넘는지, 그 차이가 2029년 이후에도 유지되는지. 5장 계산표로 점검"},
     {t:"노사 일정·파업 여부",w:"매년 7~10월 임단협 시즌"}
   ],
 
@@ -517,6 +591,75 @@ ship: {
     ]
   },
 
+  history:{
+    nbpi:[
+      {t:2007.96,y:184.83,when:"2007년 말",label:"184.8",src:"[25]"},
+      {t:2008.62,y:191.51,when:"2008년 (사상 최고)",label:"191.5",big:true,src:"[26]"},
+      {t:2016.42,y:127,when:"2016년 6월",src:"[31]"},
+      {t:2016.87,y:124,when:"2016년 11월",label:"124",below:true,src:"[30]"},
+      {t:2021.79,y:151.96,when:"2021년 10월",label:"152.0",src:"[14]"},
+      {t:2023.29,y:167.32,when:"2023년 4월 말",label:"167.3",src:"[25]"},
+      {t:2024.71,y:189.96,when:"2024년 9월",label:"190.0",src:"[26]"},
+      {t:2026.08,y:184.30,when:"2026년 1월",src:"[23]"},
+      {t:2026.21,y:182.07,when:"2026년 3월",src:"[18]"},
+      {t:2026.62,y:186.34,when:"2026년 8월",src:"[14]"},
+      {t:2026.83,y:187.20,when:"2026년 10월 말",label:"187.2",big:true,src:"[14]"}
+    ],
+    bands:[
+      {from:2003,to:2008.99,short:"①",label:"슈퍼사이클",color:"var(--good)"},
+      {from:2009,to:2016.99,short:"②",label:"장기 불황",color:"var(--bad)"},
+      {from:2017,to:2020.99,short:"③",label:"구조조정·바닥",color:"var(--warn)"},
+      {from:2021,to:2024.99,short:"④",label:"회복",color:"var(--good)"},
+      {from:2025,to:2027,short:"⑤",label:"이익 정점·주가 급등락",color:"var(--hull)"}
+    ],
+    profit:[
+      {label:"2015",value:-8.55,text:"−8.5",tip:"2015년 3사 영업손실 8조5,471억원 (현대중공업·삼성중공업·대우조선해양) [29]"},
+      {label:"과거 고점",value:6.6,text:"6.6",dim:true,tip:"2000년대 슈퍼사이클 이익 고점 6.6조원 [8]"},
+      {label:"2025",value:5.93,text:"5.9",tip:"2025년 3사 영업이익 5.93조원 [5]"},
+      {label:"2026E",value:9.8,text:"9.8",tip:"2026년 추정 9.8조원 [8]"},
+      {label:"2027E",value:11.8,text:"11.8",tip:"2027년 추정 11.8조원 [8]"},
+      {label:"2028E",value:13.7,text:"13.7",tip:"2028년 추정 13.7조원 [8]"}
+    ],
+    krShare:[
+      {label:"2016 1~11월",value:15.5,tip:"2016년 1~11월 15.5% [30]"},
+      {label:"2020 1분기",value:14,tip:"2020년 1분기 14% (55만 CGT) [33]"},
+      {label:"2021 1분기",value:52,tip:"2021년 1분기 52% (532만 CGT, 세계 1위) [33]"},
+      {label:"2024 1~11월",value:18,tip:"2024년 1~11월 약 18% (1,092만 CGT) [33]"},
+      {label:"2025 상반기",value:25,tip:"2025년 상반기 25% (487만 CGT) [33]"},
+      {label:"2025 1~10월",value:16.4,tip:"2025년 1~10월 16.4% [14]"},
+      {label:"2026 1~10월",value:14.9,color:"var(--hull)",tip:"2026년 1~10월 14.9% [14]"}
+    ],
+    eras:[
+      {yr:"2003~2008",t:"① 슈퍼사이클: 모두가 배를 주문하던 시절",c:"var(--good)",
+       story:"중국의 고성장으로 원자재와 컨테이너 물동량이 폭증하자 선주들이 앞다퉈 배를 주문했습니다. 2007년 한국은 3,200만 CGT를 수주해 중국(2,920만 CGT)을 앞섰고, 한국 수주잔고는 1년 새 두 배인 6,450만 CGT가 됐습니다. 배가 모자라니 값이 올랐고, 신조선가지수는 2008년 191.51로 사상 최고를 찍었습니다.",
+       nums:["2007년 수주: 한국 3,200만 CGT vs 중국 2,920만 CGT (무게 기준으로는 중국이 앞섬) [24]","신조선가지수 2007년 말 184.83 → 2008년 사상 최고 191.51 [25][26]","당시 조선주 PBR 고점 3.72배 [26]"],
+       stk:"주가: 현대중공업은 2007년 1월 12만5,000원에서 11월 52만8,000원으로 10개월 만에 +322% 올랐습니다 [27]."},
+      {yr:"2009~2016",t:"② 장기 불황: 주문이 끊기고, 무리한 수주가 적자로",c:"var(--bad)",
+       story:"2008년 금융위기 뒤 발주가 사실상 멈췄습니다. 2009년 3월 초까지 한국 조선사가 받은 주문은 삼성중공업의 LNG-FPSO 1척뿐이었습니다. 상선 일감이 줄자 조선사들은 경험이 적은 해양플랜트를 낮은 가격에 대거 수주했고, 공정 지연과 설계 변경, 유가 하락에 따른 계약 취소가 겹치면서 2015년 3사 합계 8조5,471억원의 영업손실이 났습니다. 2016년에는 세계 발주 자체가 전년의 28% 수준으로 쪼그라들었습니다.",
+       nums:["2009년 1~3월 초 국내 수주 1척 (삼성중공업 LNG-FPSO 6.8억 달러) [28]","2015년 영업손실: 대우조선해양 5조5,051억, 현대중공업 1조5,401억, 삼성중공업 1조5,019억원 [29]","2016년 1~11월 세계 발주 1,048만 CGT (전년 같은 기간 3,720만의 28%), 한국 점유율 15.5% [30]","신조선가지수 2016년 6월 127, 11월 124 · 세계 수주잔고 2004년 이후 최저 [30][31]"],
+       stk:"교훈: 2008~09년의 주문 공백과 그 공백을 메우려던 무리한 수주는 몇 년 뒤인 2015년에야 대규모 손실로 실적에 드러났습니다. 실적보다 수주와 선가가 먼저 꺾였습니다."},
+      {yr:"2017~2020",t:"③ 구조조정과 바닥: 사람과 도크를 줄이다",c:"var(--warn)",
+       story:"살아남기 위해 인력과 설비를 줄였습니다. 조선업 종사자는 2014년 20만3,441명에서 2022년 7월 9만2,394명으로 절반 이상 줄었습니다. 2020년 1분기 한국 수주는 55만 CGT, 점유율 14%까지 내려갔습니다. 역설적으로 이때 줄어든 생산능력이 다음 호황에서 선가를 밀어 올리는 바탕이 됩니다.",
+       nums:["종사자 2014년 20만3,441명 → 2022년 7월 9만2,394명 (−54.5%) [32]","2020년 1분기 한국 수주 55만 CGT, 점유율 14% [33]"],
+       stk:"교훈: 공급(도크·인력)이 줄어든 상태에서 수요가 돌아오면 선가가 빠르게 오릅니다."},
+      {yr:"2021~2024",t:"④ 회복: 비싸게, 많이 받아 둔 일감",c:"var(--good)",
+       story:"코로나 이후 해운 운임이 뛰고, 탄소 규제로 LNG 운반선과 친환경 추진선 주문이 몰렸습니다. 2021년 1분기 한국은 세계 발주의 52%를 가져가 1위로 돌아왔습니다. 줄어든 생산능력에 주문이 몰리자 선가가 계속 올라, 신조선가지수는 2024년 9월 189.96으로 2008년 고점(191.51)에 바짝 다가갔습니다. 이때 받은 비싼 일감이 지금 매출로 잡히고 있습니다.",
+       nums:["2021년 1분기 한국 수주 532만 CGT, 점유율 52% [33]","신조선가지수 2021년 10월 151.96 → 2023년 4월 167.32 → 2024년 9월 189.96 [14][25][26]","LNG선 1척 가격 2023년 4월 2억5,600만 달러 → 2024년 10월 2억6,100만 달러 [25][16]","2024년 세계 발주 7,353만 CGT, 2007년의 약 78% [26]"],
+       stk:"주가: HD현대중공업은 2021년 9월 공모가 6만원에 상장했습니다 [34]."},
+      {yr:"2025~2026",t:"⑤ 이익 정점과 주가 급등락: 지금",c:"var(--hull)",
+       story:"2~3년 전 비싸게 받은 배가 매출로 잡히면서 이익이 폭증했습니다. 2025년 HD한국조선해양 영업이익은 3조9,045억원(+172%)으로 사상 최대였고, 미국과의 조선 협력(MASGA) 기대까지 겹쳐 2025년 한 해 주가가 한화오션 +204%, 삼성중공업 +113% 올랐습니다. 그러나 2026년 새 주문에서 중국이 몫을 크게 늘리고 한국의 핵심인 LNG선 발주가 하반기에 줄자, 주가는 2026년 3~5월 고점에서 58~72% 떨어졌습니다. 이익은 아직 늘고 있는데 주가는 이미 '다음 사이클'을 걱정하는 국면입니다.",
+       nums:["2025년 영업이익: HD한국조선해양 3조9,045억원(+172.3%), 한화오션 1조1,091억원 [35]","2025년 주가 상승률: 한화오션 +204%, 삼성중공업 +113%, HD현대중공업·HD한국조선해양 70%대 [36]","2025년 6월 조선 3사 평균 PBR 4.01배로 2007년 고점(3.72배)을 넘어섬 [26]","2026년 연중 고점(장중) → 11/24: HD현대중공업 765,000 → 249,500원, 한화오션 154,800 → 43,000원, 삼성중공업 35,350 → 14,970원 [12][22]"],
+       stk:"지금의 질문: 2028년까지 이익은 보이는데, 2029년 이후 일감이 채워질 것인가? 3장과 4장에서 다룹니다."}
+    ],
+    vs08:[
+      ["선가","2008년 191.51로 사상 최고","2026년 10월 187.20. 고점권이지만 LNG선·컨테이너선 가격은 하락 전환 [14][16]"],
+      ["주문 흐름","2008년 하반기 금융위기로 발주 급감","2026년 1~10월 세계 발주는 +61%로 많지만 한국 몫은 14.9%로 낮고, LNG선 발주는 하반기 월 9.8척 → 4.3척 [14][17]"],
+      ["쌓인 일감","2007년 한국 잔고 6,450만 CGT로 급증 [24]","3사 잔고 1,454억 달러, 약 3.5년치(2028년 인도분까지) [7][9]"],
+      ["무리한 수주","해양플랜트 저가 수주가 2015년 8.5조 적자로 [29]","현재는 LNG선·VLGC 등 경험 많은 고부가 상선 위주. 다만 증권사는 '선가를 낮춰 일감을 채우는' 위험을 경고 [7]"],
+      ["생산능력","인력이 계속 늘어 2014년 20만3,441명으로 정점 [32]","종사자 2014년의 절반 수준, 도크 증설 제한적 [32]. 공급이 빠듯해 선가 방어에는 유리"],
+      ["밸류에이션","PBR 고점 3.72배 [26]","2025년 6월 4.01배까지 올랐다가 지금 2027E 1.1~2.0배 [26][6]"]
+    ]
+  },
   charts:{
     op:[{label:"2025A",value:5.93,dim:true,tip:"2025년 실적 5.93조원"},{label:"2026E",value:9.8},{label:"2027E",value:11.8},{label:"2028E",value:13.7}],
     opRef:{value:6.6,label:"과거 슈퍼사이클 고점 6.6조"},
@@ -554,7 +697,20 @@ ship: {
     "조세일보·택스타임즈, 한국공인회계사회 가치평가 포럼 MRP 8.167% (2026-05-29) https://www.taxtimes.co.kr/news/article.html?no=275329",
     "베타: stockanalysis HD현대중공업 https://stockanalysis.com/quote/krx/329180/statistics/ · 삼성중공업 https://stockanalysis.com/quote/krx/010140/statistics · Twelve Data 한화오션 https://twelvedata.com/markets/875745/stock/krx/042660/statistics",
     "이벤트: 한국경제 6/9 https://www.hankyung.com/article/202606096198i · 파이낸셜뉴스 6/10 https://www.fnnews.com/news/202606101133444375 · 한국경제 7/7 https://www.hankyung.com/article/202607070619Y · 뉴시스 7/16 https://www.newsis.com/view/NISX20260716_0003711746 · KB Think(연합인포맥스) 7/31 https://kbthink.com/news-list/view.html?newsId=20260731095623421 · SBS Biz 7/31 https://biz.sbs.co.kr/amp/article/20000325956 · 미디어워치 9/3 https://www.mediawatch.kr/news/article.html?no=260888 · 헤럴드경제 10/17 https://mbiz.heraldcorp.com/article/10905897 · 허프포스트코리아 10/29 https://www.huffingtonpost.kr/article/261651 · 파이낸셜뉴스 11/1 https://www.fnnews.com/news/202611010600534824 · 서울신문 11/2 https://m.seoul.co.kr/news/newsView.php?id=20261102500106",
-    "다올투자증권, 조선 모니터링 (2026-02-01) https://www.ktb.co.kr/common/download.jspx?cmd=viewPDF&path=%2Fattach_file%2FRESEARCH%2F137432%2F1%2F20260202_B2040_gs.choie_503.pdf"
+    "다올투자증권, 조선 모니터링 (2026-02-01) https://www.ktb.co.kr/common/download.jspx?cmd=viewPDF&path=%2Fattach_file%2FRESEARCH%2F137432%2F1%2F20260202_B2040_gs.choie_503.pdf",
+    "Seatrade Maritime, China passes South Korea in 2007 in new ship orders (2008-01-14, 클락슨 인용) https://www.seatrade-maritime.com/asia/china-passes-south-korea-2007-new-ship-orders",
+    "헤럴드경제, 선박값 17년간 2.6% 올라 (2026-03-19, 클락슨) https://www.heraldk.com/article/2026031916425136028 · 이코노미스트, 신조선가지수 167.32 (2023-05-09) https://economist.co.kr/article/view/ecn202305090026",
+    "헤럴드경제(다음), 18년 전 슈퍼사이클보다 주가밸류 높아진 조선사들 (2025-06-15): PBR 2007년 고점 3.72배·2025년 4.01배, 신조선가지수 과거 최고 191.51·2024년 9월 189.96, 2024년 발주 7,353만 CGT https://v.daum.net/v/20250615070014202",
+    "머니투데이, 'NO'없는 현대重, 신기록 순항 (2007-12-14) https://www.mt.co.kr/stock/2007/12/14/2007121214401481674",
+    "머니투데이, \"올 수주 딱 1척\" 조선 10년불황 또오나 (2009-03-10) https://www.mt.co.kr/stock/2009/03/10/2009030915403342826",
+    "뉴스토마토, 조선3사 지난해 손실 8.5조 (2016-03-08) https://newstomato.com/ReadNews.aspx?no=631492",
+    "아주경제, 11월 세계 선박 발주·신조선가지수 124 (2016-12-06, 클락슨) https://www.ajunews.com/view/20161206102518122",
+    "뉴스핌, 6월 선박 발주·신조선가지수 127 (2016-07-08, 클락슨) https://newspim.com/news/view/20160708000101",
+    "이코노미스트, 조선업 종사자 최고치보다 54.5% 급감 (2022-10-23, 조선해양플랜트협회) https://economist.co.kr/article/view/ecn202210230045",
+    "세계일보, 1분기 한국 수주 점유율 52% (2021-04-04) https://www.segye.com/newsView/20210404509334 · 데일리안, 2024년 1~11월 점유율 (2024-12-17) https://www.dailian.co.kr/news/view/1442192 · 한국경제, 2025년 상반기 수주 (2025-07-04) https://www.hankyung.com/article/2025070492021",
+    "아주경제, 현대중공업 상장 첫날 (2021-09-18) https://www.ajunews.com/view/20210918222521681",
+    "중앙일보(다음), 2025년 실적 (2026-02-10) https://v.daum.net/v/20260210050249043",
+    "머니투데이, 2025년 조선주 수익률 (2026-01-03) https://www.mt.co.kr/stock/2026/01/03/2026010214363970967"
   ]
 }
 };
@@ -565,82 +721,128 @@ const cite=a=>a&&a.length?` <span class="src">[${a.join("][")}]</span>`:"";
 function sec(id,no,title,sub,body){return `<section id="${id}"><div><div class="sec-head"><span class="sec-no">${no}</span><h2>${title}</h2></div>${sub?`<p class="sec-sub">${sub}</p>`:""}</div>${body}</section>`}
 const band=t=>`<div class="band">${t}</div>`;
 
+function lagGrid(){
+  const cols=["2021~22","2023~24","2025","2026","2027~28","2029~"];
+  const rows=[
+    ["수주",[["hi","한국 1위 복귀, 많이 받음"],["hi","비싸게 받음, 잔고 3.5년치"],["md","세계 발주 감소"],["md","발주 +61%지만 한국 몫 14.9%"],["un","?"],["un","?"]]],
+    ["실적",[["lo","적자 (후판값 급등)"],["md","흑자 전환"],["hi","사상 최대"],["hi","9.8조 (추정)"],["hi","11.8→13.7조 (추정)"],["un","2026~27년 수주가 결정"]]],
+    ["주가",[["md","등락"],["hi","상승"],["hi","급등 (한화 +204%)"],["lo","고점 대비 −58~−72%"],["un","?"],["un","?"]]]
+  ];
+  return `<div class="hd"></div>${cols.map(c=>`<div class="hd">${c}</div>`).join("")}`+rows.map(([n,cs])=>`<div class="rl">${n}</div>${cs.map(([k,t])=>`<div class="${k}">${t}</div>`).join("")}`).join("");
+}
 function render(D){
-  const toc=[["s0","핵심 숫자"],["s1","요약·사이클"],["s2","선행지표"],["s3","밸류체인"],["s4","산업 매력도"],["s5","종목 비교"],["s6","밸류에이션"],["s7","재무·크레딧"],["s8","딜·거버넌스"],["s9","시나리오"],["s10","촉매·일정"],["s11","리스크"],["s12","체크리스트"],["s13","용어 풀이"]];
-  let h=`<div class="hero"><span class="eyebrow">산업 리포트 · ${esc(D.name)}</span><h1>${esc(D.title)}</h1><p class="lede">${esc(D.lede)}</p><p class="asof">${esc(D.asof)}</p></div>`;
-  h+=`<section id="s0" style="padding-top:8px"><div><div class="sec-head"><span class="sec-no">00</span><h2>숫자로 먼저 보기</h2></div><p class="sec-sub">처음 보는 분을 위한 핵심 숫자 8개입니다. 각 카드 아래 줄이 그 숫자의 의미입니다. 낯선 용어는 맨 아래 <a href="#s13">용어 풀이</a>에 예시와 함께 정리했습니다.</p></div><div class="facts">${D.facts.map(f=>`<div class="fact"><span class="lbl">${esc(f.k)}</span><div class="v">${esc(f.v)}<small> ${esc(f.u)}</small></div><span class="cmp ${f.tone}">${esc(f.cmp)}</span><p class="mean">${esc(f.mean)}${cite(f.src)}</p></div>`).join("")}</div></section>`;
-  h+=`<nav class="toc" aria-label="목차">${toc.map(([i,t],n)=>`<a href="#${i}">${n}. ${t}</a>`).join("")}</nav>`;
-
   const cc=(id,title,take,src)=>`<div class="card chart-card"><h3>${title}</h3><div class="chart" id="${id}"></div>${take?`<p class="take">${take}</p>`:""}${src?`<p class="src">${src}</p>`:""}</div>`;
-  const dash1=`<div class="grid g3">${cc("ch-op","3사 영업이익, 과거 고점의 2배","2026년 추정치가 2000년대 슈퍼사이클 고점(6.6조원)을 이미 넘었습니다.","단위 조원. 2025A 머니투데이 [5], 2026~28E SK증권 [8]")}${cc("ch-dd","주가는 5월 고점의 3분의 1","이익은 늘었는데 주가는 빠졌습니다. 시장은 2029년 이후 수주를 걱정합니다.","11/24 종가 ÷ 2026년 5월 고점 [9]")}${cc("ch-share","1~8월 글로벌 수주 점유율","물량은 중국, 한국은 LNG선 같은 고부가 선종에 집중합니다.","CGT 기준 [8]")}</div>`;
-  const dash2=`<div class="band" style="padding-top:8px">선행지표 히스토리</div><div class="grid g2x">${cc("ch-nbpi","클락슨 신조선가지수","2021년 10월 대비 +23%. 2026년 들어 182~187pt에서 사상 최고권이지만 오름폭은 작아졌습니다.","pt · 21.10 [14], 26.01 다올 [23], 26.03 [18], 26.07 [22], 26.08~10 [14]")}${cc("ch-shippx","선종별 신조선가 (백만 달러)","LNG선·초대형 컨선은 하락, VLCC(유조선)만 상승. 한국 주력 선종의 가격이 먼저 꺾였습니다.","클락슨 인용 기사 [16][17][23]")}${cc("ch-kr","한국 월별 수주 점유율 (2026)","3월 39%에서 8월 7%까지 하락 후 10월 21.7% 반등. 점선은 1~10월 누적 14.9%.","CGT · 3월 [18], 5월 [14], 6~8월 [2], 9월 수정치 13.5%·10월 [14]. 9월은 최초 21%로 보도됐다가 발주 총량 수정으로 13.5%가 됐습니다.")}${cc("ch-gorders","세계 월별 선박 발주량 (만 CGT)","9월 971만으로 급증 후 10월 431만으로 −56%. 회색은 전년 같은 달.","클락슨 [14][15][18]")}${cc("ch-rate","국고채 10년 금리 (%)","9월 말 4.47%에서 11/24 3.82%로 하락. 적정가 계산의 무위험이자율로 씁니다.","주달 일별 종가 [19]")}${cc("ch-fx","원/달러 환율 (원)","6월 1,541.8원 고점 이후 1,330~1,340원대로 원화 강세. 달러로 받는 조선사 이익에는 부담입니다.","[3][19]")}${cc("ch-orders","연간 수주 목표 달성률","연말 2개월을 남기고 90% 이상. 한화오션은 목표 미공시(10월 말 81.1억 달러).","11월 중순 기준 [5]")}${cc("ch-plate","후판 가격 추이·전망","원가 부담은 완만히 커지는 중. 2027년 +6.8% 전망.","단위 $/톤, 메리츠 추정 [6]")}</div><div class="card chart-card"><h3>대형 LNG선 수주 (2026년 1~10월, 76척)</h3><div class="chart" id="ch-lng"></div><p class="take">한국 이익의 핵심 선종. 1~7월 61% → 1~10월 57.9%로 중국 비중이 커지는 중입니다. 중국은 2025년 3~5척에서 2026년 32척으로 늘었습니다.</p><p class="src">[16][17]</p></div>`;
-  h+=band("산업 이해 · 지금 어디쯤인가");
-  const T=D.thesis;
-  const cyc=`<div class="card cycle"><span class="lbl">사이클 위치</span>${D.cycle.rows.map(r=>`<div class="cyc-row"><span class="lbl">${r.label}</span><div class="cyc-track">${D.cycle.phases.map((p,i)=>`<div class="cyc-seg ${i===r.on?r.cls:""}">${p}</div>`).join("")}</div></div><p style="font-size:.84rem;color:var(--muted)">${esc(r.note)}</p>`).join("")}</div>`;
-  h+=sec("s1","01","투자 논지와 사이클 위치","왜 지금 보는가, 무엇이 틀리면 파는가를 한 장으로.",
-    `<div class="thesis"><div><span class="lbl">투자 논지 카드</span><h3>${esc(T.headline)}</h3></div><div class="thesis-cols">
-     <div><span class="lbl">왜 지금</span><ul>${T.why.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
-     <div><span class="lbl">무엇이 틀리면</span><ul>${T.wrong.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
-     <div><span class="lbl">매도 트리거</span><ul>${T.exit.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div></div>${cyc}${whyHTML(D)}`);
+  const srcs=t=>esc(t).replace(/\[(\d+)\]/g,'<span class="src">[$1]</span>');
+  const chap=(id,no,title,q,body)=>`<section class="chap" id="${id}"><div class="chap-h"><span class="chap-no">${no}</span><h2>${title}</h2><p class="chap-q">${q}</p></div>${body}</section>`;
+  const take=t=>`<div class="take2"><span class="lbl">이 장의 결론</span><p>${t}</p></div>`;
+  const story=(...ps)=>`<div class="story">${ps.map(x=>`<p>${x}</p>`).join("")}</div>`;
+  const H=D.history, T=D.thesis;
+  const wn=v=>Math.round(v).toLocaleString("ko-KR"), sg=v=>(v>=0?"+":"−")+Math.abs(v).toFixed(1)+"%";
+  const CH=[["c1","1장","조선업은 어떻게 돈을 버나","수주 → 건조 → 인도, 2~3년의 시차"],["c2","2장","지난 20년, 호황과 불황은 이렇게 반복됐다","슈퍼사이클 · 8.5조 적자 · 구조조정 · 회복"],["c3","3장","지금은 사이클의 어디쯤인가","실적은 호황, 수주는 둔화 초입"],["c4","4장","이익은 사상 최대인데 주가는 왜 3분의 1이 됐나","2026년 주가 vs 코스피, 날짜별 이벤트"],["c5","5장","그래서 적정 주가는 얼마인가","금리·위험프리미엄·베타로 직접 계산"],["c6","6장","앞으로 무엇을 보면 되나","시나리오 · 일정 · 리스크 · 체크리스트"]];
 
-  h+=sec("s2","02","핵심 선행지표","주가보다 먼저 움직이는 숫자들. 색은 투자자 관점의 신호입니다.",
-    `<div class="grid g4">${D.indicators.map(k=>`<div class="card kpi"><span class="lbl">${esc(k.k)}</span><div class="v num">${k.v}<small> ${k.u}</small></div><span class="pill p-${k.tone}">${k.tag}</span><p style="color:var(--muted);font-size:.82rem">${esc(k.d)}${cite(k.src)}</p></div>`).join("")}</div>${dash2}`);
+  let h=`<div class="hero"><span class="eyebrow">산업 리포트 · ${esc(D.name)} · 처음 보는 분을 위해 순서대로</span><h1>${esc(D.title)}</h1><p class="lede">${esc(D.lede)}</p><p class="asof">${esc(D.asof)}</p></div>`;
+  h+=`<div class="qnums">${[["9.8조원","3사 영업이익 2026년 추정 · 과거 고점 6.6조의 1.5배"],["1,454억 달러","3사 수주잔고 · 약 3.5년치 일감"],["14.9%","2026년 1~10월 한국 수주 점유율 · 전년 16.4%"],["−58~−72%","3사 주가, 연중 고점 대비 (11/24) · 코스피보다 큰 낙폭"]].map(([b,t])=>`<div><b>${b}</b><span>${t}</span></div>`).join("")}</div>`;
+  h+=`<div class="summary" style="margin-top:16px"><span class="lbl">3분 요약 · 이 리포트의 줄거리</span><ol>
+   <li><b>조선사는 배를 주문받고 2~3년 뒤에 이익을 냅니다.</b> 그래서 수주는 앞서가는 지표, 실적은 뒤따라오는 지표이고, 주가는 그 사이에서 '다음 수주'를 미리 반영합니다. <a href="#c1">1장 →</a></li>
+   <li><b>지난 20년 동안 같은 패턴이 반복됐습니다.</b> 2003~08년 슈퍼사이클(신조선가지수 2008년 191.51) 뒤 주문이 끊겼고, 무리한 해양플랜트 수주로 2015년 3사 영업손실 8.5조원, 업계 인력은 절반 이하로 줄었습니다. 2021년부터 다시 비싸게 일감을 쌓았습니다. <a href="#c2">2장 →</a></li>
+   <li><b>지금은 '실적은 호황, 수주는 둔화 초입'입니다.</b> 2021~24년에 받은 비싼 배가 매출로 잡혀 3사 영업이익은 2026년 9.8조원(과거 고점 6.6조의 1.5배)으로 늘지만, 2026년 새 주문에서 한국 몫은 14.9%로 줄고 대형 LNG선 발주는 하반기에 월 9.8척에서 4.3척으로 줄었습니다. <a href="#c3">3장 →</a></li>
+   <li><b>주가는 이익보다 '2029년 이후 일감'을 먼저 걱정했습니다.</b> 미 의회의 해외 건조 제한, 캐나다 잠수함 탈락, 10월 중국 LNG선 경쟁 우려가 겹쳐 3사 주가는 연중 고점 대비 58~72% 빠졌고, 5/26 이후 낙폭(−52~−69%)은 코스피(−38%)보다 컸습니다. <a href="#c4">4장 →</a></li>
+   <li><b>금리·위험프리미엄·베타로 자본비용을 계산하면 약 12.5%</b>이고, 이 기준의 기본 시나리오 적정가는 세 종목 모두 현재가보다 낮습니다. 지금 주가는 '2029년 이후에도 높은 이익이 꽤 이어진다'는 기대를 일부 담고 있습니다. 그 기대를 확인할 지표는 6장에 모았습니다. <a href="#c5">5장 →</a></li></ol></div>`;
+  h+=`<nav class="chapnav" aria-label="목차" style="margin-top:16px">${CH.map(([id,n,t,d])=>`<a href="#${id}"><small>${n}</small><b>${t}</b><span>${d}</span></a>`).join("")}<a href="#c7"><small>부록</small><b>더 깊게 보기</b><span>산업 매력도 · 재무 · 딜 · 용어 풀이</span></a></nav>`;
 
-  h+=sec("s3","03","산업구조·밸류체인","",
-    `<div class="chain">${D.chain.map(c=>`<div class="card ${c.core?"core":""}"><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div>`).join("")}</div><p class="sec-sub">${esc(D.chainNote)}</p>`);
+  /* ---------- 1장 ---------- */
+  h+=chap("c1","1장","조선업은 어떻게 돈을 버나","배 한 척이 계약되고 돈이 되기까지 2~3년이 걸립니다. 이 시차를 알면 이익과 주가가 왜 따로 움직이는지 보입니다.",
+    story("조선사의 매출은 '배를 몇 척, 얼마에 주문받았느냐'에서 시작합니다. 계약을 맺으면 선주는 대금 일부를 먼저 내고, 조선소는 2~3년에 걸쳐 배를 짓습니다. 회계상 매출은 공사가 진행된 만큼 나눠서 잡히고, 배를 넘길 때 나머지 대금이 들어옵니다.",
+      "그래서 <b>오늘의 실적은 2~3년 전에 받은 주문의 결과</b>입니다. 2023~24년에 LNG 운반선을 척당 2억5,600만~2억6,100만 달러의 높은 가격에 받아 둔 덕분에 지금 이익이 사상 최대인 것이고, 반대로 2026년에 새 주문이 줄면 그 영향은 2028~29년 실적에 나타납니다. 주식시장은 이 시차를 알고 있어서, <b>실적이 좋아도 새 주문이 줄면 주가가 먼저 떨어집니다.</b>")
+    +`<div class="flow"><div><span class="lbl">1단계</span><h3>수주 (계약)</h3><p>선주가 배를 주문합니다. 선가와 척수가 정해지고, 대금 일부가 먼저 들어옵니다.</p><p class="see">볼 숫자: 신조선가지수, 세계 발주량(CGT), 한국 점유율, 수주잔고</p></div><div><span class="lbl">2단계 · 2~3년</span><h3>건조 (매출 인식)</h3><p>공정이 진행된 만큼 매출이 잡힙니다. 계약 때 받은 선가와 지금 원가(후판·인건비)의 차이가 마진입니다.</p><p class="see">볼 숫자: 매출, 영업이익률, 후판 가격, 원/달러 환율</p></div><div><span class="lbl">3단계</span><h3>인도 (잔금)</h3><p>배를 넘기고 나머지 대금을 받습니다. 비는 도크를 다음 주문으로 채워야 실적이 이어집니다.</p><p class="see">볼 숫자: 인도 슬롯 확보율, 수주 ÷ 매출(Book-to-Bill)</p></div></div>`
+    +`<div class="card"><span class="lbl">같은 시기에도 세 숫자는 다른 이야기를 합니다 (개념도)</span><div class="lag">${lagGrid()}</div><p class="src">초록 = 좋음, 노랑 = 중간, 빨강 = 나쁨, 점선 = 아직 모름. 2021~22년은 후판 가격 급등으로 조선 3사가 적자를 낸 구간입니다. 각 칸의 숫자는 2~4장 본문과 출처를 따릅니다.</p></div>`
+    +`<h3 class="sub-h">누가 무엇을 하나: 밸류체인</h3><div class="chain">${D.chain.map(c=>`<div class="card ${c.core?"core":""}"><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div>`).join("")}</div><p class="sec-sub">${esc(D.chainNote)}</p>`
+    +take("수주는 2~3년 뒤의 실적을, 실적은 2~3년 전의 수주를 보여 줍니다. 주가는 대개 실적이 아니라 수주와 선가를 보고 먼저 움직입니다. 나머지 장은 이 시차를 기준으로 읽으면 됩니다."));
 
-  h+=band("산업 매력도 · PE 관점");
-  h+=sec("s4","04","산업 매력도","포터의 5 Forces와 단위경제성, 현금흐름, 자본집약도, 해자.",
-    `<div class="grid g2"><div class="card"><span class="lbl">5 Forces</span><div class="chart" id="ch-radar"></div>${D.forces.map(f=>`<div class="force"><h3>${f.k}</h3><div class="dots" aria-label="${f.s}점">${[1,2,3,4,5].map(i=>`<i class="${i<=f.s?"f":""}"></i>`).join("")}</div><p style="grid-column:1/-1;color:var(--muted);font-size:.84rem">${esc(f.d)}</p></div>`).join("")}<p class="src">${esc(D.forcesNote)}</p></div>
-     <div class="grid">${D.attract.slice(0,2).map(a=>`<div class="card"><h3>${a.t}</h3><ul>${a.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div></div>
-     <div class="grid g3">${D.attract.slice(2).map(a=>`<div class="card"><h3>${a.t}</h3><ul>${a.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>
-     <div class="grid g2x">${cc("ch-roe","2028E ROE vs 자기자본비용","네 회사 모두 ROE가 자본비용(7.8%)을 크게 웃돕니다. 이 스프레드가 PBR 프리미엄의 근거입니다.","메리츠 추정 [6]")}${cc("ch-slots","LNG선 연간 건조 슬롯","한국이 중국의 3배. LNG선 해자의 실체입니다.","척/년, 메리츠 [6]")}</div>`);
+  /* ---------- 2장 ---------- */
+  h+=chap("c2","2장","지난 20년, 호황과 불황은 이렇게 반복됐다","지금이 어떤 국면인지 판단하려면 지난 사이클을 알아야 합니다. 20년을 다섯 구간으로 나눴습니다.",
+    story("아래 그래프는 새 배 가격을 지수로 만든 클락슨 신조선가지수입니다(1988년 1월 = 100). 배 가격은 조선사가 앞으로 벌 돈의 크기를 정하기 때문에 사이클을 가장 잘 보여 줍니다. 색 띠는 아래에서 설명하는 다섯 구간입니다.")
+    +cc("ch-hnbpi","클락슨 신조선가지수 20년 (pt)","2008년 사상 최고 191.51 → 2016년 124까지 35% 하락 → 2024년 9월 189.96으로 거의 회복 → 2026년 10월 187.20. 지금 선가는 2008년 고점 바로 아래에 있습니다.","점선은 확인된 값 사이를 이은 것이고, 그 사이의 실제 움직임은 아닙니다. 점에 마우스를 올리면 시점과 출처가 보입니다. [14][18][23][25][26][30][31]")
+    +`<div class="eras">${H.eras.map(e=>`<div class="era" style="--ec:${e.c}"><div class="era-h"><span class="yr">${e.yr}</span><h3>${esc(e.t)}</h3></div><p>${esc(e.story)}</p><ul>${e.nums.map(x=>`<li>${srcs(x)}</li>`).join("")}</ul><p class="stk">${srcs(e.stk)}</p></div>`).join("")}</div>`
+    +`<div class="grid g2x">${cc("ch-hprofit","조선 3사 영업이익 히스토리 (조원)","2015년 8.5조원 적자에서 2026년 9.8조원 흑자로. 2026년 추정치는 이미 과거 고점(6.6조원)을 넘었습니다.","2015년은 현대중공업·삼성중공업·대우조선해양 [29], 이후는 HD한국조선해양·한화오션(옛 대우조선해양)·삼성중공업 [5][8]. 회사 구성이 조금 달라 흐름 비교용입니다.")}${cc("ch-hshare","한국 수주 점유율, 보도 시점별 (%)","2021년 1분기 52%로 세계 1위였던 한국 몫이 2026년 1~10월 14.9%까지 내려왔습니다. 늘어난 물량은 주로 중국이 가져갔습니다.","CGT 기준. 집계 기간(분기·반기·누계)이 서로 달라 흐름 참고용입니다. [14][30][33]")}</div>`
+    +`<h3 class="sub-h">지금은 2008년과 무엇이 같고 무엇이 다른가</h3><div class="tbl"><table class="cmp2"><thead><tr><th>항목</th><th>2007~2008년 (지난 고점)</th><th>2026년 (지금)</th></tr></thead><tbody>${H.vs08.map(r=>`<tr><td><b>${r[0]}</b></td><td>${srcs(r[1])}</td><td>${srcs(r[2])}</td></tr>`).join("")}</tbody></table></div>`
+    +take("지난 사이클에서 주가는 2007년 하반기에 이미 크게 올라 있었고(현대중공업 11월 52만8,000원), 선가는 2008년에 정점을 찍었으며, 대규모 적자는 2015년에야 실적에 드러났습니다. <b>주가 → 선가·수주 → 실적</b> 순서입니다. 2026년도 주가는 3~5월에 고점을 찍고 급락했지만 선가는 고점권, 실적은 개선 중입니다. 다만 2008년과 달리 일감이 3.5년치 쌓여 있고 생산능력도 늘지 않아, 핵심 질문은 '붕괴'가 아니라 <b>'이익 정점이 언제, 얼마나 길게 오느냐'</b>입니다."));
 
-  h+=band("가격 판단 · IB 관점");
-  const C=D.comps;
-  const dd=C.rows.map(r=>({n:r[0],v:parseFloat(r[10])}));
-  const maxdd=Math.max(...dd.map(x=>Math.abs(x.v)));
-  const Q=D.quotes, wn=v=>Math.round(v).toLocaleString("ko-KR"), sg=v=>(v>=0?"+":"−")+Math.abs(v).toFixed(1)+"%";
-  const qt=`<div class="card" style="gap:6px"><span class="lbl">주가 현황 · ${esc(Q.asof.split(".")[0])}</span><div class="tbl" style="border:0"><table><thead><tr><th>종목</th><th>종가(원)</th><th>전일 대비</th><th>5월 고점(종가)</th><th>고점 대비</th><th>52주 최저(장중)</th><th>최저 대비</th><th>시가총액</th><th>증권사 목표가 평균</th><th>목표가까지</th><th>PBR 27E</th><th>PER 27E</th></tr></thead><tbody>${Q.rows.map(r=>`<tr><td>${r.n} <span class="src">${r.code}</span></td><td><b>${wn(r.px)}</b></td><td class="${r.chg>=0?"up":"dn"}">${sg(r.chg)}</td><td>${wn(r.hi)}</td><td class="dn">${sg((r.px/r.hi-1)*100)}</td><td>${wn(r.lo52)}</td><td>${sg((r.px/r.lo52-1)*100)}</td><td>${r.cap.toFixed(1)}조원</td><td>${wn(r.tp)}</td><td class="up">${sg((r.tp/r.px-1)*100)}</td><td>${r.pbr.toFixed(2)}배</td><td>${r.per.toFixed(1)}배</td></tr>`).join("")}</tbody></table></div><p class="src">${esc(Q.asof)} ${esc(Q.note)} 출처 [6][10]</p><p style="font-size:.86rem">읽는 법: 예를 들어 HD현대중공업은 5월 고점 745,000원에서 249,500원으로 66.5% 내려왔고, 52주 최저가 235,500원보다는 5.9% 위에 있습니다. 증권사 목표가 평균 692,600원까지는 +177.6% 여력이 있다는 계산입니다. <a href="stocks.html">종목별 적정가 계산 보기 →</a></p></div>`;
-  h+=sec("s5","05","관련 종목·주가 현황·피어 비교","위 표는 11/24 종가 기준 주가, 아래 표는 메리츠증권 11/5 종가 기준 피어 비교입니다. "+esc(C.note),
-    qt+`<div class="tbl"><table><thead><tr>${C.cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${C.rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${i===10&&c.startsWith("-")?"neg":""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
-     <div class="grid g2"><div class="card"><span class="lbl">6개월 주가 수익률 (11/5 기준)</span><div class="bars">${dd.map(x=>`<div class="bar-row"><span>${x.n}</span><div class="bar-track"><div class="bar-fill hull" style="width:${Math.abs(x.v)/maxdd*100}%"></div></div><span class="r">${x.v}%</span></div>`).join("")}</div><p class="src">출처 [6]</p></div>
-     <div class="card"><span class="lbl">3분기 영업이익률 (계산값)</span><div class="bars">${[["HD한국조선해양",17.5],["한화오션",14.2],["삼성중공업",10.7],["HD현대마린엔진",28.5]].map(([n,v])=>`<div class="bar-row"><span>${n}</span><div class="bar-track"><div class="bar-fill" style="width:${v/30*100}%"></div></div><span class="r">${v}%</span></div>`).join("")}</div><p class="src">눈금 0~30%. 출처 [1][3]</p></div></div>`);
+  /* ---------- 3장 ---------- */
+    const cyc=`<div class="card cycle"><span class="lbl">사이클 위치</span>${D.cycle.rows.map(r=>`<div class="cyc-row"><span class="lbl">${r.label}</span><div class="cyc-track">${D.cycle.phases.map((p,i)=>`<div class="cyc-seg ${i===r.on?r.cls:""}">${p}</div>`).join("")}</div></div><p style="font-size:.84rem;color:var(--muted)">${esc(r.note)}</p>`).join("")}</div>`;
+    const dash2=`<div class="band" style="padding-top:8px">선행지표 히스토리</div><div class="grid g2x">${cc("ch-nbpi","클락슨 신조선가지수","2021년 10월 대비 +23%. 2026년 들어 182~187pt에서 사상 최고권이지만 오름폭은 작아졌습니다.","pt · 21.10 [14], 26.01 다올 [23], 26.03 [18], 26.07 [22], 26.08~10 [14]")}${cc("ch-shippx","선종별 신조선가 (백만 달러)","LNG선·초대형 컨선은 하락, VLCC(유조선)만 상승. 한국 주력 선종의 가격이 먼저 꺾였습니다.","클락슨 인용 기사 [16][17][23]")}${cc("ch-kr","한국 월별 수주 점유율 (2026)","3월 39%에서 8월 7%까지 하락 후 10월 21.7% 반등. 점선은 1~10월 누적 14.9%.","CGT · 3월 [18], 5월 [14], 6~8월 [2], 9월 수정치 13.5%·10월 [14]. 9월은 최초 21%로 보도됐다가 발주 총량 수정으로 13.5%가 됐습니다.")}${cc("ch-gorders","세계 월별 선박 발주량 (만 CGT)","9월 971만으로 급증 후 10월 431만으로 −56%. 회색은 전년 같은 달.","클락슨 [14][15][18]")}${cc("ch-rate","국고채 10년 금리 (%)","9월 말 4.47%에서 11/24 3.82%로 하락. 적정가 계산의 무위험이자율로 씁니다.","주달 일별 종가 [19]")}${cc("ch-fx","원/달러 환율 (원)","6월 1,541.8원 고점 이후 1,330~1,340원대로 원화 강세. 달러로 받는 조선사 이익에는 부담입니다.","[3][19]")}${cc("ch-orders","연간 수주 목표 달성률","연말 2개월을 남기고 90% 이상. 한화오션은 목표 미공시(10월 말 81.1억 달러).","11월 중순 기준 [5]")}${cc("ch-plate","후판 가격 추이·전망","원가 부담은 완만히 커지는 중. 2027년 +6.8% 전망.","단위 $/톤, 메리츠 추정 [6]")}</div><div class="card chart-card"><h3>대형 LNG선 수주 (2026년 1~10월, 76척)</h3><div class="chart" id="ch-lng"></div><p class="take">한국 이익의 핵심 선종. 1~7월 61% → 1~10월 57.9%로 중국 비중이 커지는 중입니다. 중국은 2025년 3~5척에서 2026년 32척으로 늘었습니다.</p><p class="src">[16][17]</p></div>`;
+  h+=chap("c3","3장","지금은 사이클의 어디쯤인가","같은 산업 안에서도 수주·실적·주가는 서로 다른 단계에 있습니다. 하나씩 근거와 함께 봅니다.",
+    story("2장의 다섯 구간 중 지금은 ⑤입니다. 아래 게이지는 수주·실적·주가 각각이 침체 → 회복 → 호황 → 둔화 중 어디에 있는지를 이 리포트의 판단으로 표시한 것이고, 바로 아래에 그렇게 판단한 근거를 그래프로 붙였습니다.")
+    +cyc+whyHTML(D,["orders","earn"])
+    +`<h3 class="sub-h">핵심 선행지표: 주가보다 먼저 움직이는 숫자</h3><p class="sec-sub">색 태그는 투자자 입장의 신호입니다. 아래 그래프에서 각 지표의 최근 히스토리를 볼 수 있습니다.</p>`
+    +`<div class="grid g4">${D.indicators.map(k=>`<div class="card kpi"><span class="lbl">${esc(k.k)}</span><div class="v num">${k.v}<small> ${k.u}</small></div><span class="pill p-${k.tone}">${k.tag}</span><p style="color:var(--muted);font-size:.82rem">${esc(k.d)}${cite(k.src)}</p></div>`).join("")}</div>${dash2}`
+    +take("실적은 2028년까지 늘어날 가능성이 높습니다(수주잔고 약 3.5년치). 하지만 그다음을 책임질 새 주문에서 한국 몫과 LNG선 발주가 줄었고, LNG선·초대형 컨테이너선 가격도 내려가기 시작했습니다. 2장의 순서대로라면 '실적 호황 + 수주 둔화 초입'은 주가가 실적보다 먼저 흔들리는 구간입니다."));
 
-  const V=D.valuation;
-  h+=sec("s6","06","밸류에이션: 경제지표로 만든 적정주가","각 입력값이 어디서 왔는지(근거)와 함께 적정주가를 계산합니다. 표 안의 숫자는 직접 바꿀 수 있고, 결과가 바로 다시 계산됩니다.",
-    `<div class="grid g2"><div class="card"><span class="lbl">왜 이 방법인가</span><p>${esc(V.keyMultiple)}</p><p>여기서는 <b>잔여이익모델(RIM)</b>을 씁니다. 적정주가 = 지금의 주당순자산 + 앞으로 자본비용(COE)을 넘어서 벌 초과이익의 현재가치입니다. 2027~28년은 수주잔고로 이익이 보이는 구간이라 증권사 추정 ROE를 쓰고, 2029년 이후는 수주 둔화를 반영해 초과이익이 해마다 줄어든다고(지속계수 ω) 가정합니다.</p></div>
-     <div class="card"><span class="lbl">수주잔고 대비 시가총액</span><p>${esc(V.backlogCap)}</p><span class="lbl" style="margin-top:6px">역사적 PBR 밴드</span><p>${esc(V.band)}</p></div></div>
+  /* ---------- 4장 ---------- */
+    const C=D.comps;
+  const Q=D.quotes;
+  const qt=`<div class="card" style="gap:6px"><span class="lbl">주가 현황 · ${esc(Q.asof.split(".")[0])}</span><div class="tbl" style="border:0"><table><thead><tr><th>종목</th><th>종가(원)</th><th>전일 대비</th><th>연중 고점(장중)</th><th>고점 대비</th><th>52주 최저(장중)</th><th>최저 대비</th><th>시가총액</th><th>증권사 목표가 평균</th><th>목표가까지</th><th>PBR 27E</th><th>PER 27E</th></tr></thead><tbody>${Q.rows.map(r=>`<tr><td>${r.n} <span class="src">${r.code}</span></td><td><b>${wn(r.px)}</b></td><td class="${r.chg>=0?"up":"dn"}">${sg(r.chg)}</td><td>${wn(r.hi)} <span class="src">${r.hiD}</span></td><td class="dn">${sg((r.px/r.hi-1)*100)}</td><td>${wn(r.lo52)}</td><td>${sg((r.px/r.lo52-1)*100)}</td><td>${r.cap.toFixed(1)}조원</td><td>${wn(r.tp)}</td><td class="up">${sg((r.tp/r.px-1)*100)}</td><td>${r.pbr.toFixed(2)}배</td><td>${r.per.toFixed(1)}배</td></tr>`).join("")}</tbody></table></div><p class="src">${esc(Q.asof)} ${esc(Q.note)} 출처 [6][10]</p><p style="font-size:.86rem">읽는 법: 예를 들어 HD현대중공업은 연중 고점 765,000원(5/27 장중)에서 249,500원으로 67.4% 내려왔고, 52주 최저가 235,500원보다는 5.9% 위에 있습니다. 증권사 목표가 평균 692,600원까지는 +177.6% 여력이 있다는 계산입니다. <a href="stocks.html">종목별 적정가 계산 보기 →</a></p></div>`;
+  const PH=[["1~5월","고점 형성","2025년 급등의 연장선에서 한화오션 3/3, 삼성중공업 4/23, HD현대중공업 5/27에 연중 고점(장중 154,800 / 35,350 / 765,000원)을 찍었습니다."],
+    ["6~7월","정책 악재","6/9 미 하원 군사위가 해외 조선소의 미 해군 함정 건조를 막는 조항을 통과시켰고, 7/7 캐나다 잠수함 사업에서 한화오션이 탈락해 하루 −22.65% 빠졌습니다. 7월 말 2분기 호실적에도 고점을 되찾지 못했습니다."],
+    ["8~9월","횡보","9/3 한화오션 컨테이너선 수주 같은 호재도 있었지만, 한국 월별 수주 점유율이 8월 7%까지 내려가면서 주가는 제자리를 맴돌았습니다. 직전 7/31 코스피 사상 최대 상승(반도체 주도) 때도 조선주는 소외됐습니다."],
+    ["10~11월","급락과 반등 시도","10월 한 달 HD현대중공업 −36.8%(코스피 −16.2%). 중국 LNG선 경쟁 우려와 3분기 이익의 예상 하회로 목표가가 줄줄이 내려갔습니다. 11/2 한화의 미 해군 상륙함 첫 수주로 반등했지만 11/24 주가는 연중 고점의 28~42%입니다."]];
+  h+=chap("c4","4장","이익은 사상 최대인데 주가는 왜 3분의 1이 됐나","2026년 주가를 코스피와 나란히 놓고, 크게 엇갈린 날마다 무슨 일이 있었는지 확인합니다.",
+    story("2026년 조선주는 네 단계를 거쳤습니다. 아래 카드로 흐름을 먼저 잡고, 그래프와 표에서 날짜별로 확인해 보세요. 그래프는 5/26 주가를 100으로 놓았기 때문에, 선이 50이면 그날 이후 절반이 됐다는 뜻입니다.")
+    +`<div class="phases">${PH.map(([w,t,d])=>`<div><span class="when">${w}</span><h3>${t}</h3><p>${d}</p></div>`).join("")}</div>`
+    +whyHTML(D,["price"])
+    +`<h3 class="sub-h">지금 주가와 멀티플 한눈에 보기</h3>`+qt
+    +`<div class="tbl"><table><thead><tr>${C.cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${C.rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${i===10&&c.startsWith("-")?"neg":""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="src">위 표는 메리츠증권 11/5 종가 기준 피어 비교입니다. ${esc(C.note)} [6]</p>`
+    +take("주가 하락의 주된 이유는 지금의 이익이 아니라 <b>'다음 일감'과 정책 변수</b>였습니다. 실적이 좋았던 날에는 코스피보다 조금 더 오르는 데 그쳤고, 수주·정책 악재가 있던 날에는 훨씬 더 빠졌습니다. 2장의 순서처럼, 주가가 실적보다 먼저 사이클 정점을 반영하고 있는 것으로 볼 수 있습니다."));
+
+  /* ---------- 5장 ---------- */
+  const VINTRO=story("주식의 적정 가격은 '회사가 앞으로 버는 돈이 주주가 요구하는 수익률보다 얼마나 많은가'로 정해집니다. 조선업은 이익이 2~3년 시차로 들쭉날쭉해 PER(주가 ÷ 이익)이 사이클 내내 왜곡되므로, 증권사들도 순자산과 ROE를 함께 보는 방법을 씁니다. 여기서는 그 방법(잔여이익모델)을 세 단계로 풀었습니다.")
+    +`<div class="steps3"><div><span class="n">1</span><h3>회사가 자본으로 얼마나 버나 (ROE)</h3><p>HD현대중공업 2028E ROE 37% = 주주 돈 100원으로 1년에 37원을 번다는 뜻. 2027~28년은 수주잔고로 이익이 보여서 증권사 추정치를 씁니다.</p></div><div><span class="n">2</span><h3>주주가 요구하는 최소 수익률 (자본비용)</h3><p>국고채 10년 3.823% + 베타 1.06 × 시장위험프리미엄 8.167% = 12.48%. ROE가 이보다 높은 부분만 '초과이익'으로 주가에 더해집니다.</p></div><div><span class="n">3</span><h3>초과이익이 얼마나 오래 가나 (ω)</h3><p>2029년 이후는 2·3장의 수주 흐름에 달렸습니다. 0.3이면 빨리 사라지고, 0.8이면 오래 유지된다는 가정입니다.</p></div></div>`
+    +story("<b>적정주가 = 지금 가진 순자산 + 앞으로 벌 초과이익의 현재가치</b>입니다. 아래 표의 금리·베타·ROE·ω를 직접 바꾸면 결과가 바로 다시 계산됩니다.");
+    const V=D.valuation;
+  h+=chap("c5","5장","그래서 적정 주가는 얼마인가","지금 주가가 싼지 비싼지, 금리·위험프리미엄·베타 같은 경제지표로 직접 계산해 봅니다.",VINTRO+`<div class="grid g2"><div class="card"><span class="lbl">왜 이 방법인가</span><p>${esc(V.keyMultiple)}</p><p>여기서는 <b>잔여이익모델(RIM)</b>을 씁니다. 적정주가 = 지금의 주당순자산 + 앞으로 자본비용(COE)을 넘어서 벌 초과이익의 현재가치입니다. 2027~28년은 수주잔고로 이익이 보이는 구간이라 증권사 추정 ROE를 쓰고, 2029년 이후는 수주 둔화를 반영해 초과이익이 해마다 줄어든다고(지속계수 ω) 가정합니다.</p></div>
+     <div class="card"><span class="lbl">수주잔고 대비 시가총액</span><p>${esc(V.backlogCap)}</p><span class="lbl" style="margin-top:6px">과거 사이클의 PBR</span><p>${esc(V.band)}</p></div></div>
      <div class="card"><span class="lbl">① 팩터와 근거</span><div class="tbl" style="border:0"><table class="vt"><thead><tr><th>팩터</th><th>사용 값</th><th>근거 (출처)</th></tr></thead><tbody id="vt-f"></tbody></table></div></div>
      <div class="card"><span class="lbl">② 종목별 계산</span><div class="tbl" style="border:0"><table class="vt"><thead id="vt-h"></thead><tbody id="vt-b"></tbody></table></div><p class="src">ROE 2027E = 메리츠 PBR 27E ÷ PER 27E, ROE 2028E = 메리츠 추정 [6]. BPS 2026E = 11/5 주가 ÷ 메리츠 PBR 26E. 배당은 단순화를 위해 반영하지 않았습니다(적정가를 약간 높이는 방향). 현재가는 11/24 종가.</p></div>
      <div class="grid g2"><div class="card"><span class="lbl">③ HD현대중공업 계산 과정</span><ol class="steps2" id="vt-steps"></ol></div>
      <div class="card"><span class="lbl">④ 시나리오별 적정주가</span><div class="tbl" style="border:0"><table class="vt" style="min-width:0"><thead><tr><th>종목</th><th>약세 ω${D.val.omega.bear}</th><th>기본 ω${D.val.omega.base}</th><th>강세 ω${D.val.omega.bull}</th><th>증권사 COE ${D.val.coeBroker}% · ω${D.val.omega.bull}</th></tr></thead><tbody id="vt-s"></tbody></table></div><p class="src">% 는 11/24 종가 대비. 마지막 열은 메리츠가 쓴 자본비용 7.8%를 넣었을 때입니다 [6].</p></div></div>
-     <div class="card"><span class="lbl">⑤ 읽는 법</span><p id="vt-read"></p></div>`);
+     <div class="card"><span class="lbl">⑤ 읽는 법</span><p id="vt-read"></p></div>`+take("기본값 기준으로, 자본비용을 금리·위험프리미엄으로 계산하면(약 12.5%) 세 종목 모두 기본 시나리오 적정가보다 현재가가 높습니다. 증권사처럼 7.8%를 쓰고 초과이익이 오래 간다고(ω 0.8) 보면 HD현대중공업·한화오션은 적정가 근처가 됩니다. 결국 적정 주가는 <b>2029년 이후 수주(ω)와 자본비용 가정</b>에 달려 있고, 6장의 지표가 그 가정을 확인하는 수단입니다."));
 
-  h+=sec("s7","07","재무 건전성·크레딧","점선 카드는 이번 버전에서 데이터를 확보하지 못한 항목입니다.",
-    `<div class="grid g2">${D.credit.map(c=>`<div class="card ${c.gap?"gap":""}"><span class="lbl">${c.gap?"데이터 보강 필요":"확인됨"}</span><h3>${c.t}</h3><p>${esc(c.d)}</p></div>`).join("")}</div>`);
-
-  h+=sec("s8","08","딜·자본시장·거버넌스","미국 조선 거점 확보가 2024~26년 딜의 중심입니다.",
-    `<div class="grid g2"><div class="card"><span class="lbl">주요 딜</span><div class="tl">${D.deals.map(x=>`<div class="tl-item past"><span class="tl-when">${x.when}</span><div><h3>${esc(x.t)}</h3><p style="color:var(--muted)">${esc(x.d)}</p></div></div>`).join("")}</div></div>
-     <div class="card"><span class="lbl">지배구조·주주환원·오버행</span><ul>${D.governance.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`);
-
-  h+=band("판단과 실행");
-  h+=sec("s9","09","시나리오 분석",esc(D.scenarioNote),
-    `<div class="card chart-card"><h3>시나리오 확률</h3><div id="ch-scn"></div></div><div class="grid g3 scn">${D.scenarios.map(s=>`<div class="card ${s.cls}"><div style="display:flex;justify-content:space-between;align-items:baseline"><h3>${s.t}</h3><span class="mono num">${s.p}</span></div><ul>${s.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>`);
-
-  h+=sec("s10","10","촉매 트래커·이벤트 캘린더","채워진 점은 지나간 이벤트입니다.",
+  /* ---------- 6장 ---------- */
+  h+=chap("c6","6장","앞으로 무엇을 보면 되나","5장의 결론은 '2029년 이후 수주'와 '자본비용' 가정에 달려 있습니다. 그 가정을 확인할 시나리오·일정·리스크·체크리스트입니다.",
+    `<div class="thesis"><div><span class="lbl">투자 논지 한 장 요약</span><h3>${esc(T.headline)}</h3></div><div class="thesis-cols">
+     <div><span class="lbl">왜 지금 보는가</span><ul>${T.why.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+     <div><span class="lbl">무엇이 틀리면</span><ul>${T.wrong.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+     <div><span class="lbl">매도 신호</span><ul>${T.exit.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div></div>`
+    +`<h3 class="sub-h">6-1 시나리오별 적정주가</h3><p class="sec-sub">${esc(D.scenarioNote)}</p><div class="card chart-card"><h3>시나리오 확률</h3><div id="ch-scn"></div></div>`
+    +`<div class="grid g3 scn">${D.scenarios.map(x=>`<div class="card ${x.cls}"><div style="display:flex;justify-content:space-between;align-items:baseline"><h3>${x.t}</h3><span class="mono num">${x.p}%</span></div><ul>${x.items.map(i=>`<li>${srcs(i)}</li>`).join("")}</ul><span class="lbl">적정주가 (ω ${x.om}, 자본비용 ${x.coe==="broker"?D.val.coeBroker+"%":"CAPM"})</span><ul id="scn-v-${x.cls}"></ul></div>`).join("")}</div>`
+    +`<div class="take2"><span class="lbl">확률 가중 적정주가 (현재가 대비)</span><p id="scn-w"></p></div>`);
+    h+=sec("c6b","6-2","촉매 트래커·이벤트 캘린더","채워진 점은 지나간 이벤트입니다.",
     `<div class="card"><div class="tl">${D.catalysts.map(x=>`<div class="tl-item ${x.past?"past":""}"><span class="tl-when">${x.when}</span><div><h3>${esc(x.t)}</h3><p style="color:var(--muted)">${esc(x.d)}</p></div></div>`).join("")}</div></div>`);
-
-  h+=sec("s11","11","리스크","원 안의 번호는 아래 카드 번호입니다. 오른쪽 위로 갈수록 먼저 챙겨야 할 리스크입니다.",
+    h+=sec("c6c","6-3","리스크","원 안의 번호는 아래 카드 번호입니다. 오른쪽 위로 갈수록 먼저 챙겨야 할 리스크입니다.",
     `<div class="card chart-card"><h3>리스크 맵: 발생 가능성 × 영향</h3><div class="chart" id="ch-risk"></div><p class="src">점수는 이 페이지의 판단(1~5)입니다.</p></div><div class="grid g3">${D.risks.map((r,i)=>`<div class="card"><span class="pill p-${r.lvl}">${r.lvl==="bad"?"높음":"중간"}</span><h3>${i+1}. ${esc(r.t)}</h3><p style="color:var(--muted)">${esc(r.d)}</p></div>`).join("")}</div>`);
-
-  h+=sec("s12","12","투자 체크리스트","체크 상태는 이 브라우저에만 저장됩니다.",
+    h+=sec("c6d","6-4","투자 체크리스트","체크 상태는 이 브라우저에만 저장됩니다.",
     `<p class="progress" id="chk-p"></p><div class="c-hb-t" style="height:10px;border-radius:5px"><div id="chk-bar" class="c-hb-f" style="width:0;background:var(--hull);border-radius:5px"></div></div><div class="chk">${D.checklist.map((c,i)=>`<label for="chk-${i}"><input type="checkbox" id="chk-${i}"><span>${esc(c.t)}<span class="why">${esc(c.w)}</span></span></label>`).join("")}</div>`);
 
-  h+=sec("s13","13","용어 풀이","이 페이지에 나오는 용어를 숫자 예시와 함께 풀었습니다.",
+  /* ---------- 부록 ---------- */
+  h+=chap("c7","부록","더 깊게 보기","산업의 구조적 매력도, 재무·크레딧, 딜·거버넌스, 용어 풀이입니다.","");
+    h+=sec("a1","A-1","산업 매력도","포터의 5 Forces와 단위경제성, 현금흐름, 자본집약도, 해자.",
+    `<div class="grid g2"><div class="card"><span class="lbl">5 Forces</span><div class="chart" id="ch-radar"></div>${D.forces.map(f=>`<div class="force"><h3>${f.k}</h3><div class="dots" aria-label="${f.s}점">${[1,2,3,4,5].map(i=>`<i class="${i<=f.s?"f":""}"></i>`).join("")}</div><p style="grid-column:1/-1;color:var(--muted);font-size:.84rem">${esc(f.d)}</p></div>`).join("")}<p class="src">${esc(D.forcesNote)}</p></div>
+     <div class="grid">${D.attract.slice(0,2).map(a=>`<div class="card"><h3>${a.t}</h3><ul>${a.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div></div>
+     <div class="grid g3">${D.attract.slice(2).map(a=>`<div class="card"><h3>${a.t}</h3><ul>${a.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>
+     <div class="grid g2x">${cc("ch-roe","2028E ROE vs 자기자본비용","네 회사 모두 ROE가 자본비용(7.8%)을 크게 웃돕니다. 이 스프레드가 PBR 프리미엄의 근거입니다.","메리츠 추정 [6]")}${cc("ch-slots","LNG선 연간 건조 슬롯","한국이 중국의 3배. LNG선 해자의 실체입니다.","척/년, 메리츠 [6]")}</div>`);
+    h+=sec("a2","A-2","재무 건전성·크레딧","점선 카드는 이번 버전에서 데이터를 확보하지 못한 항목입니다.",
+    `<div class="grid g2">${D.credit.map(c=>`<div class="card ${c.gap?"gap":""}"><span class="lbl">${c.gap?"데이터 보강 필요":"확인됨"}</span><h3>${c.t}</h3><p>${esc(c.d)}</p></div>`).join("")}</div>`);
+    h+=sec("a3","A-3","딜·자본시장·거버넌스","미국 조선 거점 확보가 2024~26년 딜의 중심입니다.",
+    `<div class="grid g2"><div class="card"><span class="lbl">주요 딜</span><div class="tl">${D.deals.map(x=>`<div class="tl-item past"><span class="tl-when">${x.when}</span><div><h3>${esc(x.t)}</h3><p style="color:var(--muted)">${esc(x.d)}</p></div></div>`).join("")}</div></div>
+     <div class="card"><span class="lbl">지배구조·주주환원·오버행</span><ul>${D.governance.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`);
+    h+=sec("a4","A-4","용어 풀이","이 페이지에 나오는 용어를 숫자 예시와 함께 풀었습니다.",
     `<div class="gloss">${D.glossary.map(([t,d])=>`<div class="card"><dl><dt>${esc(t)}</dt><dd>${d}</dd></dl></div>`).join("")}</div>`);
-  h+=`<footer><strong>출처</strong><ol>${D.sources.map(s=>`<li>${esc(s)}</li>`).join("")}</ol><p>이 페이지는 공개 기사와 증권사 리포트를 정리한 참고 자료이며 투자 권유가 아닙니다. 주가·멀티플은 작성일 기준이 아니라 각 출처의 기준일 수치입니다.</p></footer>`;
+  h+=`<footer><strong>출처</strong><ol>${D.sources.map(s=>`<li>${esc(s)}</li>`).join("")}</ol><p>이 페이지는 공개 기사와 증권사 리포트를 정리한 참고 자료이며 투자 권유가 아닙니다. 과거 수치는 각 출처가 보도한 시점의 값입니다.</p></footer>`;
   document.getElementById("app").innerHTML=h;
+  window.__onVal=()=>{const R=window.__rim;if(!R)return;const cos=R.st.cos;const k=(sc,c)=>sc.coe==="broker"?D.val.coeBroker:R.coeOf(c);
+    D.scenarios.forEach(sc=>{const el=document.getElementById("scn-v-"+sc.cls);if(!el)return;
+      el.innerHTML=cos.map(c=>{const v=R.calc(c,k(sc,c),sc.om).v;return `<li>${c.n} <b>${wn(v)}원</b> <span class="src">(현재가 대비 ${sg((v/c.px-1)*100)})</span></li>`}).join("")});
+    const w=document.getElementById("scn-w");if(w)w.innerHTML=cos.map(c=>{const v=D.scenarios.reduce((a,sc)=>a+sc.p/100*R.calc(c,k(sc,c),sc.om).v,0);return `${c.n} <b>${wn(v)}원</b> (${sg((v/c.px-1)*100)})`}).join(" · ")+`<br><span class="src">강세 ${D.scenarios[0].p}% · 기본 ${D.scenarios[1].p}% · 약세 ${D.scenarios[2].p}% 확률로 가중. 5장 표에서 베타·ROE·금리를 바꾸면 함께 바뀝니다.</span>`;};
   bindVal(D); bindChecklist(D); drawCharts(D);
 }
 
@@ -653,6 +855,7 @@ function bindVal(D){
     const pv27=ri27/(1+k),pv28=ri28/Math.pow(1+k,2),pvtv=tv/Math.pow(1+k,2);
     return {fxAdj,r27,r28,k,ri27,b27,ri28,tv,pv27,pv28,pvtv,v:c.b26+pv27+pv28+pvtv}}
   const coeOf=c=>st.rf+c.beta*st.mrp;
+  window.__rim={calc,coeOf,st};
   function implied(c){const om=V.omega.bull;let lo=1,hi=40;if(calc(c,lo,om).v<c.px)return NaN;for(let i=0;i<60;i++){const m=(lo+hi)/2;if(calc(c,m,om).v>c.px)lo=m;else hi=m}return (lo+hi)/2}
   function render(){
     const fx=(st.fxNow/st.fxBase-1)*st.sens*100;
@@ -695,24 +898,25 @@ function bindVal(D){
     ].map(x=>`<li>${x}</li>`).join("");
     $("vt-s").innerHTML=st.cos.map(c=>{const k=coeOf(c);const f=(coe,om)=>{const v=calc(c,coe,om).v;return `${wn(v)}<br><span class="src">${pc((v/c.px-1)*100)}</span>`};
       return `<tr><td>${c.n}</td><td>${f(k,V.omega.bear)}</td><td>${f(k,V.omega.base)}</td><td>${f(k,V.omega.bull)}</td><td>${f(V.coeBroker,V.omega.bull)}</td></tr>`}).join("");
+    if(window.__onVal)window.__onVal();
     const imp=R.map(x=>{const v=implied(x.c);return `${x.c.n} ${isFinite(v)?v.toFixed(1)+"%":"1% 미만"}`}).join(", ");const cs=R.map(x=>x.coe);
     $("vt-read").innerHTML=`현재 금리(${st.rf}%)와 회계사회 MRP(${st.mrp}%)로 계산한 자본비용은 약 ${Math.min(...cs).toFixed(1)}~${Math.max(...cs).toFixed(1)}%입니다. 이 기준으로는 세 종목 모두 기본 시나리오 적정가보다 현재가가 높습니다. 초과이익이 2029년 이후에도 매년 80%씩 유지된다고(ω ${V.omega.bull}) 낙관해도, 지금 주가를 정당화하려면 자본비용이 ${imp} 수준이어야 합니다. 증권사가 쓰는 7.8% 근처이거나 그보다 낮은 값입니다. 즉 지금 주가는 <b>"2029년 이후에도 초과이익이 꽤 유지되고, 낮은 자본비용을 적용한다"</b>는 낙관을 아직 일부 담고 있습니다. 금리가 더 내려가거나(Rf↓), LNG선 수주가 다시 늘어 ω가 올라가면 적정가가 올라갑니다.`;
   }
-  document.getElementById("s6").addEventListener("input",e=>{const t=e.target;if(t.tagName!=="INPUT")return;const v=parseFloat(t.value);if(!isFinite(v))return;
+  document.getElementById("c5").addEventListener("input",e=>{const t=e.target;if(t.tagName!=="INPUT")return;const v=parseFloat(t.value);if(!isFinite(v))return;
     if(t.dataset.c){st.cos.find(c=>c.id===t.dataset.c)[t.dataset.f]=v}else if(t.dataset.k){st[t.dataset.k]=v}
     const id=t.id||null;render();});
   render();
 }
-function whyHTML(D){
+function whyHTML(D,only){
   const W=D.why;
   const blk=(k,cls,body)=>`<div class="why"><div class="why-h"><h3>${esc(W[k].h)}</h3><span class="pill ${cls}">${esc(W[k].tag)}</span></div><ul class="ev">${W[k].pts.map(x=>`<li>${esc(x).replace(/\[(\d+)\]/g,'<span class="src">[$1]</span>')}</li>`).join("")}</ul>${body}</div>`;
   const cc=(id,title,take,src)=>`<div class="card chart-card"><h3>${title}</h3><div class="chart" id="${id}"></div>${take?`<p class="take">${take}</p>`:""}${src?`<p class="src">${src}</p>`:""}</div>`;
   const ev=D.events;
-  let h=blk("orders","p-warn",`<div class="grid g2x">${cc("ch-sharetype","선종별 수주 점유율: 한국 vs 중국 (%)","전체 점유율은 1.5%p 줄었지만, 선종별로 보면 컨테이너선에서 한국 몫이 26% → 10~15%로 크게 줄었고 LNG선도 중국이 42%를 가져갔습니다.",esc(D.shareType.note)+" [14][15][16][17]")}${cc("ch-lngpace","대형 LNG선 세계 발주 속도 (월평균 척수)","하반기 들어 발주 속도가 절반 아래로. 한국 이익의 가장 큰 축이 식고 있습니다.","상반기 59척, 7~10월 17척, 10월 7척 [17]")}</div>`);
-  h+=blk("earn","p-good",`<div class="grid g2x">${cc("ch-qop","분기 영업이익: 2025 vs 2026 (억원)","3사 모두 전년 대비 +37~+98%. 2025년 값은 발표된 증가율로 역산했습니다.","2Q [22] KB Think·연합인포맥스, 3Q [22] 및 기존 [1]")}${cc("ch-op","3사 영업이익, 과거 고점의 1.5배","2026년 추정치(9.8조원)가 2000년대 슈퍼사이클 고점(6.6조원)을 이미 넘었습니다.","단위 조원. 2025A [5], 2026~28E [8]")}</div>`);
+  let h="";if(only.includes("orders"))h+=blk("orders","p-warn",`<div class="grid g2x">${cc("ch-sharetype","선종별 수주 점유율: 한국 vs 중국 (%)","전체 점유율은 1.5%p 줄었지만, 선종별로 보면 컨테이너선에서 한국 몫이 26% → 10~15%로 크게 줄었고 LNG선도 중국이 42%를 가져갔습니다.",esc(D.shareType.note)+" [14][15][16][17]")}${cc("ch-lngpace","대형 LNG선 세계 발주 속도 (월평균 척수)","하반기 들어 발주 속도가 절반 아래로. 한국 이익의 가장 큰 축이 식고 있습니다.","상반기 59척, 7~10월 17척, 10월 7척 [17]")}</div>`);
+  if(only.includes("earn"))h+=blk("earn","p-good",`<div class="grid g2x">${cc("ch-qop","분기 영업이익: 2025 vs 2026 (억원)","3사 모두 전년 대비 +37~+98%. 2025년 값은 발표된 증가율로 역산했습니다.","2Q [22] KB Think·연합인포맥스, 3Q [22] 및 기존 [1]")}${cc("ch-op","3사 영업이익, 과거 고점의 1.5배","2026년 추정치(9.8조원)가 2000년대 슈퍼사이클 고점(6.6조원)을 이미 넘었습니다.","단위 조원. 2025A [5], 2026~28E [8]")}</div>`);
   const i0=PX.d.indexOf("2026-05-26"),li=PX.d.length-1,iK=PX.d.indexOf("2026-11-24");
   const chg=a=>((a[iK]/a[i0]-1)*100).toFixed(1);
-  h+=blk("price","p-bad",`<div class="card chart-card"><h3>3사 주가 vs 코스피 (2026-05-26 = 100)</h3><div class="c-leg" style="margin:0"><span><i style="background:var(--c-hd)"></i>HD현대중공업 ${chg(PX.hd)}%</span><span><i style="background:var(--c-hw)"></i>한화오션 ${chg(PX.hw)}%</span><span><i style="background:var(--c-sh)"></i>삼성중공업 ${chg(PX.sh)}%</span><span><i style="background:var(--muted)"></i>코스피(KODEX 코스피 ETF) ${chg(PX.kx)}%</span><span style="margin-left:auto">5/26 → 11/24</span></div><div class="chart" id="ch-px"></div><p class="take">번호 원은 코스피 대비 조선주가 크게 다르게 움직인 날입니다(초록 = 시장보다 강함, 빨강 = 시장보다 약함). 선 위에 마우스를 올리면 그날 종가와 등락률이 보입니다.</p><p class="src">주달 일별 시세(시간외 단일가 포함 종가라 공식 종가와 최대 3% 차이), HD현대중공업 10/29 이후는 Twelve Data. 코스피는 KODEX 코스피 ETF로 대신 표시 [12][13]</p></div>
+  if(only.includes("price"))h+=blk("price","p-bad",`<div class="card chart-card"><h3>3사 주가 vs 코스피 (2026-05-26 = 100)</h3><div class="c-leg" style="margin:0"><span><i style="background:var(--c-hd)"></i>HD현대중공업 ${chg(PX.hd)}%</span><span><i style="background:var(--c-hw)"></i>한화오션 ${chg(PX.hw)}%</span><span><i style="background:var(--c-sh)"></i>삼성중공업 ${chg(PX.sh)}%</span><span><i style="background:var(--muted)"></i>코스피(KODEX 코스피 ETF) ${chg(PX.kx)}%</span><span style="margin-left:auto">5/26 → 11/24</span></div><div class="chart" id="ch-px"></div><p class="take">번호 원은 코스피 대비 조선주가 크게 다르게 움직인 날입니다(초록 = 시장보다 강함, 빨강 = 시장보다 약함). 선 위에 마우스를 올리면 그날 종가와 등락률이 보입니다.</p><p class="src">주달 일별 시세(시간외 단일가 포함 종가라 공식 종가와 최대 3% 차이), HD현대중공업 10/29 이후는 Twelve Data. 코스피는 KODEX 코스피 ETF로 대신 표시 [12][13]</p></div>
    <div class="card"><span class="lbl">코스피 대비 크게 엇갈린 날과 이벤트</span><div class="tbl" style="border:0"><table class="evt"><thead><tr><th>#</th><th>날짜</th><th>3사 평균</th><th>코스피 대용</th><th>차이</th><th>무슨 일이 있었나</th></tr></thead><tbody>${ev.map((e,n)=>{const i=PX.d.indexOf(e.d);const a=(PX.hdp[i]+PX.hwp[i]+PX.shp[i])/3,k=PX.kxp[i];const f=v=>`<span class="${v>=0?"up":"dn"}">${v>=0?"+":""}${v.toFixed(1)}%</span>`;return `<tr><td><span class="no" style="background:${e.up?"var(--good)":"var(--bad)"}">${n+1}</span></td><td class="n">${e.d.slice(5).replace("-","/")}</td><td class="n">${f(a)}</td><td class="n">${f(k)}</td><td class="n">${f(a-k)}</td><td>${esc(e.t)}<br><span class="src">${esc(e.m)} · ${esc(e.src)}</span></td></tr>`}).join("")}</tbody></table></div><p class="src">등락률은 주달 일별 시세 기준이라 기사 속 수치(공식 종가·장중)와 조금 다를 수 있습니다. 출처 [12][22]</p></div>`);
   return h;
 }
@@ -757,7 +961,11 @@ function drawCharts(D){
   K.mount(document.getElementById("ch-plate"),K.line({labels:G.plate.labels,series:[{color:"var(--sea)",points:G.plate.values.map(y=>({y}))}],unit:"$/톤",yMin:G.plate.yMin,labelAll:true,dec:0}));
   K.stack(document.getElementById("ch-lng"),{data:G.lng,unit:"척"});
   K.mount(document.getElementById("ch-radar"),K.radar({axes:D.forces.map(f=>({label:f.k,value:f.s})),max:5,title:"5 Forces"}));
-  K.hbars(document.getElementById("ch-roe"),{data:G.roe,unit:"%",dec:1,ref:{value:7.8,label:"자기자본비용 7.8%"}});
+  K.hbars(document.getElementById("ch-roe"),{data:G.roe,unit:"%",dec:1,ref:{value:12.5,label:"자기자본비용(CAPM) 약 12.5% · 증권사 가정 7.8%"}});
+  const HS=D.history;
+  K.mount(document.getElementById("ch-hnbpi"),K.yline({x:[2003,2027],points:HS.nbpi.map(p=>({...p,tip:`${p.when}: ${p.y} ${p.src}`})),bands:HS.bands,yMin:100,height:300,gap:2.5,title:"신조선가지수 20년"}));
+  K.mount(document.getElementById("ch-hprofit"),K.pncols({data:HS.profit,unit:"조원",dec:1,height:250,title:"3사 영업이익 히스토리"}));
+  K.hbars(document.getElementById("ch-hshare"),{data:HS.krShare.map(d=>({...d,color:d.color||"var(--sea)"})),unit:"%",dec:1,max:60});
   K.hbars(document.getElementById("ch-slots"),{data:G.slots,unit:"척"});
   K.stack(document.getElementById("ch-scn"),{data:D.scenarios.map(s=>({label:s.t,value:parseFloat(s.p),color:s.cls==="bull"?"var(--good)":s.cls==="bear"?"var(--bad)":"var(--sea)"})),unit:"%"});
   K.mount(document.getElementById("ch-risk"),K.scatter({x:[0.5,5.5],y:[0.5,5.5],xs:1,ys:1,xf:()=>"",yf:()=>"",xLabel:"발생 가능성 (낮음 → 높음)",yLabel:"영향 (작음 → 큼)",height:300,

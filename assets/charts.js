@@ -139,5 +139,40 @@ C.gbars=function(o){return w=>{
     s+=`<text x="${cx}" y="${h-pb+18}" text-anchor="middle" class="c-ax-b">${esc(g)}</text>`});
   s+=`</svg><div class="c-leg">${o.series.map(se=>`<span><i style="background:${se.color}"></i>${esc(se.name)}</span>`).join("")}</div>`;return s}};
 
+
+/* ---------- yline: 연도(숫자) x축 + 시대 구간 + 공백은 점선 ---------- */
+C.yline=function(o){return w=>{
+  const h=o.height||290,pl=o.padL||44,pr=16,pt=30,pb=30;const iw=w-pl-pr,ih=h-pt-pb;
+  const [x0,x1]=o.x;const ys=o.points.map(p=>p.y);let lo=o.yMin!=null?o.yMin:Math.min(...ys),hi=Math.max(...ys);
+  const st=nice(hi-lo);lo=Math.floor(lo/st)*st;hi=Math.ceil((hi+(hi-lo)*0.1)/st)*st;
+  const X=t=>pl+(t-x0)/(x1-x0)*iw,Y=v=>pt+ih-(v-lo)/(hi-lo)*ih;
+  let s=`<svg class="c-svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(o.title||"")}">`;
+  (o.bands||[]).forEach((b,i)=>{const a=X(b.from),z=X(b.to);s+=`<g data-tip="${esc(b.tip||b.label)}"><rect x="${a}" y="${pt}" width="${z-a}" height="${ih}" style="fill:${b.color}" opacity=".13"/><text x="${(a+z)/2}" y="${pt-10}" text-anchor="middle" class="c-zone" style="fill:${b.color}">${esc(b.short||String(i+1))}</text></g>`});
+  for(let t=lo;t<=hi+1e-9;t+=st){s+=`<line x1="${pl}" x2="${w-pr}" y1="${Y(t)}" y2="${Y(t)}" style="stroke:var(--grid)"/><text x="${pl-6}" y="${Y(t)+4}" text-anchor="end" class="c-ax">${fmt(t,st<1?1:0)}</text>`}
+  const step=o.tick||5;for(let t=Math.ceil(x0/step)*step;t<=x1;t+=step){s+=`<text x="${X(t)}" y="${h-pb+18}" text-anchor="middle" class="c-ax">${t}</text><line x1="${X(t)}" x2="${X(t)}" y1="${pt+ih}" y2="${pt+ih+4}" style="stroke:var(--axis)"/>`}
+  const P=o.points.map(p=>[X(p.t),Y(p.y),p]);const gap=o.gap||2;
+  for(let i=1;i<P.length;i++){const d=P[i][2].t-P[i-1][2].t>gap;s+=`<line x1="${P[i-1][0]}" y1="${P[i-1][1]}" x2="${P[i][0]}" y2="${P[i][1]}" style="stroke:${o.color||"var(--sea)"}" stroke-width="${d?1.5:2.2}" ${d?'stroke-dasharray="4 5" opacity=".6"':""}/>`}
+  P.forEach(([px,py,p])=>{s+=`<g data-tip="${esc(p.tip||(p.when+": "+fmt(p.y,o.dec||0)+(o.unit||"")))}"><circle cx="${px}" cy="${py}" r="13" fill="transparent"/><circle cx="${px}" cy="${py}" r="${p.big?5.5:4}" style="fill:${p.big?(o.color||"var(--sea)"):"var(--surface)"};stroke:${o.color||"var(--sea)"}" stroke-width="2"/></g>`;
+    if(p.label){const anc=px<pl+40?"start":px>w-pr-40?"end":"middle";s+=`<text x="${px}" y="${p.below?py+18:py-10}" text-anchor="${anc}" class="c-val">${esc(p.label)}</text>`}});
+  s+=`<line x1="${pl}" x2="${w-pr}" y1="${pt+ih}" y2="${pt+ih}" style="stroke:var(--axis)"/></svg>`;
+  if(o.bands)s+=`<div class="c-leg">${o.bands.map((b,i)=>`<span><i style="background:${b.color};opacity:.7"></i>${esc(b.short||String(i+1))} ${esc(b.label)}</span>`).join("")}</div>`;
+  return s}};
+
+/* ---------- pncols: 음수도 그리는 세로 막대 ---------- */
+C.pncols=function(o){return w=>{
+  const h=o.height||240,pl=o.padL||40,pr=12,pt=24,pb=34;const iw=w-pl-pr,ih=h-pt-pb;
+  const vals=o.data.map(d=>d.value).concat(o.ref?[o.ref.value]:[]);let max=Math.max(0,...vals),min=Math.min(0,...vals);
+  const st=nice(max-min);max=Math.ceil(max*1.12/st)*st;min=min<0?Math.floor(min*1.2/st)*st:0;
+  const y=v=>pt+(max-v)/(max-min)*ih;const n=o.data.length,slot=iw/n,bw=Math.min(54,slot*0.58);
+  let s=`<svg class="c-svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(o.title||"")}">`;
+  for(let t=min;t<=max+1e-9;t+=st){s+=`<line x1="${pl}" x2="${w-pr}" y1="${y(t)}" y2="${y(t)}" style="stroke:var(--grid)"/><text x="${pl-6}" y="${y(t)+4}" text-anchor="end" class="c-ax">${fmt(t,st<1?1:0)}</text>`}
+  o.data.forEach((d,i)=>{const cx=pl+slot*i+slot/2,x=cx-bw/2,a=y(Math.max(0,d.value)),b=y(Math.min(0,d.value));const col=d.color||(d.value<0?"var(--bad)":"var(--sea)");
+    s+=`<g data-tip="${esc(d.tip||(d.label+": "+fmt(d.value,o.dec||0)+(o.unit||"")))}"><rect x="${cx-slot/2}" y="${pt}" width="${slot}" height="${ih}" fill="transparent"/><rect x="${x}" y="${a}" width="${bw}" height="${Math.max(1,b-a)}" rx="3" style="fill:${col};${d.dim?"opacity:.5":""}"/>`;
+    s+=`<text x="${cx}" y="${d.value<0?b+15:a-7}" text-anchor="middle" class="c-val">${esc(d.text||fmt(d.value,o.dec||0))}</text>`;
+    s+=`<text x="${cx}" y="${h-pb+18}" text-anchor="middle" class="c-ax">${esc(d.label)}</text></g>`});
+  s+=`<line x1="${pl}" x2="${w-pr}" y1="${y(0)}" y2="${y(0)}" style="stroke:var(--axis)"/>`;
+  if(o.ref){const ry=y(o.ref.value);s+=`<line x1="${pl}" x2="${w-pr}" y1="${ry}" y2="${ry}" style="stroke:var(--hull)" stroke-width="1.5" stroke-dasharray="5 4"/>`}
+  s+=`</svg>`;if(o.ref)s+=`<p class="c-note"><i class="c-key-ref"></i>${esc(o.ref.label)}</p>`;return s}};
+
 window.Charts=C;
 })();
