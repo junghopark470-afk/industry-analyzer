@@ -2,8 +2,8 @@
 body.home{
   --bg:#F2F4F6; --surface:#FFFFFF; --ink:#13202B; --muted:#5A6874; --line:#D9DFE4;
   --hull:#B23A2E; --sea:#1D6A74; --sea-soft:#E1EEF0;
-  --f-display:"Space Grotesk","IBM Plex Sans KR",system-ui,sans-serif;
-  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-display:"Pretendard Variable",Pretendard,system-ui,sans-serif;
+  --f-body:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
   padding:0 max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
 @media (prefers-color-scheme: dark){body.home{

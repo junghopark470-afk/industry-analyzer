@@ -98,5 +98,46 @@ C.range=function(o){const lo=Math.min(o.min,o.now)*0.92,hi=Math.max(o.max,o.now)
   return `<div class="c-rg" data-tip="${esc(o.tip||"")}"><div class="c-rg-t"><div class="c-rg-band" style="left:${p(o.min)}%;width:${p(o.max)-p(o.min)}%"></div><i class="c-rg-mid" style="left:${p(o.mid)}%"></i><i class="c-rg-now" style="left:${p(o.now)}%"></i></div>
   <div class="c-rg-k"><span><i class="k-band"></i>약세~강세 ${o.minL}~${o.maxL}</span><span><i class="k-mid"></i>기본 ${o.midL}</span><span><i class="k-now"></i>현재 ${o.nowL}</span></div></div>`};
 
+/* ---------- time-series lines with event markers ----------
+   o: {dates:[...], series:[{name,color,values,dash}], events:[{i,n,tip,up}], height, unit, base, yMin}
+*/
+C.tsline=function(o){return w=>{
+  const h=o.height||320,pl=44,pr=14,pt=30,pb=34;const iw=w-pl-pr,ih=h-pt-pb;const N=o.dates.length;
+  const all=o.series.flatMap(s=>s.values.filter(v=>v!=null));
+  let lo=o.yMin!=null?o.yMin:Math.min(...all),hi=Math.max(...all);const st=nice(hi-lo,4);lo=Math.floor(lo/st)*st;hi=Math.ceil(hi/st)*st;
+  const X=i=>pl+i*iw/(N-1),Y=v=>pt+ih-(v-lo)/(hi-lo)*ih;
+  let s=`<svg class="c-svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(o.title||"")}">`;
+  for(let t=lo;t<=hi+1e-9;t+=st){s+=`<line x1="${pl}" x2="${w-pr}" y1="${Y(t)}" y2="${Y(t)}" style="stroke:var(--grid)"/><text x="${pl-6}" y="${Y(t)+4}" text-anchor="end" class="c-ax">${fmt(t)}</text>`}
+  if(o.base!=null&&o.base>=lo&&o.base<=hi){s+=`<line x1="${pl}" x2="${w-pr}" y1="${Y(o.base)}" y2="${Y(o.base)}" style="stroke:var(--axis)" stroke-width="1.2"/>`}
+  let lastM="";const minGap=w<520?70:56;let lastX=-1e9;
+  o.dates.forEach((d,i)=>{const m=d.slice(0,7);if(m!==lastM){lastM=m;const x=X(i);if(x-lastX>=minGap){lastX=x;s+=`<line x1="${x}" x2="${x}" y1="${pt+ih}" y2="${pt+ih+4}" style="stroke:var(--axis)"/><text x="${x}" y="${h-pb+18}" text-anchor="${i===0?"start":"middle"}" class="c-ax">${+d.slice(5,7)}월</text>`}}});
+  (o.events||[]).forEach(e=>{const x=X(e.i);s+=`<line x1="${x}" x2="${x}" y1="${pt-14}" y2="${pt+ih}" style="stroke:${e.up?"var(--good)":"var(--bad)"}" stroke-width="1" stroke-dasharray="2 3" opacity=".7"/>`});
+  o.series.forEach(se=>{let d="";se.values.forEach((v,i)=>{if(v==null)return;d+=(d?"L":"M")+X(i).toFixed(1)+","+Y(v).toFixed(1)});
+    s+=`<path d="${d}" fill="none" style="stroke:${se.color}" stroke-width="${se.width||2}" ${se.dash?'stroke-dasharray="5 4"':""} stroke-linejoin="round"/>`;
+    const li=se.values.length-1;s+=`<circle cx="${X(li)}" cy="${Y(se.values[li])}" r="3.5" style="fill:${se.color}"/>`});
+  // hover columns
+  const cw=Math.max(iw/(N-1),2);
+  o.dates.forEach((d,i)=>{const tip=`<b>${d}</b><br>`+o.series.map(se=>`${esc(se.name)} ${fmt(se.values[i],o.dec||0)}${o.unit||""}${se.pct?` (${se.pct[i]>=0?"+":""}${se.pct[i].toFixed(2)}%)`:""}`).join("<br>");
+    s+=`<rect x="${X(i)-cw/2}" y="${pt}" width="${cw}" height="${ih}" fill="transparent" data-tip="${esc(tip)}"/>`});
+  (o.events||[]).forEach(e=>{const x=X(e.i);s+=`<g data-tip="${esc(e.tip)}"><circle cx="${x}" cy="${pt-16}" r="10" style="fill:${e.up?"var(--good)":"var(--bad)"};stroke:var(--surface)" stroke-width="2"/><text x="${x}" y="${pt-12}" text-anchor="middle" class="c-num">${e.n}</text></g>`});
+  return s+`</svg>`}};
+
+/* ---------- grouped vertical bars ----------
+   o: {groups:[label], series:[{name,color,values,texts?}], unit, dec, height}
+*/
+C.gbars=function(o){return w=>{
+  const h=o.height||230,pl=o.padL||40,pr=10,pt=24,pb=36;const iw=w-pl-pr,ih=h-pt-pb;const G=o.groups.length,S=o.series.length;
+  const all=o.series.flatMap(s=>s.values);const hi0=Math.max(...all,0),lo0=Math.min(...all,0);const st=nice(hi0-lo0||1,4);
+  const hi=Math.ceil(hi0*1.12/st)*st||st,lo=Math.floor(lo0/st)*st;const Y=v=>pt+ih-(v-lo)/(hi-lo)*ih;
+  const gw=iw/G,bw=Math.min(34,(gw*0.78)/S);
+  let s=`<svg class="c-svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(o.title||"")}">`;
+  for(let t=lo;t<=hi+1e-9;t+=st){s+=`<line x1="${pl}" x2="${w-pr}" y1="${Y(t)}" y2="${Y(t)}" style="stroke:var(--grid)"/><text x="${pl-6}" y="${Y(t)+4}" text-anchor="end" class="c-ax">${fmt(t,st<1?1:0)}</text>`}
+  o.groups.forEach((g,gi)=>{const cx=pl+gw*gi+gw/2;const x0=cx-bw*S/2;
+    o.series.forEach((se,si)=>{const v=se.values[gi];if(v==null)return;const x=x0+si*bw,y=Math.min(Y(v),Y(0)),hh=Math.abs(Y(v)-Y(0));
+      const t=se.texts?se.texts[gi]:fmt(v,o.dec||0);
+      s+=`<g data-tip="${esc(g+" · "+se.name+": "+(se.tips?se.tips[gi]:t+(o.unit||"")))}"><rect x="${x+1}" y="${y}" width="${bw-2}" height="${Math.max(hh,1)}" rx="2" style="fill:${se.color}"/>${bw>=18||S===1?`<text x="${x+bw/2}" y="${v>=0?y-5:y+hh+12}" text-anchor="middle" class="c-val" style="font-size:${bw<26?10:11}px">${t}</text>`:""}</g>`});
+    s+=`<text x="${cx}" y="${h-pb+18}" text-anchor="middle" class="c-ax-b">${esc(g)}</text>`});
+  s+=`</svg><div class="c-leg">${o.series.map(se=>`<span><i style="background:${se.color}"></i>${esc(se.name)}</span>`).join("")}</div>`;return s}};
+
 window.Charts=C;
 })();
