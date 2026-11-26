@@ -75,3 +75,15 @@ h1,h2{font-family:var(--f-serif);font-weight:600;color:var(--head);letter-spacin
 h1,h2,.home h1,.home h2{font-family:var(--f-serif);word-break:keep-all}
 .qnums div{background:transparent;border:0;border-top:2px solid var(--rule);border-radius:0;padding:12px 2px 6px}
 .qnums b{font-family:var(--f-serif);font-weight:600;color:var(--head)}
+
+/* 사이트 제목: 아이콘 + 굵은 산세리프 워드마크 */
+.site-top .brand{display:flex;align-items:center;gap:12px;font-family:var(--f-body);text-decoration:none;font-size:1rem}
+.site-top .brand-mark{flex:none;width:36px;height:36px;display:grid;place-items:center;background:var(--mast-on);border-radius:9px}
+.site-top .brand-mark svg{fill:var(--navy)}
+.site-top .brand-txt b{display:block;font-weight:800;font-size:1.22rem;letter-spacing:-.035em;line-height:1.15;color:var(--mast-ink)}
+.site-top .brand-txt small{display:block;margin-top:2px;font-size:.74rem;letter-spacing:.02em;color:var(--mast-sub)}
+
+/* 본문 폭: 표·차트와 같은 폭으로 (줄 길이 제한 해제) */
+.story,.hero .lede,.lede,.chap-q,.sec-sub,.era p,.ex,.home .lede{max-width:none}
+.story{gap:14px}
+.story p{line-height:1.85}
