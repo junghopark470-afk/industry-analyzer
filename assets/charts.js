@@ -66,6 +66,13 @@ C.hbars=function(el,o){if(!el)return;const max=o.max||Math.max(...o.data.map(d=>
 C.stack=function(el,o){if(!el)return;const tot=o.data.reduce((a,d)=>a+d.value,0);
   el.innerHTML=`<div class="c-st">${o.data.map(d=>`<div class="c-st-s" style="flex:${d.value};background:${d.color}" data-tip="${esc(d.label+": "+fmt(d.value,o.dec||0)+(o.unit||""))}">${d.value/tot>0.22?`<span>${esc(d.short||d.label)} ${fmt(d.value,o.dec||0)}${o.unit||""}</span>`:""}</div>`).join("")}</div><div class="c-leg">${o.data.map(d=>`<span><i style="background:${d.color}"></i>${esc(d.label)} ${fmt(d.value,o.dec||0)}${o.unit||""}</span>`).join("")}</div>`;ensureTip()};
 
+/* ---------- 여러 줄 100% 누적 막대 (HTML) ---------- */
+C.stackrows=function(el,o){if(!el)return;const u=o.unit||"",dc=o.dec||0;const keys=[];
+  o.rows.forEach(r=>r.parts.forEach(d=>{if(!keys.find(k=>k.label===d.label))keys.push(d)}));
+  el.innerHTML=o.rows.map(r=>{const tot=r.parts.reduce((a,d)=>a+d.value,0);
+    return `<div class="c-sr"><div class="c-sr-l">${r.labelHTML||esc(r.label)}</div><div class="c-st">${r.parts.map(d=>`<div class="c-st-s" style="flex:${d.value};background:${d.color}" data-tip="${esc(d.label+": "+fmt(d.value,dc)+u)}">${d.value/tot>0.12?`<span>${esc(d.value/tot>0.3?d.label+" ":"")}${fmt(d.value,dc)}${u}</span>`:""}</div>`).join("")}</div></div>`}).join("")
+    +`<div class="c-leg">${keys.map(d=>`<span><i style="background:${d.color}"></i>${esc(d.label)}</span>`).join("")}</div>`;ensureTip()};
+
 /* ---------- radar ---------- */
 C.radar=function(o){return w=>{const size=Math.min(w,380),h=size;const cx=w/2,cy=h/2+4,R=size/2-58;const n=o.axes.length;
   const pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+Math.cos(a)*R*v/o.max,cy+Math.sin(a)*R*v/o.max]};
@@ -106,7 +113,7 @@ function evLayout(evs,X,R){const rows=[];const out=(evs||[]).map(e=>({...e})).so
   out.forEach(e=>{const x=X(e.i);let r=0;while(rows[r]!=null&&x-rows[r]<md)r++;rows[r]=x;e.row=r});return {evs:out,n:Math.max(1,rows.length)}}
 function dateAxis(dates,X,y,w,o){let s="",lastM="",lastX=-1e9,lastY="";const N=dates.length;const multi=dates[0].slice(0,4)!==dates[N-1].slice(0,4);const minGap=o.minGap||(w<520?64:54);
   dates.forEach((d,i)=>{const m=d.slice(0,7);if(m===lastM)return;lastM=m;const mo=+d.slice(5,7);
-    if(o.yearOnly&&mo!==1&&i!==0)return;const x=X(i);if(x-lastX<minGap)return;lastX=x;
+    if(o.yearOnly&&mo!==1&&i!==0)return;const x=X(i);if(x-lastX<minGap)return;lastX=i===0?x+28:x;
     const yr=d.slice(0,4);const t=o.yearOnly?yr:(multi&&yr!==lastY?`${d.slice(2,4)}년 ${mo}월`:`${mo}월`);lastY=yr;
     s+=`<line x1="${x}" x2="${x}" y1="${y}" y2="${y+4}" style="stroke:var(--axis)"/><text x="${x}" y="${y+18}" text-anchor="${i===0?"start":"middle"}" class="c-ax">${t}</text>`});return s}
 function evMarks(L,X,top,bot,R){let s="";L.evs.forEach(e=>{const x=X(e.i);const cy=top+R+e.row*(R*2+3);s+=`<line x1="${x}" x2="${x}" y1="${cy+R}" y2="${bot}" style="stroke:${e.big?"var(--ink)":e.up?"var(--good)":"var(--bad)"}" stroke-width="1" stroke-dasharray="2 3" opacity=".7"/>`});return s}
@@ -194,15 +201,17 @@ C.yline=function(o){return w=>{
 /* ---------- pncols: 음수도 그리는 세로 막대 ---------- */
 C.pncols=function(o){return w=>{
   const h=o.height||240,pl=o.padL||40,pr=12,pt=24,pb=34;const iw=w-pl-pr,ih=h-pt-pb;
-  const vals=o.data.map(d=>d.value).concat(o.ref?[o.ref.value]:[]);let max=Math.max(0,...vals),min=Math.min(0,...vals);
+  const vals=o.data.map(d=>d.value).filter(v=>v!=null).concat(o.ref?[o.ref.value]:[]);let max=Math.max(0,...vals),min=Math.min(0,...vals);
   const st=nice(max-min);max=Math.ceil(max*1.12/st)*st;min=min<0?Math.floor(min*1.2/st)*st:0;
   const y=v=>pt+(max-v)/(max-min)*ih;const n=o.data.length,slot=iw/n,bw=Math.min(54,slot*0.58);
   let s=`<svg class="c-svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(o.title||"")}">`;
   for(let t=min;t<=max+1e-9;t+=st){s+=`<line x1="${pl}" x2="${w-pr}" y1="${y(t)}" y2="${y(t)}" style="stroke:var(--grid)"/><text x="${pl-6}" y="${y(t)+4}" text-anchor="end" class="c-ax">${fmt(t,st<1?1:0)}</text>`}
-  o.data.forEach((d,i)=>{const cx=pl+slot*i+slot/2,x=cx-bw/2,a=y(Math.max(0,d.value)),b=y(Math.min(0,d.value));const col=d.color||(d.value<0?"var(--bad)":"var(--sea)");
+  const vfs=slot<24?"font-size:9px":"";
+  o.data.forEach((d,i)=>{const cx=pl+slot*i+slot/2;if(d.value==null){s+=`<g data-tip="${esc(d.tip||d.label)}"><rect x="${cx-slot/2}" y="${pt}" width="${slot}" height="${ih}" fill="transparent"/><text x="${cx}" y="${h-pb+18}" text-anchor="middle" class="c-ax" style="${vfs}">${esc(d.label)}</text></g>`;return}
+    const x=cx-bw/2,a=y(Math.max(0,d.value)),b=y(Math.min(0,d.value));const col=d.color||(d.value<0?"var(--bad)":"var(--sea)");
     s+=`<g data-tip="${esc(d.tip||(d.label+": "+fmt(d.value,o.dec||0)+(o.unit||"")))}"><rect x="${cx-slot/2}" y="${pt}" width="${slot}" height="${ih}" fill="transparent"/><rect x="${x}" y="${a}" width="${bw}" height="${Math.max(1,b-a)}" rx="3" style="fill:${col};${d.dim?"opacity:.5":""}"/>`;
-    s+=`<text x="${cx}" y="${d.value<0?b+15:a-7}" text-anchor="middle" class="c-val">${esc(d.text||fmt(d.value,o.dec||0))}</text>`;
-    s+=`<text x="${cx}" y="${h-pb+18}" text-anchor="middle" class="c-ax">${esc(d.label)}</text></g>`});
+    s+=`<text x="${cx}" y="${d.value<0?b+15:a-7}" text-anchor="middle" class="c-val" style="${vfs}">${esc(d.text!=null?d.text:fmt(d.value,o.dec||0))}</text>`;
+    s+=`<text x="${cx}" y="${h-pb+18}" text-anchor="middle" class="c-ax" style="${vfs}">${esc(d.label)}</text></g>`});
   s+=`<line x1="${pl}" x2="${w-pr}" y1="${y(0)}" y2="${y(0)}" style="stroke:var(--axis)"/>`;
   if(o.ref){const ry=y(o.ref.value);s+=`<line x1="${pl}" x2="${w-pr}" y1="${ry}" y2="${ry}" style="stroke:var(--hull)" stroke-width="1.5" stroke-dasharray="5 4"/>`}
   s+=`</svg>`;if(o.ref)s+=`<p class="c-note"><i class="c-key-ref"></i>${esc(o.ref.label)}</p>`;return s}};

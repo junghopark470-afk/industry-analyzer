@@ -162,10 +162,10 @@ footer li{word-break:break-all}
 
   <div class="hero">
     <span class="eyebrow">주가 vs 적정가치</span>
-    <h1 id="hero-h1">세 회사 모두 증권사 목표가의 절반 아래, 자체 계산으로는 약세~기본 시나리오 사이</h1>
+    <h1 id="hero-h1">세 회사 모두 증권사 목표가의 절반 아래지만, 이 페이지의 자본비용(12.4~12.7%)으로 계산하면 강세 시나리오보다도 비쌉니다</h1>
     <div class="qbar" id="qbar"></div>
-    <p class="lede">증권사 목표가 평균은 현재가의 2.2~2.8배지만, 지난 6주 동안 리포트의 40%가 목표가를 내렸습니다 [10]. 그래서 이 페이지는 목표가와 별도로 ROE·PBR 기반 적정가를 세 가지 시나리오로 다시 계산해 현재가와 비교합니다. 아래 가정은 직접 바꿀 수 있습니다.</p>
-    <p class="asof">현재가: 2026-11-24 공식 종가(Yahoo Finance). BPS·EPS 추정은 메리츠증권 2026-11-06 리포트에서 역산. 투자 권유가 아닙니다.</p>
+    <p class="lede">증권사 목표가 평균은 현재가의 2.4~2.9배지만, 지난 6주 동안 리포트의 40%가 목표가를 내렸습니다 [10]. 그래서 이 페이지는 목표가와 별도로 ROE·PBR 기반 적정가를 세 가지 시나리오로 다시 계산해 현재가와 비교합니다. 아래 가정은 직접 바꿀 수 있습니다.</p>
+    <p class="asof">현재가: 2026-11-26 공식 종가(Yahoo Finance). BPS·EPS 추정은 메리츠증권 2026-11-06 리포트에서 역산. 투자 권유가 아닙니다.</p>
   </div>
 
   <section>
@@ -173,10 +173,10 @@ footer li{word-break:break-all}
     <div class="how">
       <div class="card"><span class="lbl">계산 예시 · HD현대중공업</span><ol class="steps" id="how-steps"></ol></div>
       <div class="card"><span class="lbl">용어</span><dl class="gl">
-        <dt>현재가</dt><dd>2026-11-24 장 마감 가격</dd>
+        <dt>현재가</dt><dd>2026-11-26 장 마감 가격</dd>
         <dt>BPS</dt><dd>주당순자산. 회사 순자산 ÷ 주식 수 (2027년 추정)</dd>
         <dt>ROE</dt><dd>자기자본이익률. 20%면 주주 돈 100원으로 1년에 20원 이익</dd>
-        <dt>COE</dt><dd>자기자본비용. 국고채 금리 + 베타 × 시장위험프리미엄 (기본 약 12.5%)</dd>
+        <dt>COE</dt><dd>자기자본비용. 국고채 금리 + 베타 × 시장위험프리미엄 (기본 12.4~12.7%)</dd>
         <dt>PBR</dt><dd>주가 ÷ BPS. 순자산의 몇 배에 거래되는지</dd>
         <dt>PER</dt><dd>주가 ÷ 주당순이익. 이익의 몇 배에 거래되는지</dd>
         <dt>상승여력</dt><dd>(적정가 ÷ 현재가 − 1). +20%면 적정가가 현재가보다 20% 높음</dd>
@@ -194,7 +194,7 @@ footer li{word-break:break-all}
     <div><h2>세 종목 나란히 보기</h2><p class="sec-sub">막대와 점에 마우스를 올리거나 탭하면 숫자가 나옵니다.</p></div>
     <div class="grid g3">
       <div class="card chart-card"><h3>현재가 대비 상승여력</h3><div class="c-leg" style="margin:0"><span><i style="background:var(--r1)"></i>기본 시나리오 적정가</span><span><i style="background:var(--r4)"></i>증권사 목표가 평균</span></div><div class="chart" id="ch-up"></div><p class="take" id="take-up"></p></div>
-      <div class="card chart-card"><h3>52주 고점 대비 현재 주가</h3><div class="chart" id="ch-dd2"></div><p class="take">HD현대중공업 33%(−67%), 한화오션 28%(−72%), 삼성중공업 42%(−58%). 52주 장중 고점 기준이며, 한화오션의 낙폭이 가장 큽니다.</p></div>
+      <div class="card chart-card"><h3>52주 고점 대비 현재 주가</h3><div class="chart" id="ch-dd2"></div><p class="take">HD현대중공업 31%(−69%), 한화오션 27%(−73%), 삼성중공업 39%(−61%). 52주 장중 고점 기준이며, 한화오션의 낙폭이 가장 큽니다.</p></div>
       <div class="card chart-card"><h3>ROE 대비 PBR: 싸고 비싼 위치</h3><div class="chart" id="ch-sc"></div><p class="take">점선이 가정한 자본비용에서의 적정 PBR입니다. 점선 아래면 ROE에 비해 싸게 거래되는 것입니다.</p></div>
     </div>
   </section>
@@ -206,7 +206,7 @@ footer li{word-break:break-all}
   </section>
 
   <section>
-    <div><h2>가정 조정</h2><p class="sec-sub">산업 리포트 06번과 같은 잔여이익모델입니다. 적정가 = 2026E BPS + 2027·2028년 초과이익의 현재가치 + 2029년 이후(ω로 감소) 초과이익의 현재가치. COE = 국고채 10년(3.823%, 11/24) + β × 시장위험프리미엄(8.167%, 한국공인회계사회 2026 설문). ROE는 환율 조정(현재 환율 ÷ 추정치 가정 1,289원)을 곱해 씁니다.</p></div>
+    <div><h2>가정 조정</h2><p class="sec-sub">산업 리포트 06번과 같은 잔여이익모델입니다. 적정가 = 2026E BPS + 2027·2028년 초과이익의 현재가치 + 2029년 이후(ω로 감소) 초과이익의 현재가치. COE = 국고채 10년(3.776%, 11/26) + β × 시장위험프리미엄(8.167%, 한국공인회계사회 2026 설문). ROE는 환율 조정(현재 환율 ÷ 추정치 가정 1,289원)을 곱해 씁니다.</p></div>
     <div class="assume">
       <fieldset><legend>공통</legend>
         <label for="rf">국고채 10년 Rf (%)<input id="rf" type="number" step="0.01"></label>
@@ -227,15 +227,15 @@ footer li{word-break:break-all}
   </section>
 
   <section>
-    <div><h2>최근 주가 재료 (11/20~11/24)</h2></div>
+    <div><h2>최근 주가 재료 (11/20~11/26)</h2><p class="sec-sub">11/25~26 이틀 동안 코스피는 5,006.03에서 4,711.21로 5.9% 내렸고, HD현대중공업 −4.8%(250,500 → 238,500원), 한화오션 −4.2%(43,200 → 41,400원), 삼성중공업 −7.1%(14,970 → 13,900원)였습니다 [4]. 이 이틀의 하락 원인을 설명하는 기사는 확인하지 못해 아래 카드는 11/24까지의 재료입니다.</p></div>
     <div class="grid g3">
       <div class="card"><span class="lbl">시장 전체</span><p style="font-size:.9rem">11/20 코스피 −5.2%, 11/23 −3.3%로 AI·반도체발 급락 후, 11/24 엔비디아 CEO 복귀 소식에 코스피 +6.3%(5,006.03) 반등. 조선주도 시장을 따라 움직였습니다 [3][5].</p></div>
       <div class="card"><span class="lbl">회사별 뉴스</span><ul style="margin:0;padding-left:18px;font-size:.88rem;display:grid;gap:4px">
-        <li>HD현대: 정기선 회장 약 150억원 자사주 장내매수 계획 (11/24) [4]</li>
+        <li>HD현대: 정기선 회장 약 150억원 자사주 장내매수 계획 (11/24) [11]</li>
         <li>HD한국조선해양: LPG선 2척 3,084억원 수주, 연간 목표 94.9% 달성 (11/23) [6]</li>
-        <li>한화오션: 하청노조 12/9 공동파업 선언. 순차입금 약 5.2조원 (11/24) [4]</li>
+        <li>한화오션: 하청노조 12/9 공동파업 선언. 순차입금 약 5.2조원 (11/24) [11]</li>
         <li>삼성중공업: 신임 대표 이왕근 부사장 내정 (11/23) [2]</li></ul></div>
-      <div class="card"><span class="lbl">주의할 신호</span><p style="font-size:.9rem">미 상원 세출위가 2027 회계연도 해군 함정 예산을 행정부 요청보다 30.8% 적은 416억 달러로 제시 (11/24 밤) [4]. MASGA 기대가 가장 큰 한화오션에 부담입니다.</p></div>
+      <div class="card"><span class="lbl">주의할 신호</span><p style="font-size:.9rem">미 상원 세출위가 2027 회계연도 해군 함정 예산을 행정부 요청보다 30.8% 적은 416억 달러로 제시 (11/24 밤) [11]. MASGA 기대가 가장 큰 한화오션에 부담입니다.</p></div>
     </div>
   </section>
 
@@ -245,13 +245,14 @@ footer li{word-break:break-all}
       <li>메리츠증권, 2027 Outlook 조선 (2026-11-06, 11/5 종가 기준 추정치·목표가) https://home.imeritz.com/include/resource/research/WorkFlow/20261104152618505K_02.pdf</li>
       <li>알파스퀘어 삼성중공업 (2026-11-24) https://alphasquare.co.kr/home/stock-information?code=010140 · 이투데이 종목정보 (2026-11-24 장종료) https://www.etoday.co.kr/market/mkt_stkinfo?varIssCd=010140</li>
       <li>CBC뉴스, 조선주 일제히 약세 (2026-11-20) https://www.cbci.co.kr/news/articleView.html?idxno=629077</li>
-      <li>Yahoo Finance 일별 시세 (2026-11-24 공식 종가): HD현대중공업 https://finance.yahoo.com/quote/329180.KS/history/ · 한화오션 https://finance.yahoo.com/quote/042660.KS/history/ · 삼성중공업 https://finance.yahoo.com/quote/010140.KS/history/</li>
+      <li>Yahoo Finance 일별 시세 (2026-11-26 공식 종가): HD현대중공업 https://finance.yahoo.com/quote/329180.KS/history/ · 한화오션 https://finance.yahoo.com/quote/042660.KS/history/ · 삼성중공업 https://finance.yahoo.com/quote/010140.KS/history/</li>
       <li>잡포스트, HD현대중공업 5.45% 상승 (2026-11-24) https://www.job-post.co.kr/news/articleView.html?idxno=240604</li>
       <li>알파스퀘어 HD한국조선해양 (2026-11-23) https://alphasquare.co.kr/home/stock-summary?code=009540</li>
       <li>미래에셋증권 HD현대중공업 목표가 57만원 (머니투데이 2026-10-29) https://www.mt.co.kr/index.php/stock/2026/10/29/2026102908430280961</li>
       <li>유안타증권 HD현대중공업 목표가 64.3만원 (비즈니스포스트 2026-11-12) https://www.businesspost.co.kr/BP?command=article_view&num=451792</li>
       <li>한국투자·현대차·NH 목표가 조정 (시사저널e 2026-10-13) https://www.sisajournal-e.com/news/articleView.html?idxno=424277</li>
       <li>FnGuide 목표가 하향 비중 40% (파이낸셜뉴스 2026-11-16) https://www.fnnews.com/news/202611161826072417</li>
+      <li>알파스퀘어 HD현대중공업 종목 뉴스 (2026-11-24 16:33) https://alphasquare.co.kr/home/stock-summary?code=329180 · 한화오션 (2026-11-24 16:19) https://alphasquare.co.kr/home/stock-summary?code=042660</li>
     </ol>
     <p>BPS·EPS 역산: 2026E BPS = 11/5 주가 ÷ 메리츠 2026E PBR, 2027E BPS = 11/5 주가 ÷ 2027E PBR, 2027E EPS = 11/5 주가 ÷ 2027E PER. 시가총액은 메리츠 시총으로 역산한 주식수 × 현재가입니다. 시나리오 ROE와 PER 밴드는 이 페이지의 가정입니다.</p>
   </footer>
@@ -260,29 +261,29 @@ footer li{word-break:break-all}
 <script src="../assets/charts.js"></script>
 <script>
 const D=[
- {id:"hhi",name:"HD현대중공업",code:"329180",px:250500,chg:5.03,asof:"11/24 종가",shares:104.96e6,
+ {id:"hhi",name:"HD현대중공업",code:"329180",px:238500,prev:243500,chg:-2.05,asof:"11/26 종가",shares:104.96e6,
   p1105:271000,pbr26:2.70,pbr27:2.20,per27:7.4,hi52:765000,lo52:235500,
   tps:[["메리츠",800000,"11/06"],["한국투자",750000,"10/12"],["NH",700000,"10월"],["유안타",643000,"11/12"],["미래에셋",570000,"10/29"]],
   roe28:37.0,beta:1.06,
   notes:["엔진 자회사 포함, 3사 중 이익의 질이 가장 높음 (HD현대마린엔진 영업이익률 28.5%)","배당 2026E 주당 12,500원 (메리츠)","목표가 하향이 가장 많음: 10월에만 20건"]},
- {id:"hwo",name:"한화오션",code:"042660",px:43200,chg:8.27,asof:"11/24 종가",shares:306.4e6,
+ {id:"hwo",name:"한화오션",code:"042660",px:41400,prev:42450,chg:-2.47,asof:"11/26 종가",shares:306.4e6,
   p1105:49250,pbr26:1.37,pbr27:1.27,per27:18.4,hi52:154800,lo52:39500,
   tps:[["메리츠",120000,"11/06"],["한국투자",110000,"10/12"],["현대차",100000,"10/13"]],
   roe28:16.1,beta:1.09,
   notes:["PBR은 3사 중 가장 낮지만, 메리츠는 2027E 영업이익을 5.1조 → 1.4조로 급감 추정 (2026년 일회성)","순차입금 약 5.2조원, 무배당","MASGA·미 해군 노출이 가장 커서 미국 예산 뉴스에 가장 민감"]},
- {id:"shi",name:"삼성중공업",code:"010140",px:14970,chg:4.32,asof:"11/24 종가",shares:880.0e6,
-  p1105:16960,pbr26:2.75,pbr27:2.08,per27:8.5,hi52:35350,lo52:14270,
+ {id:"shi",name:"삼성중공업",code:"010140",px:13900,prev:14160,chg:-1.84,asof:"11/26 종가",shares:880.0e6,
+  p1105:16960,pbr26:2.75,pbr27:2.08,per27:8.5,hi52:35350,lo52:13530,
   tps:[["메리츠",35000,"11/06"],["현대차",31000,"10/13"]],
   roe28:24.2,beta:1.06,
-  notes:["LNG선·FLNG 비중이 가장 높아 LNG 선가와 중국 경쟁에 가장 민감","2029년 LNG선 슬롯 75% 확보 (메리츠)","52주 최저가 근처 (14,270원)"]}
+  notes:["LNG선·FLNG 비중이 가장 높아 LNG 선가와 중국 경쟁에 가장 민감","2029년 LNG선 슬롯 75% 확보 (메리츠)","52주 최저가 근처 (11/25 장중 13,530원)"]}
 ];
 D.forEach(c=>{c.roe27=Math.round(c.pbr27/c.per27*1000)/10});
-const DEF={rf:3.823,mrp:8.167,fxNow:1342.6,fxBase:1289,perlo:8,perhi:12,om:{bear:0.3,base:0.5,bull:0.8}};
+const DEF={rf:3.776,mrp:8.167,fxNow:1343.6,fxBase:1289,perlo:8,perhi:12,om:{bear:0.3,base:0.5,bull:0.8}};
 const fresh=()=>({...DEF,om:{...DEF.om},co:Object.fromEntries(D.map(c=>[c.id,{beta:c.beta,roe27:c.roe27,roe28:c.roe28}]))});
 let S=load();
-function load(){let s=null;try{s=JSON.parse(localStorage.getItem("ship3-rim-v2")||"null")}catch(e){}
+function load(){let s=null;try{s=JSON.parse(localStorage.getItem("ship3-rim-v3")||"null")}catch(e){}
   return s&&s.co?s:fresh()}
-function save(){try{localStorage.setItem("ship3-rim-v2",JSON.stringify(S))}catch(e){}}
+function save(){try{localStorage.setItem("ship3-rim-v3",JSON.stringify(S))}catch(e){}}
 
 const won=v=>Math.round(v).toLocaleString("ko-KR");
 const pct=v=>(v>=0?"+":"")+v.toFixed(0)+"%";
@@ -295,9 +296,9 @@ const fairPBR=c=>fair(c,"base")/bps26(c);
 
 function verdict(c){const b=fair(c,"base"),r=fair(c,"bear"),d=(c.px/b-1)*100,ds=(d>=0?"+":"−")+Math.abs(d).toFixed(1)+"%";
   if(c.px<r) return ["p-good",`약세 적정가보다도 ${Math.abs((c.px/r-1)*100).toFixed(1)}% 낮음`];
-  if(c.px<b*0.9) return ["p-good",`기본 적정가 대비 ${ds} 할인`];
+  if(c.px<b*0.9) return ["p-good",`기본 적정가 대비 ${ds} 디스카운트`];
   if(c.px<=b*1.1) return ["p-warn",`기본 적정가 근처 (${ds})`];
-  return ["p-bad",`기본 적정가 대비 ${ds} 할증`];}
+  return ["p-bad",`기본 적정가 대비 ${ds} 프리미엄`];}
 
 function renderCards(){
   document.getElementById("cards").innerHTML=D.map(c=>{
@@ -307,7 +308,7 @@ function renderCards(){
     <div class="px num">${won(c.px)}<small> 원 <span class="${c.chg>=0?"up":"dn"}">${c.chg>=0?"+":""}${c.chg}%</span></small></div>
     <span class="pill ${cls}">${txt}</span>
     ${Charts.range({min:fair(c,"bear"),mid:b,max:fair(c,"bull"),now:c.px,minL:won(fair(c,"bear")),midL:won(b),maxL:won(fair(c,"bull")),nowL:won(c.px),tip:`현재가 ${won(c.px)}원 · 기본 시나리오 ${won(b)}원`})}
-    <dl class="kv"><dt>전일 종가 → 오늘 종가</dt><dd>${won(c.px/(1+c.chg/100))} → ${won(c.px)}원</dd>
+    <dl class="kv"><dt>전일 종가 → 오늘 종가</dt><dd>${won(c.prev||c.px/(1+c.chg/100))} → ${won(c.px)}원</dd>
     <dt>시가총액</dt><dd>${(c.px*c.shares/1e12).toFixed(1)}조원</dd>
     <dt>기본 시나리오 적정가</dt><dd>${won(b)}원 (${pct((b/c.px-1)*100)})</dd>
     <dt>약세 ~ 강세</dt><dd>${won(fair(c,"bear"))} ~ ${won(fair(c,"bull"))}</dd>
@@ -390,7 +391,7 @@ function renderSummary(){
   const ups=D.map(c=>(fair(c,"base")/c.px-1)*100), tpu=D.map(c=>(c.tps.reduce((a,t)=>a+t[1],0)/c.tps.length/c.px-1)*100);
   const rng=a=>{const lo=Math.min(...a),hi=Math.max(...a);const f=v=>(v>=0?"+":"−")+Math.abs(v).toFixed(0)+"%";return f(lo)+"~"+f(hi)};
   document.getElementById("hero-h1").textContent=`증권사 목표가까지 ${rng(tpu)}, 자체 기본 적정가까지는 ${rng(ups)}`;
-  document.getElementById("qbar").innerHTML=D.map(c=>`<div><span>${c.name} · 11/24 종가</span><b>${won(c.px)}원</b><span class="${c.chg>=0?"up":"dn"}">${c.chg>=0?"+":""}${c.chg}%</span><span> · 기본 적정가 ${won(fair(c,"base"))}원</span></div>`).join("");
+  document.getElementById("qbar").innerHTML=D.map(c=>`<div><span>${c.name} · ${c.asof}</span><b>${won(c.px)}원</b><span class="${c.chg>=0?"up":"dn"}">${c.chg>=0?"+":""}${c.chg}%</span><span> · 기본 적정가 ${won(fair(c,"base"))}원</span></div>`).join("");
   const c=D[0],q=S.co[c.id],k=coeOf(c),a=fxAdj(),b=bps26(c),r27=q.roe27*a,r28=q.roe28*a,f=fair(c,"base");
   document.getElementById("how-steps").innerHTML=[
     `자기자본비용 COE = 국고채 ${S.rf}% + 베타 ${q.beta} × 시장위험프리미엄 ${S.mrp}% = <b>${k.toFixed(2)}%</b>`,
