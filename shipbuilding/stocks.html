@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>조선 3사 주가 비교 · 산업동향 분석기</title>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<script>(function(){var t="light";try{t=localStorage.getItem("ia-theme")==="dark"?"dark":"light"}catch(e){}document.documentElement.setAttribute("data-theme",t)})()</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -149,9 +150,9 @@ footer li{word-break:break-all}
 .chart-card .take{font-size:.86rem;color:var(--muted)}
 .chart{min-width:0}
 </style>
-<link rel="stylesheet" href="../assets/site.css?v=6c59547b">
+<link rel="stylesheet" href="../assets/site.css?v=3673b32e">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="../assets/theme.css?v=6c59547b">
+<link rel="stylesheet" href="../assets/theme.css?v=3673b32e">
 </head>
 <body>
 
@@ -159,6 +160,7 @@ footer li{word-break:break-all}
   <header class="top site-top">
     <a class="brand" href="../"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="13" width="4.2" height="8" rx="1.2"/><rect x="9.9" y="8" width="4.2" height="13" rx="1.2"/><rect x="16.8" y="3" width="4.2" height="18" rx="1.2"/></svg></span><span class="brand-txt"><b>산업동향 분석기</b><small>투자자를 위한 산업 체크 보드</small></span></a>
     <nav class="tabs" aria-label="산업 선택"><a class="tab" aria-current="page" href="../shipbuilding/">조선</a><span class="tab is-soon" aria-disabled="true">자동차</span><span class="tab is-soon" aria-disabled="true">반도체</span></nav>
+    <button class="theme-tg" type="button" aria-pressed="false" title="다크 모드 켜기/끄기"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6"/><path d="M11 1.5h2v3h-2zM11 19.5h2v3h-2zM1.5 11h3v2h-3zM19.5 11h3v2h-3zM4.2 5.6l1.4-1.4 2.1 2.1-1.4 1.4zM16.3 17.7l1.4-1.4 2.1 2.1-1.4 1.4zM4.2 18.4l2.1-2.1 1.4 1.4-2.1 2.1zM16.3 6.3l2.1-2.1 1.4 1.4-2.1 2.1z"/></svg><span class="tg-txt">다크 모드</span></button>
   </header>
   <nav class="subnav" aria-label="페이지"><a href="./">산업 리포트</a><a href="stocks.html" aria-current="page">조선 3사 주가 비교</a></nav>
 
@@ -260,7 +262,7 @@ footer li{word-break:break-all}
   </footer>
 </div>
 
-<script src="../assets/charts.js?v=6c59547b"></script>
+<script src="../assets/charts.js?v=3673b32e"></script>
 <script>
 const D=[
  {id:"hhi",name:"HD현대중공업",code:"329180",px:238500,prev:243500,chg:-2.05,asof:"11/26 종가",shares:104.96e6,
@@ -414,5 +416,9 @@ document.querySelector(".assume").addEventListener("input",e=>{
 document.getElementById("reset").addEventListener("click",()=>{S=fresh();save();renderInputs();all()});
 </script>
 
+<script>(function(){var r=document.documentElement;
+function sync(){var d=r.getAttribute("data-theme")==="dark";document.querySelectorAll(".theme-tg").forEach(function(b){b.setAttribute("aria-pressed",d?"true":"false");var t=b.querySelector(".tg-txt");if(t)t.textContent=d?"라이트 모드":"다크 모드"})}
+document.querySelectorAll(".theme-tg").forEach(function(b){b.addEventListener("click",function(){var n=r.getAttribute("data-theme")==="dark"?"light":"dark";r.setAttribute("data-theme",n);try{localStorage.setItem("ia-theme",n)}catch(e){}sync()})});
+window.addEventListener("storage",function(e){if(e.key==="ia-theme"){r.setAttribute("data-theme",e.newValue==="dark"?"dark":"light");sync()}});sync()})()</script>
 </body>
 </html>
