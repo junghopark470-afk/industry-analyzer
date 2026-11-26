@@ -1,0 +1,84 @@
+/* 리서치 하우스 테마: 흰 바탕, 짙은 남색 마스트헤드, 세리프 제목, 가는 구분선, 각진 모서리.
+   특정 회사의 로고·이름·서체는 쓰지 않습니다. 각 페이지 스타일과 site.css 뒤에 불러와 덮어씁니다. */
+:root,body.home{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#0E1B2B; --muted:#56616E; --line:#D7DCE2;
+  --navy:#0B2545; --head:#0B2545; --rule:#0B2545; --mast-ink:#FFFFFF; --mast-sub:#A9BAD0; --mast-tab:#C9D5E4; --mast-on:#8DB8EA;
+  --sea:#1E5C9E; --sea-soft:#EBF1F8; --hull:#A3262A; --hull-soft:#F7E8E8;
+  --good:#1F7A4D; --warn:#A06A10; --bad:#B3302C;
+  --grid:#ECEFF3; --axis:#B4BCC6; --track:#E9EDF2; --on-fill:#FFFFFF;
+  --c-hd:#13315C; --c-hw:#C27C1E; --c-sh:#2E8C87;
+  --r1:#1E5C9E; --r2:#8B97A4; --r3:#A06A10; --r4:#6A5A9C;
+  --f-serif:"Noto Serif KR","Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]),body.home{
+  --bg:#0A1320; --surface:#0F1B2B; --ink:#E6ECF3; --muted:#97A5B4; --line:#24344A;
+  --navy:#10233F; --head:#F1F5F9; --rule:#6EA6E6; --mast-sub:#93A7C2; --mast-tab:#B7C6D9; --mast-on:#6EA6E6;
+  --sea:#6EA6E6; --sea-soft:#152A44; --hull:#E5706B; --hull-soft:#3A1E20;
+  --good:#5FC08A; --warn:#E0A54A; --bad:#E5706B;
+  --grid:#1B2A3C; --axis:#3A4C63; --track:#1B2A3C; --on-fill:#0A1320;
+  --c-hd:#8FB3E6; --c-hw:#E0A04A; --c-sh:#55C2B9;
+  --r1:#6EA6E6; --r2:#8D9DAA; --r3:#E0A54A; --r4:#A493D6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1320; --surface:#0F1B2B; --ink:#E6ECF3; --muted:#97A5B4; --line:#24344A;
+  --navy:#10233F; --head:#F1F5F9; --rule:#6EA6E6; --mast-sub:#93A7C2; --mast-tab:#B7C6D9; --mast-on:#6EA6E6;
+  --sea:#6EA6E6; --sea-soft:#152A44; --hull:#E5706B; --hull-soft:#3A1E20;
+  --good:#5FC08A; --warn:#E0A54A; --bad:#E5706B;
+  --grid:#1B2A3C; --axis:#3A4C63; --track:#1B2A3C; --on-fill:#0A1320;
+  --c-hd:#8FB3E6; --c-hw:#E0A04A; --c-sh:#55C2B9;
+  --r1:#6EA6E6; --r2:#8D9DAA; --r3:#E0A54A; --r4:#A493D6; color-scheme:dark}
+
+body,body.home{background:var(--bg)}
+
+/* 마스트헤드: 화면 끝까지 이어지는 남색 띠 (가로 스크롤 없이) */
+.site-top{background:var(--navy);box-shadow:0 0 0 100vmax var(--navy);clip-path:inset(0 -100vmax);border-bottom:0;padding-block:16px 14px;row-gap:8px}
+.site-top .brand{color:var(--mast-ink);font-family:var(--f-serif);font-weight:600;font-size:1.1rem;letter-spacing:.01em}
+.site-top .brand small{color:var(--mast-sub);font-family:var(--f-body);letter-spacing:.02em}
+.site-top .tabs{gap:2px 18px}
+.site-top .tab{background:transparent;border:0;border-bottom:2px solid transparent;border-radius:0;color:var(--mast-tab);padding:4px 0;font-weight:500}
+.site-top a.tab:hover{color:var(--mast-ink);border-color:transparent;border-bottom-color:var(--mast-sub)}
+.site-top .tab[aria-current="page"]{background:transparent;color:var(--mast-ink);border-color:transparent;border-bottom-color:var(--mast-on)}
+.site-top .tab.is-soon{color:var(--mast-sub);opacity:.75}
+.subnav{gap:4px 28px;border-bottom:1px solid var(--line)}
+.subnav a{font-size:.9rem;letter-spacing:.01em;padding:12px 0}
+.subnav a[aria-current="page"]{color:var(--head);border-bottom-color:var(--rule)}
+
+/* 제목: 세리프, 남색 */
+h1,h2{font-family:var(--f-serif);font-weight:600;color:var(--head);letter-spacing:-.005em}
+.hero{padding-block:44px 24px}
+.hero h1,.home .hero h1{font-weight:600;line-height:1.22}
+.eyebrow,.home .eyebrow{color:var(--sea);letter-spacing:.16em;font-weight:700}
+.hero .lede{color:var(--muted)}
+.chap{border-top:3px solid var(--rule);padding-top:36px}
+.chap-no{color:var(--sea);letter-spacing:.16em}
+.chap-h h2{font-weight:600}
+.sub-h{color:var(--head)}
+.sec-no{color:var(--sea)}
+.band{color:var(--head);font-weight:700}
+.band::after{background:var(--rule);opacity:.35}
+
+/* 핵심 숫자: 박스 대신 위쪽 굵은 선 */
+.fact{background:transparent;border:0;border-top:2px solid var(--rule);border-radius:0;padding:12px 2px 6px}
+.fact .v{font-family:var(--f-serif);font-weight:600;color:var(--head)}
+
+/* 각진 모서리, 그림자 없음 */
+.card,.thesis,.thesis-cols>div,.box2,.why,.ex,.ev,.flow>div,.phases>div,.steps3>div,.qnums div,.chapnav a,
+.ff,.assume fieldset,.qbar div,.kpi .pk,.chk label,.cyc-seg,.lag>div,.home .card{border-radius:2px;box-shadow:none}
+.pill,.home .links span,button.reset{border-radius:2px;letter-spacing:.01em}
+.inputs input,.vt input,.assume input{border-radius:2px}
+.take2{border-radius:0}
+.c-tip{border-radius:2px}
+.tbl{border-radius:0;border-left:0;border-right:0;border-top:2px solid var(--rule)}
+.chapnav small{color:var(--sea);letter-spacing:.08em}
+.chapnav a:hover,.home a.card:hover{border-color:var(--rule)}
+
+/* 3분 요약: 남색 블록 */
+.summary{background:var(--navy);border-radius:2px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .summary{border:1px solid var(--line)}}
+
+/* 홈 */
+.home .card{border-top:2px solid var(--rule)}
+.home .card h2{font-size:1.5rem}
+.home .foot{border-top:1px solid var(--line);padding-top:14px}
+h1,h2,.home h1,.home h2{font-family:var(--f-serif);word-break:keep-all}
+.qnums div{background:transparent;border:0;border-top:2px solid var(--rule);border-radius:0;padding:12px 2px 6px}
+.qnums b{font-family:var(--f-serif);font-weight:600;color:var(--head)}
