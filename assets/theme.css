@@ -10,27 +10,21 @@
   --r1:#1E5C9E; --r2:#8B97A4; --r3:#A06A10; --r4:#6A5A9C;
   --f-serif:"Noto Serif KR","Source Serif 4",Georgia,"Times New Roman",serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]),body.home{
-  --bg:#0A1320; --surface:#0F1B2B; --ink:#E6ECF3; --muted:#97A5B4; --line:#24344A;
-  --navy:#10233F; --head:#F1F5F9; --rule:#6EA6E6; --mast-sub:#93A7C2; --mast-tab:#B7C6D9; --mast-on:#6EA6E6;
-  --sea:#6EA6E6; --sea-soft:#152A44; --hull:#E5706B; --hull-soft:#3A1E20;
-  --good:#5FC08A; --warn:#E0A54A; --bad:#E5706B;
-  --grid:#1B2A3C; --axis:#3A4C63; --track:#1B2A3C; --on-fill:#0A1320;
-  --c-hd:#8FB3E6; --c-hw:#E0A04A; --c-sh:#55C2B9;
-  --r1:#6EA6E6; --r2:#8D9DAA; --r3:#E0A54A; --r4:#A493D6; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0A1320; --surface:#0F1B2B; --ink:#E6ECF3; --muted:#97A5B4; --line:#24344A;
-  --navy:#10233F; --head:#F1F5F9; --rule:#6EA6E6; --mast-sub:#93A7C2; --mast-tab:#B7C6D9; --mast-on:#6EA6E6;
-  --sea:#6EA6E6; --sea-soft:#152A44; --hull:#E5706B; --hull-soft:#3A1E20;
-  --good:#5FC08A; --warn:#E0A54A; --bad:#E5706B;
-  --grid:#1B2A3C; --axis:#3A4C63; --track:#1B2A3C; --on-fill:#0A1320;
-  --c-hd:#8FB3E6; --c-hw:#E0A04A; --c-sh:#55C2B9;
-  --r1:#6EA6E6; --r2:#8D9DAA; --r3:#E0A54A; --r4:#A493D6; color-scheme:dark}
+/* 리서치 페이지처럼 항상 흰 종이 느낌으로 보여 줍니다. 기기가 다크 모드여도 밝은 테마를 씁니다. */
+:root,body.home{color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]),:root[data-theme="dark"],body.home{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#0E1B2B; --muted:#56616E; --line:#D7DCE2;
+  --navy:#0B2545; --head:#0B2545; --rule:#0B2545; --mast-ink:#FFFFFF; --mast-sub:#A9BAD0; --mast-tab:#C9D5E4; --mast-on:#8DB8EA;
+  --sea:#1E5C9E; --sea-soft:#EBF1F8; --hull:#A3262A; --hull-soft:#F7E8E8;
+  --good:#1F7A4D; --warn:#A06A10; --bad:#B3302C;
+  --grid:#ECEFF3; --axis:#B4BCC6; --track:#E9EDF2; --on-fill:#FFFFFF;
+  --c-hd:#13315C; --c-hw:#C27C1E; --c-sh:#2E8C87;
+  --r1:#1E5C9E; --r2:#8B97A4; --r3:#A06A10; --r4:#6A5A9C; color-scheme:light}}
 
 body,body.home{background:var(--bg)}
 
 /* 마스트헤드: 화면 끝까지 이어지는 남색 띠 (가로 스크롤 없이) */
-.site-top{background:var(--navy);box-shadow:0 0 0 100vmax var(--navy);clip-path:inset(0 -100vmax);border-bottom:0;padding-block:16px 14px;row-gap:8px}
+.site-top{background:var(--navy);box-shadow:0 0 0 100vmax var(--navy);clip-path:inset(0 -100vmax);border-bottom:0;padding-block:18px 16px;row-gap:8px}
 .site-top .brand{color:var(--mast-ink);font-family:var(--f-serif);font-weight:600;font-size:1.1rem;letter-spacing:.01em}
 .site-top .brand small{color:var(--mast-sub);font-family:var(--f-body);letter-spacing:.02em}
 .site-top .tabs{gap:2px 18px}
@@ -73,7 +67,6 @@ h1,h2{font-family:var(--f-serif);font-weight:600;color:var(--head);letter-spacin
 
 /* 3분 요약: 남색 블록 */
 .summary{background:var(--navy);border-radius:2px}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .summary{border:1px solid var(--line)}}
 
 /* 홈 */
 .home .card{border-top:2px solid var(--rule)}
